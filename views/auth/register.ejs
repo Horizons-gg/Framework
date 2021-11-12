@@ -2,10 +2,9 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Register & Signup | UBold - Responsive Admin Dashboard Template</title>
+        <title>Register | Horizons</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-        <meta content="Coderthemes" name="author" />
+        <meta name="description" content="Horizons Registration" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="../assets/images/favicon.ico">
@@ -51,15 +50,15 @@
 
                                 <form action="#">
 
-                                    <div class="form-group">
-                                        <label for="fullname">Full Name</label>
-                                        <input class="form-control" type="text" id="fullname" placeholder="Enter your name" required>
+                                    <div class="form-group" id="name-group">
+                                        <label for="fullname">Display Name</label>
+                                        <input class="form-control" type="text" id="displayname" placeholder="Enter your name" required>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="emailaddress">Email address</label>
-                                        <input class="form-control" type="email" id="emailaddress" required placeholder="Enter your email">
+                                    <div class="form-group" id="email-group">
+                                        <label for="email">Email address</label>
+                                        <input class="form-control" type="email" id="email" required placeholder="Enter your email">
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" id="password-group">
                                         <label for="password">Password</label>
                                         <div class="input-group input-group-merge">
                                             <input type="password" id="password" class="form-control" placeholder="Enter your password">
@@ -70,15 +69,58 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" id="code-group" style="display: none;">
+                                        <label for="fullname">Activation Code</label>
+                                        <input class="form-control" type="text" id="code" placeholder="Enter code from your email" required>
+                                    </div>
+                                    <div class="form-group" id="accept-group">
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" id="checkbox-signup">
                                             <label class="custom-control-label" for="checkbox-signup">I accept <a href="javascript: void(0);" class="text-dark">Terms and Conditions</a></label>
                                         </div>
                                     </div>
                                     <div class="form-group mb-0 text-center">
-                                        <button class="btn btn-success btn-block" type="submit"> Sign Up </button>
+                                        <button class="btn btn-success btn-block" type="button" onclick="Register()" id="signup"> Sign Up </button>
                                     </div>
+
+                                    <script>
+                                        function Register() {
+                                            var name = $('#displayname').val()
+                                            var email = $('#email').val()
+                                            var password = $('#password').val()
+                                            var code = $('#code').val()
+    
+                                            fetch(`/register`, {
+                                                method: 'POST',
+                                                headers: {
+                                                    'Content-Type': 'application/json'
+                                                },
+                                                body: JSON.stringify({
+                                                    name: name,
+                                                    email: email,
+                                                    password: password,
+                                                    code: code
+                                                })
+                                            }).then(async res => {
+                                                if (res.status === 200) {
+                                                    $('#name-group').hide()
+                                                    $('#email-group').hide()
+                                                    $('#password-group').hide()
+                                                    $('#accept-group').hide()
+
+                                                    $('#code-group').show()
+                                                    $('#signup').html('Continue')
+                                                }
+                                                else if (res.status === 201) {
+                                                    var token = await res.text()
+                                                    document.cookie = `token=${token}`
+                                                    window.location.href = '/account'
+                                                }
+                                                else alert(await res.text())
+                                            })
+                                        }
+    
+                                    </script>
 
                                 </form>
 
@@ -106,7 +148,7 @@
 
                         <div class="row mt-3">
                             <div class="col-12 text-center">
-                                <p class="text-white-50">Already have account?  <a href="auth-login.html" class="text-white ml-1"><b>Sign In</b></a></p>
+                                <p class="text-white-50">Already have account?  <a href="/login" class="text-white ml-1"><b>Sign In</b></a></p>
                             </div> <!-- end col -->
                         </div>
                         <!-- end row -->
@@ -120,7 +162,7 @@
         <!-- end page -->
 
         <footer class="footer footer-alt text-white-50">
-            2015 - <script>document.write(new Date().getFullYear())</script> &copy; UBold theme by <a href="" class="text-white-50">Coderthemes</a> 
+            2019 - <script>document.write(new Date().getFullYear())</script> &copy; Horizons
         </footer>
 
         <!-- Vendor js -->

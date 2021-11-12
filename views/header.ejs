@@ -1,0 +1,593 @@
+<style>
+    /* width */
+    ::-webkit-scrollbar {
+    width: 10px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+    background: #2d343b;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+    background: #3f4853;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+    background: #3f4853;
+    }
+</style>
+
+<body class="loading" data-layout-mode="detached" data-layout='{"mode": "dark", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": true}, "topbar": {"color": "dark"}, "showRightSidebarOnPageLoad": false}'>
+
+<!-- Pre-loader -->
+<div id="preloader">
+    <div id="status">
+        <div class="spinner">Loading...</div>
+    </div>
+</div>
+<!-- End Preloader-->
+
+<!-- Topbar Start -->
+<div class="navbar-custom">
+    <div class="container-fluid">
+        <ul class="list-unstyled topnav-menu float-right mb-0">
+
+            <li class="d-none d-lg-block">
+                <form class="app-search">
+                    <div class="app-search-box dropdown">
+                        <div class="input-group">
+                            <input type="search" class="form-control" placeholder="Search..." id="top-search">
+                            <div class="input-group-append">
+                                <button class="btn" type="submit">
+                                    <i class="fe-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="dropdown-menu dropdown-lg" id="search-dropdown">
+                            <!-- item-->
+                            <div class="dropdown-header noti-title">
+                                <h5 class="text-overflow mb-2">Found 22 results</h5>
+                            </div>
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <i class="fe-home mr-1"></i>
+                                <span>Analytics Report</span>
+                            </a>
+
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <i class="fe-aperture mr-1"></i>
+                                <span>How can I help you?</span>
+                            </a>
+                
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <i class="fe-settings mr-1"></i>
+                                <span>User profile settings</span>
+                            </a>
+
+                            <!-- item-->
+                            <div class="dropdown-header noti-title">
+                                <h6 class="text-overflow mb-2 text-uppercase">Users</h6>
+                            </div>
+
+                            <div class="notification-list">
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <div class="media">
+                                        <img class="d-flex mr-2 rounded-circle" src="../assets/images/users/user-2.jpg" alt="Generic placeholder image" height="32">
+                                        <div class="media-body">
+                                            <h5 class="m-0 font-14">Erwin E. Brown</h5>
+                                            <span class="font-12 mb-0">UI Designer</span>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <div class="media">
+                                        <img class="d-flex mr-2 rounded-circle" src="../assets/images/users/user-5.jpg" alt="Generic placeholder image" height="32">
+                                        <div class="media-body">
+                                            <h5 class="m-0 font-14">Jacob Deo</h5>
+                                            <span class="font-12 mb-0">Developer</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>  
+                    </div>
+                </form>
+            </li>
+
+            <li class="dropdown d-inline-block d-lg-none">
+                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <i class="fe-search noti-icon"></i>
+                </a>
+                <div class="dropdown-menu dropdown-lg dropdown-menu-right p-0">
+                    <form class="p-3">
+                        <input type="text" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
+                    </form>
+                </div>
+            </li>
+
+            <li class="dropdown d-none d-lg-inline-block">
+                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="fullscreen" href="#">
+                    <i class="fe-maximize noti-icon"></i>
+                </a>
+            </li>
+
+            <li class="dropdown d-none d-lg-inline-block topbar-dropdown">
+                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <i class="fe-grid noti-icon"></i>
+                </a>
+                <div class="dropdown-menu dropdown-lg dropdown-menu-right">
+
+                    <div class="p-lg-1">
+                        <div class="row no-gutters">
+                            <div class="col">
+                                <a class="dropdown-icon-item" href="#">
+                                    <img src="../assets/images/brands/slack.png" alt="slack">
+                                    <span>Slack</span>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a class="dropdown-icon-item" href="#">
+                                    <img src="../assets/images/brands/github.png" alt="Github">
+                                    <span>GitHub</span>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a class="dropdown-icon-item" href="#">
+                                    <img src="../assets/images/brands/dribbble.png" alt="dribbble">
+                                    <span>Dribbble</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="row no-gutters">
+                            <div class="col">
+                                <a class="dropdown-icon-item" href="#">
+                                    <img src="../assets/images/brands/bitbucket.png" alt="bitbucket">
+                                    <span>Bitbucket</span>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a class="dropdown-icon-item" href="#">
+                                    <img src="../assets/images/brands/dropbox.png" alt="dropbox">
+                                    <span>Dropbox</span>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a class="dropdown-icon-item" href="#">
+                                    <img src="../assets/images/brands/g-suite.png" alt="G Suite">
+                                    <span>G Suite</span>
+                                </a>
+                            </div>
+                
+                        </div>
+                    </div>
+
+                </div>
+            </li>
+
+            <li class="dropdown d-none d-lg-inline-block topbar-dropdown">
+                <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <img src="../assets/images/flags/us.jpg" alt="user-image" height="16">
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+
+                    <!-- item-->
+                    <a href="javascript:void(0);" class="dropdown-item">
+                        <img src="../assets/images/flags/us.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">English (US)</span>
+                    </a>
+
+                </div>
+            </li>
+
+            <li class="dropdown notification-list topbar-dropdown">
+                <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <i class="fe-bell noti-icon"></i>
+                    <!-- <span class="badge badge-danger rounded-circle noti-icon-badge">1</span>-->
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-lg">
+
+                    <!-- item-->
+                    <div class="dropdown-item noti-title">
+                        <h5 class="m-0">
+                            <span class="float-right">
+                                <a href="" class="text-dark" data-toggle="modal" data-target="#info-indev-modal">
+                                    <small>Clear All</small>
+                                </a>
+                            </span>Notification
+                        </h5>
+                    </div>
+
+                    <div class="noti-scroll" data-simplebar>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item active">
+                            <div class="notify-icon">
+                                <img src="../assets/images/logo-sm-light.png" class="img-fluid rounded-circle" alt="" /> </div>
+                            <p class="notify-details">Staff Team</p>
+                            <p class="text-muted mb-0 user-msg">
+                                <small>Hi, Thanks for becoming a member with us! :)</small>
+                            </p>
+                        </a>
+
+                    </div>
+
+                    <!-- All-->
+                    <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all" data-toggle="modal" data-target="#info-indev-modal">
+                        View all
+                        <i class="fe-arrow-right"></i>
+                    </a>
+
+                </div>
+            </li>
+
+            <li class="dropdown notification-list topbar-dropdown">
+                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" <% if (locals.user.email) { %>data-toggle="dropdown"<% } %> href="/login" role="button" aria-haspopup="false" aria-expanded="false">
+                    <img src="<%= locals.avatar %>" alt="user-image" class="rounded-circle">
+                    <span class="pro-user-name ml-1">
+                    <% if (locals.user.email) { %><%= locals.user.display.name %><% } %><% if (!locals.user.email) { %>Login<% } %> <i class="mdi <% if (locals.user.email) { %>mdi-chevron-down<% } %>"></i> 
+                    </span>
+                </a>
+                <% if (locals.user.email) { %>
+                <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                    <!-- item-->
+                    <div class="dropdown-header noti-title">
+                        <h6 class="text-overflow m-0">Welcome <%= locals.user.display.name %> !</h6>
+                    </div>
+
+                    <!-- item-->
+                    <a href="/account" class="dropdown-item notify-item">
+                        <i class="fe-user"></i>
+                        <span>My Account</span>
+                    </a>
+
+                    <!-- item-->
+                    <a href="#settings-tab" class="dropdown-item notify-item right-bar-toggle">
+                        <i class="fe-settings"></i>
+                        <span>Settings</span>
+                    </a>
+
+                    <!-- item-->
+                    <a href="/lock-screen" class="dropdown-item notify-item">
+                        <i class="fe-lock"></i>
+                        <span>Lock Screen</span>
+                    </a>
+
+                    <div class="dropdown-divider"></div>
+
+                    <!-- item-->
+                    <a href="/logout" class="dropdown-item notify-item">
+                        <i class="fe-log-out"></i>
+                        <span>Logout</span>
+                    </a>
+
+                </div>
+                <% } %>
+            </li>
+
+            <li class="dropdown notification-list">
+                <a onclick="changeStyle()" class="nav-link waves-effect waves-light">
+                    <i class="fe-shuffle"></i>
+                </a>
+            </li>
+
+            <script type="text/javascript">
+                function changeStyle() {
+                    if(document.cookie.includes('colorScheme=dark') && !document.cookie.includes('colorScheme=light')) {
+                        document.cookie = 'colorScheme=light'
+                        document.cookie = 'themeTopbar=light'
+                    } else if(document.cookie.includes('colorScheme=light') && !document.cookie.includes('colorScheme=dark')) {
+                        document.cookie = 'colorScheme=dark'
+                        document.cookie = 'themeTopbar=dark'
+                    } else {
+                        document.cookie = 'colorScheme=light'
+                        document.cookie = 'themeTopbar=light'
+                    }
+                    window.location.reload()
+                }
+            </script>
+
+        </ul>
+
+        <!-- LOGO -->
+        <div class="logo-box">
+            <a href="/" class="logo logo-dark text-center">
+                <span class="logo-sm">
+                    <img src="../assets/images/logo-sm.png" alt="" height="22">
+                    <!-- <span class="logo-lg-text-light">UBold</span> -->
+                </span>
+                <span class="logo-lg">
+                    <img src="../assets/images/logo-dark.png" alt="" height="20">
+                    <!-- <span class="logo-lg-text-light">U</span> -->
+                </span>
+            </a>
+
+            <a href="/" class="logo logo-light text-center">
+                <span class="logo-sm">
+                    <img src="../assets/images/logo-sm-light.png" alt="" height="22">
+                </span>
+                <span class="logo-lg">
+                    <img src="../assets/images/logo-light.png" alt="" height="20">
+                </span>
+            </a>
+        </div>
+
+        <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
+            <li>
+                <button class="button-menu-mobile waves-effect waves-light">
+                    <i class="fe-menu"></i>
+                </button>
+            </li>
+
+            <li>
+                <!-- Mobile menu toggle (Horizontal Layout)-->
+                <a class="navbar-toggle nav-link" data-toggle="collapse" data-target="#topnav-menu-content">
+                    <div class="lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+                <!-- End mobile menu toggle-->
+            </li>   
+
+            <li class="dropdown d-none d-xl-block">
+                <a class="nav-link waves-effect waves-light" href="/space-engineers" role="button" aria-haspopup="false" aria-expanded="false">
+                    Space Engineers
+                    <i></i>
+                </a>
+            </li>
+
+            <li class="dropdown d-none d-xl-block">
+                <a class="nav-link waves-effect waves-light" href="/squad" role="button" aria-haspopup="false" aria-expanded="false">
+                    Squad
+                </a>
+            </li>
+
+            <li class="dropdown d-none d-xl-block">
+                <a class="nav-link waves-effect waves-light" href="/eco" role="button" aria-haspopup="false" aria-expanded="false">
+                    Eco
+                </a>
+            </li>
+
+            <li class="dropdown dropdown-mega d-none d-xl-block">
+                <a hidden class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    Mega Menu
+                    <i class="mdi mdi-chevron-down"></i> 
+                </a>
+                <div class="dropdown-menu dropdown-megamenu">
+                    <div class="row">
+                        <div class="col-sm-8">
+                
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h5 class="text-dark mt-0 font-weight-normal">UI Components</h5>
+                                    <ul class="list-unstyled megamenu-list">
+                                        <li>
+                                            <a href="javascript:void(0);">Widgets</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">Nestable List</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">Range Sliders</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">Masonry Items</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">Sweet Alerts</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">Treeview Page</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">Tour Page</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <h5 class="text-dark mt-0 font-weight-normal">Applications</h5>
+                                    <ul class="list-unstyled megamenu-list">
+                                        <li>
+                                            <a href="javascript:void(0);">eCommerce Pages</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">CRM Pages</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">Email</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">Calendar</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">Team Contacts</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">Task Board</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">Email Templates</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <h5 class="text-dark mt-0 font-weight-normal">Extra Pages</h5>
+                                    <ul class="list-unstyled megamenu-list">
+                                        <li>
+                                            <a href="javascript:void(0);">Left Sidebar with User</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">Menu Collapsed</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">Small Left Sidebar</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">New Header Style</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">Search Result</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">Gallery Pages</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);">Maintenance & Coming Soon</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="text-center mt-3">
+                                <h3 class="text-dark">Horizons Season Two!</h3>
+                                <h4>Join our Community today!</h4>
+                                <form action="https://www.horizons.gg/discord">
+                                    <button class="btn btn-primary btn-rounded mt-3">Join Now!</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<!-- end Topbar -->
+
+<!-- ========== Left Sidebar Start ========== -->
+<div class="left-side-menu">
+
+    <div class="h-100" data-simplebar>
+
+        <% if (locals.user.email) { %>
+        <!-- User box -->
+        <div class="user-box text-center">
+            <a href="/account"><img src="<%= locals.avatar %>" alt="user-img" class="rounded-circle avatar-md"></a>
+            <div class="dropdown">
+                <a href="/account" class="text-dark font-weight-normal dropdown-toggle h5 mt-2 mb-1 d-block"><%= locals.user.display.name %></a>
+            </div>
+            <p class="text-muted">Member</p>
+        </div>
+        <% } %>
+
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+
+            <ul id="side-menu">
+
+                <li class="menu-title">Home</li>
+                <li>
+                    <a href="/dashboard">
+                        <i data-feather="airplay"></i>
+                        <span> Dashboard </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/members">
+                        <i data-feather="users"></i>
+                        <span> Members </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/trade">
+                        <i data-feather="aperture"></i>
+                        <span> Trade Center </span>
+                    </a>
+                </li>
+                <li hidden>
+                    <a href="/software">
+                        <i data-feather="codesandbox"></i>
+                        <span> Software </span>
+                    </a>
+                </li>
+
+
+                <li class="menu-title">Forms</li>
+                <li>
+                    <a href="#sidebarApplications" data-toggle="collapse">
+                        <i data-feather="check-square"></i>
+                        <span class="badge badge-success badge-pill float-right">2</span>
+                        <span> Applications </span>
+                    </a>
+                    <div class="collapse" id="sidebarApplications">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="<% if (!locals.user.email) { %>/login<% } %>#" <% if (locals.user.email) { %>data-toggle="modal" data-target="#staff-app-modal"<% } %>>Staff Application</a>
+                            </li>
+                            <li>
+                                <a href="<% if (!locals.user.email) { %>/login<% } %>#" <% if (locals.user.email) { %>data-toggle="modal" data-target="#twitch-modal"<% } %>>Twitch Application</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#missing-info-alert-modal" hidden>
+                        <i data-feather="inbox"></i>
+                        <span> Suggestions </span>
+                    </a>
+                </li>
+
+
+                <li class="menu-title">Documentation</li>
+                <li>
+                    <a href="/documents/se">
+                        <i data-feather="file-text"></i>
+                        <span> Space Engineers </span>
+                    </a>
+                </li>
+                <li>
+                    <a hidden href="/documents/eco">
+                        <i data-feather="file-text"></i>
+                        <span> Eco </span>
+                    </a>
+                </li>
+                <% if (locals.userData) { if (locals.userData.staff.is_staff) { %>
+                <li>
+                    <a href="/network">
+                        <i data-feather="file-text"></i>
+                        <span> Network </span>
+                    </a>
+                </li>
+                <% }} %> 
+
+                <li hidden class="menu-title">Staff</li>
+                <li hidden>
+                    <a href="/api">
+                        <i data-feather="cpu"></i>
+                        <span> API </span>
+                    </a>
+                </li>
+                    
+                    
+
+
+            </ul>
+
+        </div>
+        <!-- End Sidebar -->
+
+        <div class="clearfix"></div>
+
+    </div>
+    <!-- Sidebar -left -->
+
+</div>
+<!-- Left Sidebar End -->
+
+<%- include('modals') %>

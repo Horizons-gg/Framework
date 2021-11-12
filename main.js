@@ -118,3 +118,5 @@ app.route('/register')
 
 
 //? Account
+app.route('/account')
+    .get(require('./routes/account').AccountGet)
