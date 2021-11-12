@@ -1,0 +1,31 @@
+{
+  "name": "framework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Horizons-gg/Framework.git"
+  },
+  "author": "Jessica Lancelot",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Horizons-gg/Framework/issues"
+  },
+  "homepage": "https://github.com/Horizons-gg/Framework#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "discord.js": "^13.3.1",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "mongodb": "^4.1.4",
+    "node-fetch": "^2.6.6",
+    "passport": "^0.5.0",
+    "socket.io": "^4.3.2",
+    "util": "^0.12.4"
+  }
+}
