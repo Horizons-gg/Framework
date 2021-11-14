@@ -120,3 +120,4 @@ app.route('/register')
 //? Account
 app.route('/account')
     .get(require('./routes/account').AccountGet)
+    .put(require('./routes/account').AccountUpdate)

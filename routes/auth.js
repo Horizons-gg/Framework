@@ -3,6 +3,8 @@ const fetch = require('node-fetch')
 
 
 function LoginGet(req, res) {
+    if (res.locals.user) return res.redirect('/account')
+
     res.render('auth/login')
 }
 function LoginPost(req, res) {
@@ -13,11 +15,13 @@ function LoginPost(req, res) {
 }
 
 function RegisterGet(req, res) {
+    if (res.locals.user) return res.redirect('/account')
+    
     res.render('auth/register')
 }
 function RegisterPost(req, res) {
     fetch(`${process.env.api}/user/create`, {
-        method: 'PUT',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },

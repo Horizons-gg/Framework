@@ -497,7 +497,7 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label for="bio">About Me</label>
-                                                            <textarea class="form-control" name="bio" rows="4" placeholder="Write something..."><!%= userData.custom.bio %></textarea>
+                                                            <textarea class="form-control" name="bio" rows="4" placeholder="Write something..."><%= locals.user.details.bio %></textarea>
                                                         </div>
                                                     </div> <!-- end col -->
                                                 </div> <!-- end row -->
@@ -506,7 +506,7 @@
                                                     <div class="col-lg-6">
                                                         <div class="form-group mb-3">
                                                             <label>Custom Color</label>
-                                                            <input type="text" id="hexa-colorpicker" name="color" class="form-control" value="<!%= userData.custom.color %>">
+                                                            <input type="text" id="hexa-colorpicker" name="color" class="form-control" value="<%= locals.user.display.color %>">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -593,28 +593,23 @@
                                                     </div>
                                                 </div> <!-- end col -->
                                                 </div> <!-- end row -->
-
-                                                <h5 class="mb-3 text-uppercase bg-light p-2"><i class="fab fa-discord" style="margin-right: .5rem;"></i> Discord Extras</h5>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="nickname">Nickname</label>
-                                                            <input type="text" class="form-control" name="nickname" placeholder="Enter nickname" value="<!%= userData.discord.nickname %>">
-                                                        </div>
-                                                    </div>
-                                                </div> <!-- end row -->
                                             </form>
 
                                             <script>
                                                 async function save() {
                                                     var accountForm = document.getElementById('accountForm')
-                                                    var formData = new FormData(accountForm);
-                                                    formData.append("banner", bannerFile.files[0]);
+                                                    var formData = new FormData(accountForm)
+                                                    var data = {}
+                                                    formData.forEach((value, key) => {
+                                                        data[key] = value
+                                                    })
                                         
                                                     var requestOptions = {
-                                                        method: 'POST',
-                                                        body: formData,
-                                                        redirect: 'follow'
+                                                        method: 'PUT',
+                                                        headers: {
+                                                            'Content-Type': 'application/json'
+                                                        },
+                                                        body: JSON.stringify(data)
                                                     };
                                         
                                                     fetch("/account", requestOptions)
@@ -633,8 +628,6 @@
                                                         .catch(error => {
                                                             alert(error)
                                                         });
-                                        
-                                                    return false
                                                 }
 
                                                 function personalityEvent() {
@@ -659,15 +652,13 @@
                                                     if (personality.split(' - ')[0] === 'ESFP') document.getElementById('persionalityDescriptionLabel').innerHTML = personality.split(' - ')[1], document.getElementById('personalityDescription').innerHTML = "ESFPs are vivacious entertainers who charm and engage those around them. They are spontaneous, energetic, and fun-loving, and take pleasure in the things around them: food, clothes, nature, animals, and especially people."
                                                     if (personality.split(' - ')[0] === 'ESTJ') document.getElementById('persionalityDescriptionLabel').innerHTML = personality.split(' - ')[1], document.getElementById('personalityDescription').innerHTML = "ESTJs are hardworking traditionalists, eager to take charge in organizing projects and people. Orderly, rule-abiding, and conscientious, ESTJs like to get things done, and tend to go about projects in a systematic, methodical way."
                                                     if (personality.split(' - ')[0] === 'ESTP') document.getElementById('persionalityDescriptionLabel').innerHTML = personality.split(' - ')[1], document.getElementById('personalityDescription').innerHTML = "ESTPs are energetic thrillseekers who are at their best when putting out fires, whether literal or metaphorical. They bring a sense of dynamic energy to their interactions with others and the world around them."
-
-
                                                 }
                                                 personalityEvent()
 
                                             </script>
 
                                             <div class="text-right">
-                                                <button class="btn btn-success waves-effect waves-light mt-2" onclick="save()"><i class="mdi mdi-content-save"></i> Save</button>
+                                                <button class="btn btn-success waves-effect waves-light mt-2" type="button" onclick="save()"><i class="mdi mdi-content-save"></i> Save</button>
                                             </div>
                                         </div>
                                         <!-- end settings content-->
