@@ -61,17 +61,54 @@
 
                         <div class="row">
                             <div class="col-lg-4 col-xl-4">
-                                <div class="card-box text-center" style="border-style: solid; border-width: 0.1ex; border-color: <!%= userData.custom.color %>;">
+                                <div class="card-box text-center" style="border-style: solid; border-width: 0.1ex; border-color: <%= locals.user.display.color %>;">
 
-                                    <div style="margin: -1.5rem -1.5rem 0 -1.5rem; border-radius: .25rem .25rem 0 0; padding: 1rem 0 0 0; background-image: url('/uploads/banners/<!%= userData.discord.id %>.<!%= banner[0] %>.<!%= banner[1] %>'); background-repeat: repeat; background-size: cover; background-position: center;">
+                                    <div onclick="$('#banner_upload').click()" title="Upload Banner" style="cursor: pointer; margin: -1.5rem -1.5rem 0 -1.5rem; border-radius: .25rem .25rem 0 0; padding: 1rem 0 0 0; background-image: url('<%= locals.banner %>'); background-repeat: repeat; background-size: cover; background-position: center;">
 
-                                        <a href="/member?id=<!%=id %>"><img src="<%= locals.avatar %>" class="rounded-circle avatar-lg" style="border-style: solid; border-color: <!%= userData.custom.color %>;" alt="profile-image"></a>
+                                        <img onclick="$('#avatar_upload').click()" src="<%= locals.avatar %>" class="rounded-circle avatar-lg" style="border-style: solid; border-color: <%= locals.user.display.color %>; cursor: pointer;" alt="profile-image" title="Upload Profile Picture">
 
                                         <div class="card-box text-center" style="width: fit-content; margin: .5rem auto 0 auto; padding: .4rem 2rem 0 2rem; border-radius: .5rem .5rem 0 0;">
                                             <h4 class="mb-0" style="margin: 0;"><%= locals.user.display.name %></h4>
                                             <p class="text-muted" style="margin: 0;"><%= locals.user.email %></p>
                                         </div>
                                     </div>
+
+                                    <input id="avatar_upload" type="file" onchange="UploadAvatar()" hidden>
+                                    <input id="banner_upload" type="file" onchange="UploadBanner()" hidden>
+
+                                    <script>
+                                        function UploadAvatar() {
+                                            var formdata = new FormData()
+                                            formdata.append('file', $('#avatar_upload').prop('files')[0])
+
+                                            fetch('/account?type=avatar', {
+                                                method: 'POST',
+                                                body: formdata,
+                                                redirect: 'follow'
+                                            })
+                                                .then(async res => {
+                                                    if (res.status === 200) window.location.reload()
+                                                    else if (res.status === 400) alert(res.text())
+                                                    else if (res.status === 500) alert('Internal Server Error, read console for more information.'), console.log(await res.text())
+                                                })
+                                        }
+
+                                        function UploadBanner() {
+                                            var formdata = new FormData()
+                                            formdata.append('file', $('#banner_upload').prop('files')[0])
+
+                                            fetch('/account?type=banner', {
+                                                method: 'POST',
+                                                body: formdata,
+                                                redirect: 'follow'
+                                            })
+                                                .then(async res => {
+                                                    if (res.status === 200) window.location.reload()
+                                                    else if (res.status === 400) alert(res.text())
+                                                    else if (res.status === 500) alert('Internal Server Error, read console for more information.'), console.log(await res.text())
+                                                })
+                                        }
+                                    </script>
 
                                     <div class="text-left mt-3">
                                         <% if (locals.user.details.firstName) { %><h4 class="font-13 text-uppercase" style="display: inline;">Full Name :</h4><p class="text-muted mb-2 font-13" style="display: inline"><span class="ml-2"><%= locals.user.details.firstName %> <%= locals.user.details.lastName %></span></p><br><% } %>
@@ -416,13 +453,13 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="firstName">First Name</label>
-                                                            <input type="text" class="form-control" name="firstName" placeholder="Enter first name" value="<%= locals.user.details.first_name %>">
+                                                            <input type="text" class="form-control" name="firstName" placeholder="Enter first name" value="<%= locals.user.details.firstName %>">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="lastName">Last Name</label>
-                                                            <input type="text" class="form-control" name="lastName" placeholder="Enter last name" value="<%= locals.user.details.last_name %>">
+                                                            <input type="text" class="form-control" name="lastName" placeholder="Enter last name" value="<%= locals.user.details.lastName %>">
                                                         </div>
                                                     </div> <!-- end col -->
                                                 </div> <!-- end row -->
@@ -497,7 +534,7 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label for="bio">About Me</label>
-                                                            <textarea class="form-control" name="bio" rows="4" placeholder="Write something..."><%= locals.user.details.bio %></textarea>
+                                                            <textarea class="form-control" name="bio" rows="4" placeholder="Write something..."><%= decodeURI(locals.user.details.bio) %></textarea>
                                                         </div>
                                                     </div> <!-- end col -->
                                                 </div> <!-- end row -->

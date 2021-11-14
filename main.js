@@ -61,6 +61,7 @@ const httpServer = require('http').createServer(app)
 
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
+const fileUpload = require('express-fileupload')
 const io = require('socket.io')(httpServer)
 
 httpServer.listen(process.env.port, () => console.log(`Listening on port ${process.env.port}`))
@@ -68,12 +69,14 @@ httpServer.listen(process.env.port, () => console.log(`Listening on port ${proce
 app.set('view engine', 'ejs')
 app.use(cookieParser())
 app.use(bodyParser.json({ extended: true }))
+app.use(fileUpload())
 
 app.use(function (req, res, next) {
     req.io = io
     next()
 })
 
+app.use('/storage', express.static(process.env.storage))
 app.use('/public', express.static('public'))
 app.use('/assets', express.static('assets'))
 app.use('/assets_landing', express.static('assets_landing'))
@@ -121,3 +124,4 @@ app.route('/register')
 app.route('/account')
     .get(require('./routes/account').AccountGet)
     .put(require('./routes/account').AccountUpdate)
+    .post(require('./routes/upload').Account)

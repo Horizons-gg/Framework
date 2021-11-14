@@ -1,4 +1,5 @@
 const fetch = require('node-fetch')
+const fs = require('fs')
 
 
 
@@ -17,11 +18,35 @@ async function FetchUser(req, res, next) {
         else res.locals.user = null
     }
 
+
     //? Avatar
     if (res.locals.user) {
-        if (res.locals.user.avatar === 'none') res.locals.avatar = "/assets/images/avatar.jpg"
-        else res.locals.avatar = "/assets/images/avatar.jpg"
-    } else res.locals.avatar = "/assets/images/avatar.jpg"
+        var output
+        var avatar = res.locals.user.display.avatar || 'none'
+
+        if (avatar === 'none') output = "/assets/images/avatar.jpg"
+        else if (avatar.includes('/storage/users')) {
+            if (fs.existsSync(process.env.storage.replace('/storage', '') + res.locals.user.display.avatar)) output = res.locals.user.display.avatar
+            else output = "/assets/images/avatar.jpg"
+        }
+        else output = "/assets/images/avatar.jpg"
+    } else output = "/assets/images/avatar.jpg"
+    res.locals.avatar = output
+
+
+    //? Banner
+    if (res.locals.user) {
+        var output
+        var banner = res.locals.user.display.banner || 'none'
+
+        if (banner === 'none') output = "/assets/images/banner.jpg"
+        else if (banner.includes('/storage/users')) {
+            if (fs.existsSync(process.env.storage.replace('/storage', '') + res.locals.user.display.banner)) output = res.locals.user.display.banner
+            else output = "/assets/images/banner.jpg"
+        }
+        else output = "/assets/images/banner.jpg"
+    } else output = "/assets/images/banner.jpg"
+    res.locals.banner = output
 
     next()
 }
