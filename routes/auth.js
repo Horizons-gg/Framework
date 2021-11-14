@@ -61,16 +61,64 @@ function Logout(req, res) {
 }
 
 
-//? OUath2 Requests
+//? OAuth2 Requests
+async function Discord(req, res) {
+    var token
+    if (res.locals.user) token = res.locals.user.security.token
+    var Users = await process.db.collection('users')
+    if (token) {
+        var User = await Users.findOne({ 'security.token': token })
+        if (User) {
+            if (await Users.findOne({ 'connections.discord.id': req.user.id })) return res.status(400).send('This discord account is linked to a preexisting account.')
+            await Users.updateOne({ '_id': User._id }, { $set: { 'connections.discord': req.user } })
+            return res.redirect('/account')
+        }
+    }
 
+    var User = await Users.findOne({ 'connections.discord.id': req.user.id })
+    if (User) {
+        res.cookie('token', User.security.token)
+        return res.redirect('/account')
+    } else {
+        var User = await Users.findOne({ 'email': req.user.email })
+        if (User) return res.status(400).send(`An account using this email (${req.user.email}) already exists, please login to your account and link your discord account from there.`)
+        fetch(`${process.env.api}/user/create?token=${process.env.security.token}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: req.user.username,
+                email: req.user.email,
+                password: null,
+                avatar: 'discord',
+                banner: 'discord',
+                discord: req.user
+            })
+        })
+            .then(async response => {
+                if (response.status !== 201) return res.status(400).send(await response.text())
+                response = await response.json()
+                res.cookie('token', response.security.token)
+                res.redirect('/account')
+            })
+            .catch(err => res.status(500).send(err))
+    }
+}
 
 
 module.exports = {
+
+    //? Horizons
     LoginGet: LoginGet,
     LoginPost: LoginPost,
 
     RegisterGet: RegisterGet,
     RegisterPost: RegisterPost,
 
-    Logout: Logout
+    Logout: Logout,
+
+
+    //? OAuth2
+    Discord: Discord
 }

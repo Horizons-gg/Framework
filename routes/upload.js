@@ -7,7 +7,7 @@ async function Account(req, res) {
     if (!req.files.file) return res.status(400).send('No file uploaded.')
 
     var file = req.files.file
-    if (file.size > 3000000) return res.status(400).send('File too large, max 3MB')
+    if (file.size > 2000000) return res.status(400).send('File too large, max 2MB')
     if (file.mimetype.includes(['image/png', 'image/jpg', 'image/jpeg'])) return res.status(400).send('File type not supported.')
 
     var path = `${process.env.storage}/users/${res.locals.user._id}/${req.query.type}`

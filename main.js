@@ -92,6 +92,7 @@ passport.serializeUser(function (user, done) { done(null, user) })
 app.use(passport.initialize())
 
 require('./util/passport').Discord(passport)
+require('./util/passport').Steam(passport)
 
 
 
@@ -130,12 +131,6 @@ app.route('/account')
     .post(require('./routes/upload').Account)
 
 
-
-
-
+//? OAuth2
 app.get('/auth/discord', passport.authenticate('discord'))
-app.get('/auth/discord/callback', passport.authenticate('discord', { failureRedirect: '/register' }),
-    function (req, res) {
-        res.cookie('token', req.user.security.token)
-        res.redirect('/account')
-    })
+app.get('/auth/discord/callback', passport.authenticate('discord', { failureRedirect: '/register' }), require('./routes/auth').Discord)

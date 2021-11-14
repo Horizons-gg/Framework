@@ -63,7 +63,10 @@
                             <div class="col-lg-4 col-xl-4">
                                 <div class="card-box text-center" style="border-style: solid; border-width: 0.1ex; border-color: <%= locals.user.display.color %>;">
 
-                                    <div onclick="$('#banner_upload').click()" title="Upload Banner" style="cursor: pointer; margin: -1.5rem -1.5rem 0 -1.5rem; border-radius: .25rem .25rem 0 0; padding: 1rem 0 0 0; background-image: url('<%= locals.banner %>'); background-repeat: repeat; background-size: cover; background-position: center;">
+                                    <div style="margin: -1.5rem -1.5rem 0 -1.5rem; border-radius: .25rem .25rem 0 0; padding: 1rem 0 0 0; background-image: url('<%= locals.banner %>'); background-repeat: repeat; background-size: cover; background-position: center;">
+
+
+                                        <i class="far fa-edit" onclick="$('#banner_upload').click()" style="right: 1.4rem; top: 0.8rem; width: 1rem; position: absolute; cursor: pointer;"></i>
 
                                         <img onclick="$('#avatar_upload').click()" src="<%= locals.avatar %>" class="rounded-circle avatar-lg" style="border-style: solid; border-color: <%= locals.user.display.color %>; cursor: pointer;" alt="profile-image" title="Upload Profile Picture">
 
@@ -88,7 +91,7 @@
                                             })
                                                 .then(async res => {
                                                     if (res.status === 200) window.location.reload()
-                                                    else if (res.status === 400) alert(res.text())
+                                                    else if (res.status === 400) alert(await res.text())
                                                     else if (res.status === 500) alert('Internal Server Error, read console for more information.'), console.log(await res.text())
                                                 })
                                         }
@@ -104,7 +107,7 @@
                                             })
                                                 .then(async res => {
                                                     if (res.status === 200) window.location.reload()
-                                                    else if (res.status === 400) alert(res.text())
+                                                    else if (res.status === 400) alert(await res.text())
                                                     else if (res.status === 500) alert('Internal Server Error, read console for more information.'), console.log(await res.text())
                                                 })
                                         }
@@ -650,17 +653,11 @@
                                                     };
                                         
                                                     fetch("/account", requestOptions)
-                                                        .then(response => response.json())
-                                                        .then(result => {
+                                                        .then(async result => {
                                                             if (result.status === 200) {
                                                                 location.reload()
                                                             }
-                                                            if (result.status === 500) {
-                                                                alert(result.body)
-                                                            }
-                                                            if (result.status === 413) {
-                                                                alert(result.body)
-                                                            }
+                                                            else(alert(await result.text()))
                                                         })
                                                         .catch(error => {
                                                             alert(error)
