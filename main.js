@@ -119,6 +119,9 @@ app.route('/register')
     .get(require('./routes/auth').RegisterGet)
     .post(require('./routes/auth').RegisterPost)
 
+app.route('/logout')
+    .get(require('./routes/auth').Logout)
+
 
 //? Account
 app.route('/account')

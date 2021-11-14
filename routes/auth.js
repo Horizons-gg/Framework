@@ -2,6 +2,7 @@ const fetch = require('node-fetch')
 
 
 
+//? Login Requests
 function LoginGet(req, res) {
     if (res.locals.user) return res.redirect('/account')
 
@@ -14,9 +15,11 @@ function LoginPost(req, res) {
         .catch(err => res.status(400).send(err))
 }
 
+
+//? Registration Requests
 function RegisterGet(req, res) {
     if (res.locals.user) return res.redirect('/account')
-    
+
     res.render('auth/register')
 }
 function RegisterPost(req, res) {
@@ -51,11 +54,20 @@ function RegisterPost(req, res) {
 }
 
 
+//? Logout Requests
+function Logout(req, res) {
+    res.cookie("token", undefined, { maxAge: 1 })
+    res.render('auth/logout')
+}
+
+
 
 module.exports = {
     LoginGet: LoginGet,
     LoginPost: LoginPost,
 
     RegisterGet: RegisterGet,
-    RegisterPost: RegisterPost
+    RegisterPost: RegisterPost,
+
+    Logout: Logout
 }
