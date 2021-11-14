@@ -9,7 +9,7 @@ function Discord(passport) {
     passport.use(new DiscordStrategy({
         clientID: process.env.auth.discord.id,
         clientSecret: process.env.auth.discord.secret,
-        callbackURL: 'http://localhost/auth/discord/callback',
+        callbackURL: `${process.env.site.root}/auth/discord/callback`,
         scope: scopes
     },
         async function (accessToken, refreshToken, user, done) {
