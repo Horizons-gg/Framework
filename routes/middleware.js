@@ -29,6 +29,7 @@ async function FetchUser(req, res, next) {
             if (fs.existsSync(process.env.storage.replace('/storage', '') + res.locals.user.display.avatar)) output = res.locals.user.display.avatar
             else output = "/assets/images/avatar.jpg"
         }
+        else if (avatar === 'discord') output = `https://cdn.discordapp.com/avatars/${res.locals.user.connections.discord.id}/${res.locals.user.connections.discord.avatar}.webp?size=128`
         else output = "/assets/images/avatar.jpg"
     } else output = "/assets/images/avatar.jpg"
     res.locals.avatar = output
@@ -44,10 +45,11 @@ async function FetchUser(req, res, next) {
             if (fs.existsSync(process.env.storage.replace('/storage', '') + res.locals.user.display.banner)) output = res.locals.user.display.banner
             else output = "/assets/images/banner.jpg"
         }
+        else if (banner === 'discord') output = `https://cdn.discordapp.com/banners/${res.locals.user.connections.discord.id}/${res.locals.user.connections.discord.banner}.png?size=300`
         else output = "/assets/images/banner.jpg"
     } else output = "/assets/images/banner.jpg"
     res.locals.banner = output
-
+    
     next()
 }
 

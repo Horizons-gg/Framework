@@ -87,16 +87,16 @@ app.use('/assets_landing', express.static('assets_landing'))
 //! Passport
 //!
 
-// const passport = require('passport')
-// passport.serializeUser(function (user, done) { done(null, user) })
-// passport.deserializeUser(function (obj, done) { done(null, obj) })
-// app.use(passport.initialize())
-// app.use(passport.session())
+const passport = require('passport')
+passport.serializeUser(function (user, done) { done(null, user) })
+app.use(passport.initialize())
+
+require('./util/passport').Discord(passport)
 
 
 
 //!
-//! Middleware
+//! Horizons Middleware
 //!
 
 var Middleware = require('./routes/middleware')
@@ -128,3 +128,14 @@ app.route('/account')
     .get(require('./routes/account').AccountGet)
     .put(require('./routes/account').AccountUpdate)
     .post(require('./routes/upload').Account)
+
+
+
+
+
+app.get('/auth/discord', passport.authenticate('discord'))
+app.get('/auth/discord/callback', passport.authenticate('discord', { failureRedirect: '/register' }),
+    function (req, res) {
+        res.cookie('token', req.user.security.token)
+        res.redirect('/account')
+    })
