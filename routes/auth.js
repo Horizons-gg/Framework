@@ -81,8 +81,12 @@ async function Discord(req, res) {
         return res.redirect('/account')
     } else {
         var User = await Users.findOne({ 'email': req.user.email })
-        if (User) return res.status(400).send(`An account using this email (${req.user.email}) already exists, please login to your account and link your discord account from there.`)
-        fetch(`${process.env.api}/user/create?token=${process.env.security.token}`, {
+        if (User) {
+            await Users.updateOne({ '_id': User._id }, { $set: { 'connections.discord': req.user } })
+            res.cookie('token', User.security.token)
+            return res.redirect('/account')
+        }
+        else fetch(`${process.env.api}/user/create?token=${process.env.security.token}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
