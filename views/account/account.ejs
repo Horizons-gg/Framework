@@ -63,12 +63,12 @@
                             <div class="col-lg-4 col-xl-4">
                                 <div class="card-box text-center" style="border-style: solid; border-width: 0.1ex; border-color: <%= locals.user.display.color %>;">
 
-                                    <div style="margin: -1.5rem -1.5rem 0 -1.5rem; border-radius: .25rem .25rem 0 0; padding: 1rem 0 0 0; background-image: url('<%= locals.banner %>'); background-repeat: repeat; background-size: cover; background-position: center;">
+                                    <div id="banner_div" style="margin: -1.5rem -1.5rem 0 -1.5rem; border-radius: .25rem .25rem 0 0; padding: 1rem 0 0 0; background-image: url('<%= locals.banner %>'); background-repeat: repeat; background-size: cover; background-position: center;">
 
 
                                         <i class="far fa-edit" onclick="$('#banner_upload').click()" style="right: 1.4rem; top: 0.8rem; width: 1rem; position: absolute; cursor: pointer;"></i>
 
-                                        <img onclick="$('#avatar_upload').click()" src="<%= locals.avatar %>" class="rounded-circle avatar-lg" style="border-style: solid; border-color: <%= locals.user.display.color %>; cursor: pointer;" alt="profile-image" title="Upload Profile Picture">
+                                        <img id="avatar_image" onclick="$('#avatar_upload').click()" src="<%= locals.avatar %>" class="rounded-circle avatar avatar-lg" style="border-style: solid; border-color: <%= locals.user.display.color %>; cursor: pointer;" alt="profile-image" title="Upload Profile Picture">
 
                                         <div class="card-box text-center" style="width: fit-content; margin: .5rem auto 0 auto; padding: .4rem 2rem 0 2rem; border-radius: .5rem .5rem 0 0;">
                                             <h4 class="mb-0" style="margin: 0;"><%= locals.user.display.name %></h4>
@@ -81,6 +81,8 @@
 
                                     <script>
                                         function UploadAvatar() {
+                                            var oldAvatar = $('#avatar_image').attr('src')
+
                                             var formdata = new FormData()
                                             formdata.append('file', $('#avatar_upload').prop('files')[0])
 
@@ -90,9 +92,10 @@
                                                 redirect: 'follow'
                                             })
                                                 .then(async res => {
-                                                    if (res.status === 200) window.location.reload()
-                                                    else if (res.status === 400) alert(await res.text())
-                                                    else if (res.status === 500) alert('Internal Server Error, read console for more information.'), console.log(await res.text())
+                                                    var text = await res.text()
+                                                    if (res.status === 200) $(`img[src="${oldAvatar}"]`).attr('src', text), console.log('Avatar Uploaded: ' + text)
+                                                    else if (res.status === 400) alert(text)
+                                                    else if (res.status === 500) alert('Internal Server Error, read console for more information.'), console.log(text)
                                                 })
                                         }
 
@@ -106,9 +109,11 @@
                                                 redirect: 'follow'
                                             })
                                                 .then(async res => {
-                                                    if (res.status === 200) window.location.reload()
-                                                    else if (res.status === 400) alert(await res.text())
-                                                    else if (res.status === 500) alert('Internal Server Error, read console for more information.'), console.log(await res.text())
+                                                    text = await res.text()
+                                                    if (res.status === 200) $('#banner_div').css('background-image', `url('${text}')`), console.log('Banner Uploaded: ' + text)
+                                                    else if (res.status === 400) alert(text)
+                                                    else if (res.status === 400) alert(text)
+                                                    else if (res.status === 500) alert('Internal Server Error, read console for more information.'), console.log(text)
                                                 })
                                         }
                                     </script>

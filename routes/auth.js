@@ -67,7 +67,7 @@ async function Discord(req, res) {
     if (res.locals.user) token = res.locals.user.security.token
     var Users = await process.db.collection('users')
     if (token) {
-        var User = await Users.findOne({ 'security.token': token })
+        var User = res.locals.user
         if (User) {
             if (await Users.findOne({ 'connections.discord.id': req.user.id })) return res.status(400).send('This discord account is linked to a preexisting account.')
             await Users.updateOne({ '_id': User._id }, { $set: { 'connections.discord': req.user } })
@@ -93,11 +93,53 @@ async function Discord(req, res) {
             },
             body: JSON.stringify({
                 name: req.user.username,
-                email: req.user.email,
+                email: req.user.email || null,
                 password: null,
                 avatar: 'discord',
                 banner: 'discord',
                 discord: req.user
+            })
+        })
+            .then(async response => {
+                if (response.status !== 201) return res.status(400).send(await response.text())
+                response = await response.json()
+                res.cookie('token', response.security.token)
+                res.redirect('/account')
+            })
+            .catch(err => res.status(500).send(err))
+    }
+}
+
+async function Steam(req, res) {
+    var token
+    if (res.locals.user) token = res.locals.user.security.token
+    var Users = await process.db.collection('users')
+    if (token) {
+        var User = res.locals.user
+        if (User) {
+            if (await Users.findOne({ 'connections.steam.id': req.user.id })) return res.status(400).send('This discord account is linked to a preexisting account.')
+            await Users.updateOne({ '_id': User._id }, { $set: { 'connections.steam': req.user } })
+            return res.redirect('/account')
+        }
+    }
+
+    var User = await Users.findOne({ 'connections.steam.id': req.user.id })
+    if (User) {
+        res.cookie('token', User.security.token)
+        return res.redirect('/account')
+    } else {
+        fetch(`${process.env.api}/user/create?token=${process.env.security.token}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: req.user.displayName,
+                email: null,
+                password: null,
+                avatar: 'steam',
+                banner: 'none',
+                steam: req.user
             })
         })
             .then(async response => {
@@ -124,5 +166,6 @@ module.exports = {
 
 
     //? OAuth2
-    Discord: Discord
+    Discord: Discord,
+    Steam: Steam
 }

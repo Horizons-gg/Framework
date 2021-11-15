@@ -18,6 +18,11 @@
     ::-webkit-scrollbar-thumb:hover {
     background: #3f4853;
     }
+
+    .avatar {
+        object-fit: cover;
+    }
+
 </style>
 
 <body class="loading" data-layout-mode="detached" data-layout='{"mode": "dark", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": true}, "topbar": {"color": "dark"}, "showRightSidebarOnPageLoad": false}'>
@@ -231,13 +236,13 @@
             </li>
 
             <li class="dropdown notification-list topbar-dropdown">
-                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" <% if (locals.user.email) { %>data-toggle="dropdown"<% } %> href="/login" role="button" aria-haspopup="false" aria-expanded="false">
-                    <img src="<%= locals.avatar %>" alt="user-image" class="rounded-circle">
+                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" <% if (locals.user._id) { %>data-toggle="dropdown"<% } %> href="/login" role="button" aria-haspopup="false" aria-expanded="false">
+                    <img src="<%= locals.avatar %>" alt="user-image" class="rounded-circle avatar">
                     <span class="pro-user-name ml-1">
-                    <% if (locals.user.email) { %><%= locals.user.display.name %><% } %><% if (!locals.user.email) { %>Login<% } %> <i class="mdi <% if (locals.user.email) { %>mdi-chevron-down<% } %>"></i> 
+                    <% if (locals.user._id) { %><%= locals.user.display.name %><% } %><% if (!locals.user._id) { %>Login<% } %> <i class="mdi <% if (locals.user._id) { %>mdi-chevron-down<% } %>"></i> 
                     </span>
                 </a>
-                <% if (locals.user.email) { %>
+                <% if (locals.user._id) { %>
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                     <!-- item-->
                     <div class="dropdown-header noti-title">
@@ -475,10 +480,10 @@
 
     <div class="h-100" data-simplebar>
 
-        <% if (locals.user.email) { %>
+        <% if (locals.user._id) { %>
         <!-- User box -->
         <div class="user-box text-center">
-            <a href="/account"><img src="<%= locals.avatar %>" alt="user-img" class="rounded-circle avatar-md"></a>
+            <a href="/account"><img src="<%= locals.avatar %>" alt="user-img" class="rounded-circle avatar avatar-md"></a>
             <div class="dropdown">
                 <a href="/account" class="text-dark font-weight-normal dropdown-toggle h5 mt-2 mb-1 d-block"><%= locals.user.display.name %></a>
             </div>
@@ -528,10 +533,10 @@
                     <div class="collapse" id="sidebarApplications">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="<% if (!locals.user.email) { %>/login<% } %>#" <% if (locals.user.email) { %>data-toggle="modal" data-target="#staff-app-modal"<% } %>>Staff Application</a>
+                                <a href="<% if (!locals.user._id) { %>/login<% } %>#" <% if (locals.user._id) { %>data-toggle="modal" data-target="#staff-app-modal"<% } %>>Staff Application</a>
                             </li>
                             <li>
-                                <a href="<% if (!locals.user.email) { %>/login<% } %>#" <% if (locals.user.email) { %>data-toggle="modal" data-target="#twitch-modal"<% } %>>Twitch Application</a>
+                                <a href="<% if (!locals.user._id) { %>/login<% } %>#" <% if (locals.user._id) { %>data-toggle="modal" data-target="#twitch-modal"<% } %>>Twitch Application</a>
                             </li>
                         </ul>
                     </div>

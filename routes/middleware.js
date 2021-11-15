@@ -30,6 +30,7 @@ async function FetchUser(req, res, next) {
             else output = "/assets/images/avatar.jpg"
         }
         else if (avatar === 'discord') output = `https://cdn.discordapp.com/avatars/${res.locals.user.connections.discord.id}/${res.locals.user.connections.discord.avatar}.webp?size=128`
+        else if (avatar === 'steam') output = res.locals.user.connections.steam._json.avatarfull
         else output = "/assets/images/avatar.jpg"
     } else output = "/assets/images/avatar.jpg"
     res.locals.avatar = output

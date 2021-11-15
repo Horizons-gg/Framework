@@ -133,4 +133,7 @@ app.route('/account')
 
 //? OAuth2
 app.get('/auth/discord', passport.authenticate('discord'))
-app.get('/auth/discord/callback', passport.authenticate('discord', { failureRedirect: '/register' }), require('./routes/auth').Discord)
+app.get('/auth/discord/callback', passport.authenticate('discord', { failureRedirect: '/login' }), require('./routes/auth').Discord)
+
+app.get('/auth/steam', passport.authenticate('steam'))
+app.get('/auth/steam/callback', passport.authenticate('steam', { failureRedirect: '/login' }), require('./routes/auth').Steam)

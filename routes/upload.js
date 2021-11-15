@@ -4,6 +4,7 @@ const fs = require('fs')
 
 async function Account(req, res) {
     if (!res.locals.user) return res.status(401).send('Unauthorized Access.')
+    if (!req.files) return res.status(400).send('No file uploaded.')
     if (!req.files.file) return res.status(400).send('No file uploaded.')
 
     var file = req.files.file
@@ -20,7 +21,7 @@ async function Account(req, res) {
         }).catch(err => console.log(err))
         await file.mv(`${path}/${uuid}.${file.mimetype.split('/')[1]}`, (err) => {
             if (err) return res.status(500).send(err)
-            res.status(200).send('File uploaded.')
+            res.status(200).send(`/storage/users/${res.locals.user._id}/avatar/${uuid}.${file.mimetype.split('/')[1]}`)
         })
     }
     else if (req.query.type === 'banner') {
@@ -30,7 +31,7 @@ async function Account(req, res) {
         }).catch(err => console.log(err))
         await file.mv(`${path}/${uuid}.${file.mimetype.split('/')[1]}`, (err) => {
             if (err) return res.status(500).send(err)
-            res.status(200).send('File uploaded.')
+            res.status(200).send(`/storage/users/${res.locals.user._id}/banner/${uuid}.${file.mimetype.split('/')[1]}`)
         })
     }
     else return res.status(400).send('Invalid type.')
