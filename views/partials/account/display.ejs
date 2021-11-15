@@ -1,0 +1,267 @@
+<form id="accountForm">
+    <h5 class="mb-3 text-uppercase bg-light p-2"><i class="mdi mdi-account-circle mr-1"></i> Common Info</h5>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" name="firstName" placeholder="Enter first name"
+                    value="<%= locals.user.details.firstName %>">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" name="lastName" placeholder="Enter last name"
+                    value="<%= locals.user.details.lastName %>">
+            </div>
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group mb-3">
+                <label for="dob">Date of Birth</label>
+                <input type="text" name="dob" class="form-control" data-provide="datepicker" data-date-format="d-M-yyyy"
+                    placeholder="00-00-0000" value="<%= locals.user.details.dob %>">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group mb-3">
+                <label for="gender">Gender</label>
+                <select class="form-control" name="gender">
+                    <% if (locals.user.details.gender !=="" ) { %>
+                        <option>
+                            <%= locals.user.details.gender %>
+                        </option>
+                        <% } %>
+                            <option disabled>---------</option>
+                            <option>None</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+                </select>
+            </div>
+        </div>
+    </div> <!-- end row -->
+
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label for="location">Personality</label>
+                <select class="form-control" name="personality" id="personality" onclick="personalityEvent()">
+                    <% if (locals.user.details.personality !=="" ) { %>
+                        <option>
+                            <%= locals.user.details.personality %>
+                        </option>
+                        <% } %>
+                            <option disabled>------------------------</option>
+                            <option>None</option>
+                            <option>INFP - The Healer</option>
+                            <option>INTJ - The Mastermind</option>
+                            <option>INFJ - The Counselor</option>
+                            <option>INTP - The Architect</option>
+                            <option>ENFP - The Champion</option>
+                            <option>ENTJ - The Commander</option>
+                            <option>ENTP - The Visionary</option>
+                            <option>ENFJ - The Teacher</option>
+                            <option>ISFJ - The Protector</option>
+                            <option>ISFP - The Composer</option>
+                            <option>ISTJ - The Inspector</option>
+                            <option>ISTP - The Craftsperson</option>
+                            <option>ESFJ - The Provider</option>
+                            <option>ESFP - The Performer</option>
+                            <option>ESTJ - The Supervisor</option>
+                            <option>ESTP - The Dynamo</option>
+                </select>
+            </div>
+        </div> <!-- end col -->
+
+        <div class="col-6">
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" class="form-control" name="location" placeholder="Enter location"
+                    value="<%= locals.user.details.location.address %>">
+            </div>
+        </div> <!-- end col -->
+    </div>
+    <div id="personalityDescriptionDiv">
+        <label id="persionalityDescriptionLabel">N/A</label>
+        <div class="form-control" style="height: fit-content; margin-bottom: 2rem;">
+            <p id="personalityDescription" class="text-muted font-13" style="white-space: pre-line; margin-bottom: 0;">
+            </p>
+        </div>
+    </div>
+
+    <h5 class="mb-3 text-uppercase bg-light p-2"><i class="mdi mdi-brush mr-1"></i> Customization</h5>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="bio">About Me</label>
+                <textarea class="form-control" name="bio" rows="4"
+                    placeholder="Write something..."><%= decodeURI(locals.user.details.bio) %></textarea>
+            </div>
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group mb-3">
+                <label>Custom Color</label>
+                <input type="text" id="hexa-colorpicker" name="color" class="form-control"
+                    value="<%= locals.user.display.color %>">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="bannerURL">Banner</label>
+                <input type="file" id="bannerFile" class="form-control-file">
+            </div>
+        </div> <!-- end col -->
+
+    </div>
+
+    <h5 class="mb-3 text-uppercase bg-light p-2"><i class="mdi mdi-earth mr-1"></i> Connections</h5>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="social-fb">Facebook</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fab fa-facebook-square"></i></span>
+                    </div>
+                    <input type="text" class="form-control" name="facebook" placeholder="Url"
+                        value="<!%= userData.connections.facebook %>">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="social-tw">Twitter</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fab fa-twitter"></i></span>
+                    </div>
+                    <input type="text" class="form-control" name="twitter" placeholder="Username"
+                        value="<!%= userData.connections.twitter %>">
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="social-insta">Instagram</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fab fa-instagram"></i></span>
+                    </div>
+                    <input type="text" class="form-control" name="instagram" placeholder="Username"
+                        value="<!%= userData.connections.instagram %>">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="social-lin">Twitch</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fab fa-twitch"></i></span>
+                    </div>
+                    <input type="text" class="form-control" name="twitch" placeholder="Username"
+                        value="<!%= userData.connections.twitch %>">
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="youtube">YouTube</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fab fa-youtube"></i></span>
+                    </div>
+                    <input type="text" class="form-control" name="youtube" placeholder="Url"
+                        value="<!%= userData.connections.youtube %>">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="social-gh">Github</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fab fa-github"></i></span>
+                    </div>
+                    <input type="text" class="form-control" name="github" placeholder="Username"
+                        value="<!%= userData.connections.github %>">
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+</form>
+
+<div class="text-right">
+    <button class="btn btn-success waves-effect waves-light mt-2" type="button" onclick="save()"><i
+            class="mdi mdi-content-save"></i> Save</button>
+</div>
+
+<script>
+    async function save() {
+        var accountForm = document.getElementById('accountForm')
+        var formData = new FormData(accountForm)
+        var data = {}
+        formData.forEach((value, key) => {
+            data[key] = value
+        })
+
+        var requestOptions = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        };
+
+        fetch("/account", requestOptions)
+            .then(async result => {
+                if (result.status === 200) {
+                    location.reload()
+                }
+                else (alert(await result.text()))
+            })
+            .catch(error => {
+                alert(error)
+            });
+    }
+
+    function personalityEvent() {
+        var personality = document.getElementById('personality').value
+
+        if (document.getElementById('personality').value === 'None') document.getElementById('personalityDescriptionDiv').hidden = true
+        else document.getElementById('personalityDescriptionDiv').hidden = false
+
+        if (personality.split(' - ')[0] === 'INFP') document.getElementById('persionalityDescriptionLabel').innerHTML = personality.split(' - ')[1], document.getElementById('personalityDescription').innerHTML = "INFPs are imaginative idealists, guided by their own core values and beliefs. To a Healer, possibilities are paramount; the reality of the moment is only of passing concern. They see potential for a better future, and pursue truth and meaning with their own flair."
+        if (personality.split(' - ')[0] === 'INTJ') document.getElementById('persionalityDescriptionLabel').innerHTML = personality.split(' - ')[1], document.getElementById('personalityDescription').innerHTML = "INTJs are analytical problem-solvers, eager to improve systems and processes with their innovative ideas. They have a talent for seeing possibilities for improvement, whether at work, at home, or in themselves."
+        if (personality.split(' - ')[0] === 'INFJ') document.getElementById('persionalityDescriptionLabel').innerHTML = personality.split(' - ')[1], document.getElementById('personalityDescription').innerHTML = "INFJs are creative nurturers with a strong sense of personal integrity and a drive to help others realize their potential. Creative and dedicated, they have a talent for helping others with original solutions to their personal challenges."
+        if (personality.split(' - ')[0] === 'INTP') document.getElementById('persionalityDescriptionLabel').innerHTML = personality.split(' - ')[1], document.getElementById('personalityDescription').innerHTML = "INTPs are philosophical innovators, fascinated by logical analysis, systems, and design. They are preoccupied with theory, and search for the universal law behind everything they see. They want to understand the unifying themes of life, in all their complexity."
+        if (personality.split(' - ')[0] === 'ENFP') document.getElementById('persionalityDescriptionLabel').innerHTML = personality.split(' - ')[1], document.getElementById('personalityDescription').innerHTML = "ENFPs are people-centered creators with a focus on possibilities and a contagious enthusiasm for new ideas, people and activities. Energetic, warm, and passionate, ENFPs love to help other people explore their creative potential."
+        if (personality.split(' - ')[0] === 'ENTJ') document.getElementById('persionalityDescriptionLabel').innerHTML = personality.split(' - ')[1], document.getElementById('personalityDescription').innerHTML = "ENTJs are strategic leaders, motivated to organize change. They are quick to see inefficiency and conceptualize new solutions, and enjoy developing long-range plans to accomplish their vision. They excel at logical reasoning and are usually articulate and quick-witted."
+        if (personality.split(' - ')[0] === 'ENTP') document.getElementById('persionalityDescriptionLabel').innerHTML = personality.split(' - ')[1], document.getElementById('personalityDescription').innerHTML = "ENTPs are inspired innovators, motivated to find new solutions to intellectually challenging problems. They are curious and clever, and seek to comprehend the people, systems, and principles that surround them."
+        if (personality.split(' - ')[0] === 'ENFJ') document.getElementById('persionalityDescriptionLabel').innerHTML = personality.split(' - ')[1], document.getElementById('personalityDescription').innerHTML = "ENFJs are idealist organizers, driven to implement their vision of what is best for humanity. They often act as catalysts for human growth because of their ability to see potential in other people and their charisma in persuading others to their ideas."
+        if (personality.split(' - ')[0] === 'ISFJ') document.getElementById('persionalityDescriptionLabel').innerHTML = personality.split(' - ')[1], document.getElementById('personalityDescription').innerHTML = "ISFJs are industrious caretakers, loyal to traditions and organizations. They are practical, compassionate, and caring, and are motivated to provide for others and protect them from the perils of life."
+        if (personality.split(' - ')[0] === 'ISFP') document.getElementById('persionalityDescriptionLabel').innerHTML = personality.split(' - ')[1], document.getElementById('personalityDescription').innerHTML = "ISFPs are gentle caretakers who live in the present moment and enjoy their surroundings with cheerful, low-key enthusiasm. They are flexible and spontaneous, and like to go with the flow to enjoy what life has to offer."
+        if (personality.split(' - ')[0] === 'ISTJ') document.getElementById('persionalityDescriptionLabel').innerHTML = personality.split(' - ')[1], document.getElementById('personalityDescription').innerHTML = "ISTJs are responsible organizers, driven to create and enforce order within systems and institutions. They are neat and orderly, inside and out, and tend to have a procedure for everything they do."
+        if (personality.split(' - ')[0] === 'ISTP') document.getElementById('persionalityDescriptionLabel').innerHTML = personality.split(' - ')[1], document.getElementById('personalityDescription').innerHTML = "ISTPs are observant artisans with an understanding of mechanics and an interest in troubleshooting. They approach their environments with a flexible logic, looking for practical solutions to the problems at hand."
+        if (personality.split(' - ')[0] === 'ESFJ') document.getElementById('persionalityDescriptionLabel').innerHTML = personality.split(' - ')[1], document.getElementById('personalityDescription').innerHTML = "ESFJs are conscientious helpers, sensitive to the needs of others and energetically dedicated to their responsibilities. They are highly attuned to their emotional environment and attentive to both the feelings of others and the perception others have of them."
+        if (personality.split(' - ')[0] === 'ESFP') document.getElementById('persionalityDescriptionLabel').innerHTML = personality.split(' - ')[1], document.getElementById('personalityDescription').innerHTML = "ESFPs are vivacious entertainers who charm and engage those around them. They are spontaneous, energetic, and fun-loving, and take pleasure in the things around them: food, clothes, nature, animals, and especially people."
+        if (personality.split(' - ')[0] === 'ESTJ') document.getElementById('persionalityDescriptionLabel').innerHTML = personality.split(' - ')[1], document.getElementById('personalityDescription').innerHTML = "ESTJs are hardworking traditionalists, eager to take charge in organizing projects and people. Orderly, rule-abiding, and conscientious, ESTJs like to get things done, and tend to go about projects in a systematic, methodical way."
+        if (personality.split(' - ')[0] === 'ESTP') document.getElementById('persionalityDescriptionLabel').innerHTML = personality.split(' - ')[1], document.getElementById('personalityDescription').innerHTML = "ESTPs are energetic thrillseekers who are at their best when putting out fires, whether literal or metaphorical. They bring a sense of dynamic energy to their interactions with others and the world around them."
+    }
+    personalityEvent()
+
+</script>

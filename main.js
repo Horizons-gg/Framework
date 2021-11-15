@@ -137,3 +137,9 @@ app.get('/auth/discord/callback', passport.authenticate('discord', { failureRedi
 
 app.get('/auth/steam', passport.authenticate('steam'))
 app.get('/auth/steam/callback', passport.authenticate('steam', { failureRedirect: '/login' }), require('./routes/auth').Steam)
+
+
+//? Error Codes
+app.get('*', (req, res) => {
+    res.status(404).render('pages/404')
+})
