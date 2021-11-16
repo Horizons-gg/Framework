@@ -26,6 +26,7 @@ async function AccountUpdate(req, res) {
 
     if (!new Date(data.dob)) return res.status(400).send('Invalid Date of Birth')
 
+    User.display.name = data.displayName
     User.display.color = data.color
 
     User.details.firstName = data.firstName

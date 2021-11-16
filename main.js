@@ -131,6 +131,12 @@ app.route('/account')
     .post(require('./routes/upload').Account)
 
 
+//? Security
+app.route('/password-reset')
+    .get()
+    .post(require('./routes/security').InitiatePasswordReset)
+
+
 //? OAuth2
 app.get('/auth/discord', passport.authenticate('discord'))
 app.get('/auth/discord/callback', passport.authenticate('discord', { failureRedirect: '/login' }), require('./routes/auth').Discord)

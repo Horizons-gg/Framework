@@ -1,4 +1,4 @@
-const { isStringObject } = require("util/types")
+const crypto = require('crypto')
 
 function XSSFilter(data) {
     if (!data) return false
@@ -22,8 +22,19 @@ function XSSFilter(data) {
     else return false
 }
 
+async function GenerateToken(length) {
+    var Users = await process.db.collection('users')
+    var token
+    while (!token) {
+        var temp = crypto.randomBytes(length || 48).toString('base64url')
+        if (!await Users.findOne({ "security.token": temp })) token = temp
+    }
+    return token
+}
+
 
 
 module.exports = {
-    XSSFilter: XSSFilter
+    XSSFilter: XSSFilter,
+    GenerateToken: GenerateToken
 }

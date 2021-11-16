@@ -14,7 +14,10 @@ async function FetchUser(req, res, next) {
     //? User
     if (req.cookies.token) {
         var response = await fetch(`${process.env.api}/user?token=${req.cookies.token}`)
-        if (response.status === 200) res.locals.user = await response.json()
+        if (response.status === 200) {
+            res.locals.user = await response.json()
+            if (res.locals.user.welcome) await process.db.collection('users').updateOne({ _id: res.locals.user._id }, { $set: { welcome: false } })
+        }
         else res.locals.user = null
     }
 

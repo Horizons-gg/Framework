@@ -145,41 +145,21 @@
                                         </div>
                                     </div>
 
-                                    <ul class="social-list list-inline mt-3 mb-0">
-                                        <!% if (locals.userData.connections.youtube) { %><li class="list-inline-item">
-                                            <a href="<!%= userData.connections.youtube %>" target="_blank" class="social-list-item" style="border-color: #FF0000; color: #FF0000;">
-                                                <i class="fab fa-youtube"></i></a>
-                                        </li><!% } %>
-                                        <!% if (locals.userData.connections.twitch) { %><li class="list-inline-item">
-                                            <a href="https://twitch.tv/<!%= userData.connections.twitch %>" target="_blank" class="social-list-item" style="border-color: #6441a5; color: #6441a5;">
-                                                <i class="fab fa-twitch"></i></a>
-                                        </li><!% } %>
-                                        <!% if (locals.userData.connections.facebook) { %><li class="list-inline-item">
-                                            <a href="<!%= userData.connections.facebook %>" target="_blank" class="social-list-item" style="border-color: #4f7cdd; color: #4f7cdd;">
-                                                <i class="fab fa-facebook"></i>
-                                            </a>
-                                        </li><!% } %>
-                                        <!% if (locals.userData.connections.twitter) { %><li class="list-inline-item">
-                                            <a href="https://twitter.com/<!%= userData.connections.twitter %>" target="_blank" class="social-list-item" style="border-color: #43bee1; color: #43bee1;">
-                                                <i class="fab fa-twitter"></i>
-                                            </a>
-                                        </li><!% } %>
-                                        <!% if (locals.userData.connections.instagram) { %><li class="list-inline-item">
-                                            <a href="https://www.instagram.com/<!%= userData.connections.instagram %>" target="_blank" class="social-list-item" style="border-color: #8a3ab9; color: #8a3ab9;">
-                                                <i class="fab fa-instagram"></i>
-                                            </a>
-                                        </li><!% } %>
-                                        <!% if (locals.userData.connections.github) { %><li class="list-inline-item">
-                                            <a href="https://github.com/<!%= userData.connections.github %>" target="_blank" class="social-list-item" style="border-color: #cedeef; color: #cedeef;">
-                                                <i class="fab fa-github"></i>
-                                            </a>
-                                        </li><!% } %>
-                                        <!% if (locals.userData.steam) { %><li class="list-inline-item">
-                                            <a href="<!%= userData.steam._json.profileurl %>" target="_blank" class="social-list-item" style="border-color: #1b2838; color: #1b2838;">
-                                                <i class="fab fa-steam"></i>
-                                            </a>
-                                        </li><!% } %>
-                                    </ul>
+                                    <% if (false) { %>
+                                    <div>
+                                        <video autoplay controls>
+                                            <source src="/assets/videos/welcome.mp4" type="video/mp4">
+                                        </video>
+                                    </div>
+                                
+                                    <style>
+                                        video {
+                                            width: 100% !important;
+                                            height: auto !important;
+                                        }
+                                    </style>
+                                    <% } %>
+
                                 </div> <!-- end card-box -->
 
                                 <div hidden class="card-box">
@@ -205,7 +185,7 @@
                                     <ul class="nav nav-pills navtab-bg nav-justified">
                                         <li class="nav-item">
                                             <a href="#display" data-toggle="tab" aria-expanded="true" class="nav-link active">
-                                                Display
+                                                Public Profile
                                             </a>
                                         </li>
                                         <li class="nav-item">
@@ -232,6 +212,8 @@
                                         <div class="tab-pane" id="security">
                                             <%- include('../partials/account/security') %>
                                         </div> 
+
+                                        <%- include('../partials/account/script') %>
 
                                     </div> <!-- end tab-content -->
                                 </div> <!-- end card-box-->

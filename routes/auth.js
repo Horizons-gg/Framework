@@ -70,7 +70,9 @@ async function Discord(req, res) {
         var User = res.locals.user
         if (User) {
             if (await Users.findOne({ 'connections.discord.id': req.user.id })) return res.status(400).send('This discord account is linked to a preexisting account.')
-            await Users.updateOne({ '_id': User._id }, { $set: { 'connections.discord': req.user } })
+            if (!User.email) User.email = req.user.email
+            User.connections.discord = req.user
+            await Users.updateOne({ '_id': User._id }, { $set: User })
             return res.redirect('/account')
         }
     }
