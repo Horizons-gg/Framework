@@ -103,8 +103,7 @@
                                         }).then(async res => {
                                             if (res.status == 200) {
                                                 var token = await res.text()
-                                                document.cookie = `token=${token}`
-                                                window.location.href = '/account'
+                                                window.location.href = `/login?token=${token}`
                                             } else {
                                                 alert('Invalid Credentials')
                                             }

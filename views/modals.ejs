@@ -1,67 +1,149 @@
-<!-- Global Modals Start -->
-<!-- Success Alert Modal -->
-<div id="success-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<script>
+    function DisplayModal(modal, title, message) {
+        $('#activate-modal').attr('data-target', `#${modal}`)
+
+        $(`#${modal}`).find('h4').html(title)
+        $(`#${modal}`).find('p').html(message)
+
+        $('#activate-modal').click()
+    }
+</script>
+
+<button hidden id="activate-modal" data-toggle="modal" data-target="success-modal"></button>
+
+<div id="success-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content modal-filled bg-success">
             <div class="modal-body p-4">
                 <div class="text-center">
                     <i class="dripicons-checkmark h1 text-white"></i>
-                    <h4 class="mt-2 text-white">Well Done!</h4>
-                    <p class="mt-3 text-white">Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+                    <h4 class="mt-2 text-white"></h4>
+                    <p class="mt-3 text-white"></p>
                     <button type="button" class="btn btn-light my-2" data-dismiss="modal">Continue</button>
                 </div>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+    </div>
+</div>
 
-<!-- Info Alert Modal -->
-<div id="info-indev-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="info-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-body p-4">
                 <div class="text-center">
                     <i class="dripicons-information h1 text-info"></i>
-                    <h4 class="mt-2">This Feature is Currently Under Development.</h4>
-                    <p class="mt-3">Hey there, we're still developing this feature, apologies for any inconvinience this may cause.</p>
+                    <h4 class="mt-2"></h4>
+                    <p class="mt-3"></p>
                     <button type="button" class="btn btn-info my-2" data-dismiss="modal">Continue</button>
                 </div>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+    </div>
+</div>
 
-<!-- Warning Alert Modal -->
-<div id="warning-experimental-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="warning-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-body p-4">
                 <div class="text-center">
                     <i class="dripicons-warning h1 text-warning"></i>
-                    <h4 class="mt-2">Experimental Feature</h4>
-                    <p class="mt-3">This feature is still in development but you may use it at your own risk.<br>If you encounter any bugs or errors, you may report them in our <a href="https://discord.gg/ThSUBwu" target="_blank" class="text-white-50 font-weight-bold">Discord.</a></p>
+                    <h4 class="mt-2"></h4>
+                    <p class="mt-3"></p>
                     <button type="button" class="btn btn-warning my-2" data-dismiss="modal">Continue</button>
                 </div>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+    </div>
+</div>
 
-<!-- Missing Info Alert Modal -->
-<div id="missing-info-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="error-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content modal-filled bg-danger">
             <div class="modal-body p-4">
                 <div class="text-center">
                     <i class="dripicons-wrong h1 text-white"></i>
-                    <h4 class="mt-2 text-white">Temporarily Disabled</h4>
-                    <p class="mt-3 text-white">We have Temporarily Disabled this feature to allow further development to other aspects of our site.</p>
+                    <h4 class="mt-2 text-white"></h4>
+                    <p class="mt-3 text-white"></p>
                     <button type="button" class="btn btn-light my-2" data-dismiss="modal">Continue</button>
                 </div>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+    </div>
+</div>
+
+
+
+<div id="change-email-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Change Email</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body p-4">
+                
+                <div class="row">
+                    <div class="col-9">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">New Email</label>
+                            <input type="text" class="form-control" id="user-email" value="<%= locals.user.email %>">
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <label>&nbsp;</label>
+                        <button type="button" class="btn btn-warning waves-effect waves-light form-control" onclick="InitiateEmailChange()">Change</button>
+                    </div>
+                </div>
+
+                <div class="row" id="email-change-code-div">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="field-1" class="control-label">Confirmation Code (Email)</label>
+                            <input type="text" class="form-control" id="email-change-code" placeholder="Check your Email">
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    function InitiateEmailChange() {
+                        
+                    }
+                </script>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

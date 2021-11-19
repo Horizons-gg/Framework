@@ -113,8 +113,7 @@
                                                 }
                                                 else if (res.status === 201) {
                                                     var token = await res.text()
-                                                    document.cookie = `token=${token}`
-                                                    window.location.href = '/account'
+                                                    window.location.href = `/login?token=${token}`
                                                 }
                                                 else alert(await res.text())
                                             })

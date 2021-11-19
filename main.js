@@ -132,9 +132,13 @@ app.route('/account')
 
 
 //? Security
-app.route('/password-reset')
-    .get()
+app.route('/reset/password')
+    .get(require('./routes/security').PasswordResetPage)
     .post(require('./routes/security').InitiatePasswordReset)
+
+app.route('/reset/email')
+    .get()
+    //.post(require('./routes/security').InitiateEmailReset)
 
 
 //? OAuth2
@@ -145,7 +149,12 @@ app.get('/auth/steam', passport.authenticate('steam'))
 app.get('/auth/steam/callback', passport.authenticate('steam', { failureRedirect: '/login' }), require('./routes/auth').Steam)
 
 
-//? Error Codes
+
+//!
+//! Error Pages
+//!
+
+//? 404
 app.get('*', (req, res) => {
     res.status(404).render('pages/404')
 })

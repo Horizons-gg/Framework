@@ -14,13 +14,11 @@
 
         fetch("/account", requestOptions)
             .then(async result => {
-                if (result.status === 200) {
-                    location.reload()
-                }
-                else (alert(await result.text()))
+                if (result.status === 200) DisplayModal('success-modal', 'Account Saved', 'Your account has been successfully updated on our database!')
+                else DisplayModal('error-modal', 'Bad Request', await result.text())
             })
             .catch(error => {
-                alert(error)
+                DisplayModal('warning-modal', 'Error', error)
             });
     }
 

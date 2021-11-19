@@ -4,12 +4,12 @@ const fs = require('fs')
 
 async function Account(req, res) {
     if (!res.locals.user) return res.status(401).send('Unauthorized Access.')
-    if (!req.files) return res.status(400).send('No file uploaded.')
-    if (!req.files.file) return res.status(400).send('No file uploaded.')
+    if (!req.files) return res.status(404).send('No file uploaded.')
+    if (!req.files.file) return res.status(404).send('No file uploaded.')
 
     var file = req.files.file
-    if (file.size > 2000000) return res.status(400).send('File too large, max 2MB')
-    if (file.mimetype.includes(['image/png', 'image/jpg', 'image/jpeg'])) return res.status(400).send('File type not supported.')
+    if (file.size > 3000000) return res.status(400).send('File too large, MAX 3MB')
+    if (!['image/png', 'image/jpg', 'image/jpeg', 'image/gif'].includes(file.mimetype)) return res.status(400).send('File type not supported.')
 
     var path = `${process.env.storage}/users/${res.locals.user._id}/${req.query.type}`
     var uuid = crypto.randomUUID()

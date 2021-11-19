@@ -94,7 +94,7 @@
                                                 .then(async res => {
                                                     var text = await res.text()
                                                     if (res.status === 200) $(`img[src="${oldAvatar}"]`).attr('src', text), console.log('Avatar Uploaded: ' + text)
-                                                    else if (res.status === 400) alert(text)
+                                                    else if (res.status === 400) DisplayModal('error-modal', 'Bad Request', text)
                                                     else if (res.status === 500) alert('Internal Server Error, read console for more information.'), console.log(text)
                                                 })
                                         }
@@ -111,8 +111,8 @@
                                                 .then(async res => {
                                                     text = await res.text()
                                                     if (res.status === 200) $('#banner_div').css('background-image', `url('${text}')`), console.log('Banner Uploaded: ' + text)
-                                                    else if (res.status === 400) alert(text)
-                                                    else if (res.status === 400) alert(text)
+                                                    else if (res.status === 400) DisplayModal('error-modal', 'Bad Request', text)
+                                                    else if (res.status === 400) DisplayModal('error-modal', 'Bad Request', text)
                                                     else if (res.status === 500) alert('Internal Server Error, read console for more information.'), console.log(text)
                                                 })
                                         }

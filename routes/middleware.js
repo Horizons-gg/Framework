@@ -13,12 +13,7 @@ async function FetchUser(req, res, next) {
 
     //? User
     if (req.cookies.token) {
-        var response = await fetch(`${process.env.api}/user?token=${req.cookies.token}`)
-        if (response.status === 200) {
-            res.locals.user = await response.json()
-            if (res.locals.user.welcome) await process.db.collection('users').updateOne({ _id: res.locals.user._id }, { $set: { welcome: false } })
-        }
-        else res.locals.user = null
+        res.locals.user = await process.db.collection('users').findOne({ "security.token": req.cookies.token })
     }
 
 
@@ -53,7 +48,7 @@ async function FetchUser(req, res, next) {
         else output = "/assets/images/banner.jpg"
     } else output = "/assets/images/banner.jpg"
     res.locals.banner = output
-    
+
     next()
 }
 
