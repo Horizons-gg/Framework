@@ -56,7 +56,7 @@
     "clockpicker": "0.0.7",
     "cropper": "^4.1.0",
     "d3": "^5.15.0",
-    "datatables.net": "^1.10.20",
+    "datatables.net": "^1.11.3",
     "datatables.net-bs4": "^1.10.20",
     "datatables.net-buttons": "^1.6.1",
     "datatables.net-buttons-bs4": "^1.6.1",
