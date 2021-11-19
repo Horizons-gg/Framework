@@ -29,7 +29,7 @@
     "gulp-sequence": "^1.0.0",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
-    "tar": "^6.0.1"
+    "tar": "^6.1.9"
   },
   "dependencies": {
     "@fullcalendar/bootstrap": "^4.4.0",
