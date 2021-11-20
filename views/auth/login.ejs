@@ -87,7 +87,12 @@
 
                                 <script>
 
-                                    function Login() {
+                                    document.addEventListener('keypress', Login)
+
+                                    function Login(e) {
+
+                                        if (e) if (e.code !== 'Enter') return
+
                                         var email = $('#email').val()
                                         var password = $('#password').val()
 

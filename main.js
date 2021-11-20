@@ -137,9 +137,9 @@ app.route('/reset/password')
     .post(require('./routes/security').InitiatePasswordReset)
     .put(require('./routes/security').ChangePassword)
 
-app.route('/reset/email')
-    .get()
-    //.post(require('./routes/security').InitiateEmailReset)
+app.post('/reset/email', require('./routes/security').ChangeEmail)
+
+app.post('/reset/token', require('./routes/security').MassLogout)
 
 
 //? OAuth2

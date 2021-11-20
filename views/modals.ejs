@@ -83,36 +83,49 @@
             <div class="modal-body p-4">
                 
                 <div class="row">
-                    <div class="col-9">
+                    <div class="col">
                         <div class="form-group">
                             <label for="field-1" class="control-label">New Email</label>
-                            <input type="text" class="form-control" id="user-email" value="<%= locals.user.email %>">
+                            <input type="text" class="form-control" id="new-email" value="<%= locals.user.email %>">
                         </div>
-                    </div>
-                    <div class="col-3">
-                        <label>&nbsp;</label>
-                        <button type="button" class="btn btn-warning waves-effect waves-light form-control" onclick="InitiateEmailChange()">Change</button>
                     </div>
                 </div>
 
-                <div class="row" id="email-change-code-div">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="field-1" class="control-label">Confirmation Code (Email)</label>
-                            <input type="text" class="form-control" id="email-change-code" placeholder="Check your Email">
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-group input-group-merge">
+                        <input type="password" id="password-email-change" class="form-control" placeholder="Enter your password">
+                        <div class="input-group-append" data-password="false">
+                            <div class="input-group-text">
+                                <span class="password-eye"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <script>
-                    function InitiateEmailChange() {
-                        
+                    function ChangeEmail() {
+                        fetch('/reset/email', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                email: $('#new-email').val(),
+                                password: $('#password-email-change').val()
+                            })
+                        }).then(async res => {
+                            $('#email-change-cancel').click()
+                            if (res.status === 200) DisplayModal('success-modal', 'Success', 'Your email has been changed.'), setTimeout(() => window.location.reload(), 2000)
+                            else DisplayModal('error-modal', 'Error', await res.text())
+                        })
                     }
                 </script>
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cancel</button>
+                <button type="button" id="email-change-cancel" class="btn btn-secondary waves-effect" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success waves-effect waves-light" onclick="ChangeEmail()">Change</button>
             </div>
         </div>
     </div>

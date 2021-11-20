@@ -84,7 +84,13 @@
                                     </div>
 
                                     <script>
-                                        function Register() {
+
+                                        document.addEventListener('keypress', Register)
+
+                                        function Register(e) {
+                                            
+                                            if (e) if (e.code !== 'Enter') return
+
                                             var name = $('#displayname').val()
                                             var email = $('#email').val()
                                             var password = $('#password').val()

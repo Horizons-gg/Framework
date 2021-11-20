@@ -63,7 +63,7 @@ async function RegisterPost(req, res) {
 
     var User = await Schema.User()
     User.email = req.body.email
-    User.display.name = req.user.username
+    User.display.name = req.body.name
     User.security.password = Security.Hash(req.body.password)
     User.security.lastLoginAddress = req.ip
 
@@ -114,9 +114,7 @@ async function Discord(req, res) {
             User.connections.discord = req.user
             User.security.lastLoginAddress = req.ip
 
-            await Users.insertOne(User)
-
-            res.redirect(`/login?token=${User.security.token}`)
+            await Users.insertOne(User).then(() => res.redirect(`/login?token=${User.security.token}`))
         }
     }
 }
@@ -145,9 +143,7 @@ async function Steam(req, res) {
         User.connections.steam = req.user
         User.security.lastLoginAddress = req.ip
 
-        await Users.insertOne(User)
-
-        res.redirect(`/login?token=${User.security.token}`)
+        await Users.insertOne(User).then(() => res.redirect(`/login?token=${User.security.token}`))
     }
 }
 

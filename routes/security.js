@@ -1,4 +1,4 @@
-const fetch = require('node-fetch')
+const Security = require('../util/security')
 
 
 
@@ -14,7 +14,7 @@ async function InitiatePasswordReset(req, res) {
     if (!res.locals.user) return res.status(401).send('Unauthorized')
     var User = await process.db.collection('users').findOne({ _id: res.locals.user._id })
     if (!User) return res.status(500).send('Failed to find user in the database!')
-    var resetToken = await require('../util/security').GenerateToken()
+    var resetToken = await Security.GenerateToken()
     PWResetCache[resetToken] = res.locals.user._id, setTimeout(() => { delete PWResetCache[resetToken] }, 1000 * 60 * 10)
 
     if (!User.email) return res.status(201).send(resetToken)
@@ -26,16 +26,42 @@ async function InitiatePasswordReset(req, res) {
 
 async function ChangePassword(req, res) {
     if (!PWResetCache[req.body.token]) return res.status(400).send('Token Expired')
-    if (!require('../util/security').CheckPasswordRequirements(req.body.password)) return res.status(400).send('Password must be at least 8 characters long and contain at least one number, lowercase, uppercase, and special character')
+    if (!Security.CheckPasswordRequirements(req.body.password)) return res.status(400).send('Password must be at least 8 characters long and contain at least one number, lowercase, uppercase, and special character')
     var User = await process.db.collection('users').findOne({ _id: PWResetCache[req.body.token] })
-    if (await require('../util/security').Verify(req.body.password, User.security.password)) return res.status(400).send('New password must be different from the old password')
+    if (await Security.Verify(req.body.password, User.security.password)) return res.status(400).send('New password must be different from the old password')
     
-    User.security.password = await require('../util/security').Hash(req.body.password)
-    User.security.token = await require('../util/security').GenerateToken()
+    User.security.password = await Security.Hash(req.body.password)
+    User.security.token = await Security.GenerateToken()
     await process.db.collection('users').updateOne({ _id: User._id }, { $set: { security: User.security } })
 
     delete PWResetCache[req.body.token]
     
+    res.status(200).send(User.security.token)
+}
+
+
+
+async function ChangeEmail(req, res) {
+    if (!res.locals.user) return res.status(401).send()
+    var User = await process.db.collection('users').findOne({ _id: res.locals.user._id })
+    if (!User) return res.status(500).send('Failed to find user in the database!')
+    if (!await Security.Verify(req.body.password, User.security.password)) return res.status(400).send('Password is incorrect')
+
+    if (!req.body.email) return res.status(400).send('Email is required')
+    if (!req.body.email.includes('@') || !req.body.email.includes('.')) return res.status(400).send('Invalid Email')
+    if (await process.db.collection('users').findOne({ email: req.body.email })) return res.status(400).send('Email already in use')
+    await process.db.collection('users').updateOne({ _id: User._id }, { $set: { email: req.body.email } })
+    res.status(200).send()
+}
+
+
+
+async function MassLogout(req, res) {
+    if (!res.locals.user) return res.status(401).send()
+    var User = await process.db.collection('users').findOne({ _id: res.locals.user._id })
+    if (!User) return res.status(500).send('Failed to find user in the database!')
+    User.security.token = await Security.GenerateToken()
+    await process.db.collection('users').updateOne({ _id: User._id }, { $set: { security: User.security } })
     res.status(200).send(User.security.token)
 }
 
@@ -47,8 +73,12 @@ module.exports = {
     //? Password Management
     PasswordResetPage: PasswordResetPage,
     InitiatePasswordReset: InitiatePasswordReset,
-    ChangePassword: ChangePassword
+    ChangePassword: ChangePassword,
 
     //? Email Management
+    ChangeEmail: ChangeEmail,
 
+    //? Token Management
+    MassLogout: MassLogout
+    
 }

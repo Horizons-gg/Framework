@@ -4,6 +4,9 @@ const fetch = require('node-fetch')
 
 function AccountGet(req, res) {
     if (!res.locals.user) return res.redirect('/login')
+
+    res.locals.user.details.bio = decodeURI(res.locals.user.details.bio)
+
     res.render('account/account')
 }
 
