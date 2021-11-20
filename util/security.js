@@ -42,6 +42,15 @@ function Verify(string, hash) {
     else return false
 }
 
+function CheckPasswordRequirements(password) {
+    if (password.length < 8) return false
+    if (password.search(/[a-z]/) === -1) return false
+    if (password.search(/[A-Z]/) === -1) return false
+    if (password.search(/[0-9]/) === -1) return false
+    if (password.search(/[^a-zA-Z0-9]/) === -1) return false
+    return true
+}
+
 function Encrypt(string) {
     var encrypted = crypto.publicEncrypt(process.env.security.publicKey, Buffer.from(string))
     return encodeURI(encrypted.toString("base64url"))
@@ -87,6 +96,7 @@ module.exports = {
     GenerateToken: GenerateToken,
     Hash: Hash,
     Verify: Verify,
+    CheckPasswordRequirements: CheckPasswordRequirements,
     Encrypt: Encrypt,
     Decrypt: Decrypt,
     GenerateKeyPair: GenerateKeyPair

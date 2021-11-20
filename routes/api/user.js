@@ -14,7 +14,7 @@ async function Register(req, res) {
     if (!override) {
         if (req.body.name.match(/[a-zA-Z0-9 _()]/)) return res.status(400).send('Display name can only contain letters, numbers, spaces, underscores, and brackets')
         if (!req.body.email.includes('@') || !req.body.email.includes('.')) return res.status(400).send('Email is invalid!')
-        if (req.body.password.length < 8) return res.status(400).send('Password must be at least 8 characters long!')
+        if (!require('../../util/security').CheckPasswordRequirements(req.query.password)) return res.status(400).send('Password must be at least 8 characters long and contain at least one number, lowercase, uppercase, and special character')
 
         if (!req.body.code) {
             if (UserRegisterCache[req.body.email]) delete UserRegisterCache[req.body.email]

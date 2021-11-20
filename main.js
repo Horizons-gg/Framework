@@ -135,6 +135,7 @@ app.route('/account')
 app.route('/reset/password')
     .get(require('./routes/security').PasswordResetPage)
     .post(require('./routes/security').InitiatePasswordReset)
+    .put(require('./routes/security').ChangePassword)
 
 app.route('/reset/email')
     .get()
