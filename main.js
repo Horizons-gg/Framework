@@ -143,10 +143,14 @@ app.post('/reset/token', require('./routes/security').MassLogout)
 
 
 //? OAuth2
-app.get('/auth/discord', passport.authenticate('discord'))
+app.route('/auth/discord')
+    .get(passport.authenticate('discord'))
+    .delete(require('./routes/auth').UnlinkAuth)
 app.get('/auth/discord/callback', passport.authenticate('discord', { failureRedirect: '/login' }), require('./routes/auth').Discord)
 
-app.get('/auth/steam', passport.authenticate('steam'))
+app.route('/auth/steam')
+    .get(passport.authenticate('steam'))
+    .delete(require('./routes/auth').UnlinkAuth)
 app.get('/auth/steam/callback', passport.authenticate('steam', { failureRedirect: '/login' }), require('./routes/auth').Steam)
 
 

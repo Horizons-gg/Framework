@@ -79,18 +79,29 @@ function Logout(req, res) {
 
 
 //? OAuth2 Requests
-async function Discord(req, res) {
-    var token
-    if (res.locals.user) token = res.locals.user.security.token
+async function UnlinkAuth(req, res) {
+    if (!res.locals.user) return res.status(401).send()
+    var provider = req.path.split('/')[2]
     var Users = await process.db.collection('users')
-    if (token) {
+    var User = await Users.findOne({ _id: res.locals.user._id })
+
+    if (!User.email) return res.status(400).send(`Please add an email address to your account before attempting to unlink ${provider}`)
+    if (!User.security.password) return res.status(400).send(`Please add a password to your account before attempting to unlink ${provider}`)
+
+    User.connections[provider] = {}
+    await Users.updateOne({ _id: res.locals.user._id }, { $set: { connections: User.connections } }).then(() => res.status(200).send())
+}
+
+async function Discord(req, res) {
+    var Users = await process.db.collection('users')
+    if (res.locals.user) {
         var User = res.locals.user
-        if (User.connections.discord.id) return res.redirect('/account')
         if (User) {
-            if (await Users.findOne({ 'connections.discord.id': req.user.id })) return res.status(400).send('This discord account is linked to a preexisting account.')
+            var ConnectionUser = await Users.findOne({ 'connections.discord.id': req.user.id })
+            if (ConnectionUser && ConnectionUser._id !== User._id) return res.status(400).send('This discord account is linked to a preexisting account.')
             if (!User.email) User.email = req.user.email
             User.connections.discord = req.user
-            await Users.updateOne({ '_id': User._id }, { $set: User })
+            await Users.updateOne({ '_id': User._id }, { $set: { 'connections.discord': req.user } })
             return res.redirect('/account')
         }
     }
@@ -120,14 +131,15 @@ async function Discord(req, res) {
 }
 
 async function Steam(req, res) {
-    var token
-    if (res.locals.user) token = res.locals.user.security.token
     var Users = await process.db.collection('users')
-    if (token) {
+    if (res.locals.user) {
         var User = res.locals.user
         if (User.connections.steam.id) return res.redirect('/account')
         if (User) {
-            if (await Users.findOne({ 'connections.steam.id': req.user.id })) return res.status(400).send('This discord account is linked to a preexisting account.')
+            var ConnectionUser = await Users.findOne({ 'connections.steam.id': req.user.id })
+            if (ConnectionUser && ConnectionUser._id !== User._id) return res.status(400).send('This steam account is linked to a preexisting account.')
+            if (!User.email) User.email = req.user.email
+            User.connections.discord = req.user
             await Users.updateOne({ '_id': User._id }, { $set: { 'connections.steam': req.user } })
             return res.redirect('/account')
         }
@@ -161,6 +173,7 @@ module.exports = {
 
 
     //? OAuth2
+    UnlinkAuth: UnlinkAuth,
     Discord: Discord,
     Steam: Steam
 }
