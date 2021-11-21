@@ -32,7 +32,7 @@ async function User() {
             firstName: "",
             lastName: "",
             dob: "",
-            gender: "None",
+            pronouns: "None",
             personality: "None",
             business: "",
             bio: "",

@@ -63,12 +63,11 @@
                             <div class="col-lg-4 col-xl-4">
                                 <div class="card-box text-center" style="border-style: solid; border-width: 0.1ex; border-color: <%= locals.user.display.color %>;">
 
-                                    <div id="banner_div" style="margin: -1.5rem -1.5rem 0 -1.5rem; border-radius: .25rem .25rem 0 0; padding: 1rem 0 0 0; background-image: url('<%= locals.banner %>'); background-repeat: repeat; background-size: cover; background-position: center;">
+                                    <div id="banner_div" style="position: relative; margin: -1.5rem -1.5rem 0 -1.5rem; border-radius: .25rem .25rem 0 0; padding: 1rem 0 0 0; background-image: url('<%= locals.banner %>'); background-repeat: repeat; background-size: cover; background-position: center;">
 
+                                        <i class="far fa-edit" onclick="$('#banner_upload').click()" style="color: #ffffffd8; right: 0.5rem; top: 0.5rem; width: 1rem; position: absolute; cursor: pointer;" title="Edit Banner"></i>
 
-                                        <i class="far fa-edit" onclick="$('#banner_upload').click()" style="right: 1.4rem; top: 0.8rem; width: 1rem; position: absolute; cursor: pointer;"></i>
-
-                                        <img id="avatar_image" onclick="$('#avatar_upload').click()" src="<%= locals.avatar %>" class="rounded-circle avatar avatar-lg" style="border-style: solid; border-color: <%= locals.user.display.color %>; cursor: pointer;" alt="profile-image" title="Upload Profile Picture">
+                                        <img id="avatar_image" onclick="$('#avatar_upload').click()" src="<%= locals.avatar %>" class="rounded-circle avatar avatar-lg" style="border-style: solid; border-color: <%= locals.user.display.color %>; cursor: pointer;" alt="profile-image" title="Edit Profile Picture">
 
                                         <div class="card-box text-center" style="width: fit-content; margin: .5rem auto 0 auto; padding: .4rem 2rem 0 2rem; border-radius: .5rem .5rem 0 0;">
                                             <h4 class="mb-0" style="margin: 0;"><%= locals.user.display.name %></h4>
@@ -121,28 +120,18 @@
                                     <div class="text-left mt-3">
                                         <% if (locals.user.details.firstName) { %><h4 class="font-13 text-uppercase" style="display: inline;">Full Name :</h4><p class="text-muted mb-2 font-13" style="display: inline"><span class="ml-2"><%= locals.user.details.firstName %> <%= locals.user.details.lastName %></span></p><br><% } %>
 
-                                        <% if (locals.user.details.gender) { %><h4 class="font-13 text-uppercase" style="display: inline;">Gender :</h4><p class="text-muted mb-2 font-13" style="display: inline"><span class="ml-2"><%= locals.user.details.gender %></span></p><br><% } %>
+                                        <% if (locals.user.details.pronouns) { %><h4 class="font-13 text-uppercase" style="display: inline;">Pronouns :</h4><p class="text-muted mb-2 font-13" style="display: inline"><span class="ml-2"><%= locals.user.details.pronouns %></span></p><br><% } %>
 
-                                        <% if (locals.user.details.dob) { %><h4 class="font-13 text-uppercase" style="display: inline;">Age :</h4><p class="text-muted mb-2 font-13" style="display: inline"><span class="ml-2 "><%= locals.user.details.dob %></span></p><br><% } %>
+                                        <% if (locals.user.details.dob) { %><h4 class="font-13 text-uppercase" style="display: inline;">DOB :</h4><p class="text-muted mb-2 font-13" style="display: inline"><span class="ml-2 "><%= locals.user.details.dob %></span></p><br><% } %>
 
                                         <% if (locals.user.details.location.address) { %><h4 class="font-13 text-uppercase" style="display: inline;">Location :</h4><p class="text-muted mb-1 font-13" style="display: inline"><span class="ml-2"><%= locals.user.details.location.address %></span></p><br><% } %>
 
-                                        <!% if (locals.userData.steam) { %><h4 class="font-13 text-uppercase" style="display: inline;">Steam :</h4><p class="text-muted mb-1 font-13" style="display: inline"><a href="<!%= userData.steam._json.profileurl %>" target="_blank" class="ml-2"><!%= userData.steam._json.profileurl %></a></p><br><!% } %>
-                                    
                                         <% if (locals.user.details.bio) { %><br>
                                         <h4 class="font-13 text-uppercase">Bio :</h4>
                                         <div class="form-control" style="height: fit-content;">
                                             <p class="text-muted font-13" style="white-space: pre-line; margin-bottom: 0;"><%= locals.user.details.bio %></p>
                                         </div>
                                         <% } %>
-
-                                        <br>
-                                        <div style="margin-bottom: 5rem;">
-                                            <link href="../assets/custom_css/steamButton.css" rel="stylesheet" type="text/css" />
-                                            <a href="/steam/sync" class="steambutton" style="margin-bottom: 10rem;"><span>Sync With Steam</span><div class="icon">
-                                                <i class="fab fa-steam-square"></i>
-                                            </div></a>
-                                        </div>
                                     </div>
 
                                     <% if (false) { %>
@@ -151,7 +140,7 @@
                                             <source src="/assets/videos/welcome.mp4" type="video/mp4">
                                         </video>
                                     </div>
-                                
+
                                     <style>
                                         video {
                                             width: 100% !important;
@@ -161,6 +150,50 @@
                                     <% } %>
 
                                 </div> <!-- end card-box -->
+
+
+                                <% if (locals.user.connections.discord.id) { %>
+                                    <div class="card-box text-center">
+                                        <div style="position: relative; margin: -1.5rem -1.5rem 0 -1.5rem; border-radius: .25rem .25rem 0 0; padding: 1rem 0 0 0; background-image: url('https://cdn.discordapp.com/banners/<%= locals.user.connections.discord.id %>/<%= locals.user.connections.discord.banner %>.webp?size=300'); background-repeat: repeat; background-size: cover; background-position: center;">
+
+                                            <i class="fas fa-sync" onclick="SyncAuth('discord')" style="color: #ffffffd8; right: 0.5rem; top: 0.5rem; width: 1rem; position: absolute; cursor: pointer;" title="Sync Discord"></i>
+
+                                            <img id="avatar_image" src="https://cdn.discordapp.com/avatars/<%= locals.user.connections.discord.id %>/<%= locals.user.connections.discord.avatar %>.webp?size=128" class="rounded-circle avatar avatar-lg" alt="profile-image">
+
+                                            <div class="card-box text-center" style="width: fit-content; margin: .5rem auto 0 auto; padding: .4rem 2rem 0 2rem; border-radius: .5rem .5rem 0 0;">
+                                                <h4 class="mb-0" style="margin: 0;">Discord</h4>
+                                                <p class="text-muted" style="margin: 0;"><%= locals.user.connections.discord.username %>#<%= locals.user.connections.discord.discriminator %></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% } %>
+
+                                <% if (locals.user.connections.steam.id) { %>
+                                    <div class="card-box text-center">
+                                        <div style="position: relative; margin: -1.5rem -1.5rem 0 -1.5rem; border-radius: .25rem .25rem 0 0; padding: 1rem 0 0 0; background-image: url('/assets/images/steam.jpg'); background-repeat: repeat; background-size: cover; background-position: center;">
+
+                                            <i class="fas fa-sync" onclick="SyncAuth('steam')" style="color: #ffffffd8; right: 0.5rem; top: 0.5rem; width: 1rem; position: absolute; cursor: pointer;" title="Sync Steam"></i>
+
+                                            <img id="avatar_image" src="<%= locals.user.connections.steam._json.avatarfull %>" class="rounded-circle avatar avatar-lg" alt="profile-image">
+
+                                            <div class="card-box text-center" style="width: fit-content; margin: .5rem auto 0 auto; padding: .4rem 2rem 0 2rem; border-radius: .5rem .5rem 0 0;">
+                                                <h4 class="mb-0" style="margin: 0;">Steam</h4>
+                                                <p class="text-muted" style="margin: 0;"><%= locals.user.connections.steam.displayName %></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% } %>
+
+                                <script>
+                                    function SyncAuth(provider) {
+                                        window.location.href = `/auth/${provider}`
+                                    }
+                                </script>
+
+
+                                <% if (!locals.user.connections.discord.id) { %><%- include('../partials/buttons/discord.ejs') %><% } %>
+                                <% if (!locals.user.connections.steam.id) { %><%- include('../partials/buttons/steam.ejs') %><% } %>
+
 
                                 <div hidden class="card-box">
                                     <h4 class="header-title mb-3">Inbox</h4>

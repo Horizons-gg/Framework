@@ -71,7 +71,7 @@
 
 .steambutton span:after {
     content: '';
-    background-color: #5d8628;
+    background-color: white;
     width: 2px;
     height: 70%;
     position: absolute;

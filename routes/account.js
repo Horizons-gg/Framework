@@ -23,7 +23,7 @@ async function AccountUpdate(req, res) {
 
     if (data.firstName.match(/[^a-zA-Z0-9 ]/) || data.lastName.match(/[^a-zA-Z0-9 ]/)) return res.status(400).send('First & Last name can only contain letters, numbers and spaces')
     if (new Date(data.dob) === 'Invalid Date') data.dob = null
-    if (!['None', 'Male', 'Female', 'Other'].includes(data.gender)) return res.status(400).send('Gender is Invalid')
+    if (!['None', 'He / Him', 'She / Her', 'They / Them'].includes(data.pronouns)) return res.status(400).send('Pronouns are Invalid')
     
     var personalityTypes = ['INFP', 'INTJ', 'INFJ', 'INTP', 'ENFP', 'ENTJ', 'ENTP', 'ENFJ', 'ISFJ', 'ISFP', 'ISTJ', 'ISTP', 'ESFJ', 'ESFP', 'ESTJ', 'ESTP']
     if (!personalityTypes.includes(decodeURI(data.personality).split(' - ')[0]) && decodeURI(data.personality) !== 'None') return res.status(400).send('Invalid Personality Type')
@@ -37,7 +37,7 @@ async function AccountUpdate(req, res) {
     User.details.firstName = data.firstName
     User.details.lastName = data.lastName
     User.details.dob = data.dob
-    User.details.gender = data.gender
+    User.details.pronouns = data.pronouns
     User.details.personality = data.personality
     User.details.bio = encodeURI(data.bio)
 

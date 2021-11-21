@@ -44,7 +44,7 @@ async function FetchUser(req, res, next) {
             if (fs.existsSync(process.env.storage.replace('/storage', '') + res.locals.user.display.banner)) output = res.locals.user.display.banner
             else output = "/assets/images/banner.jpg"
         }
-        else if (banner === 'discord') output = `https://cdn.discordapp.com/banners/${res.locals.user.connections.discord.id}/${res.locals.user.connections.discord.banner}.png?size=300`
+        else if (banner === 'discord') output = `https://cdn.discordapp.com/banners/${res.locals.user.connections.discord.id}/${res.locals.user.connections.discord.banner}.webp?size=300`
         else output = "/assets/images/banner.jpg"
     } else output = "/assets/images/banner.jpg"
     res.locals.banner = output

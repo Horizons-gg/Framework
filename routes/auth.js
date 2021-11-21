@@ -47,7 +47,7 @@ async function RegisterPost(req, res) {
     if (!req.body.code) {
         if (UserRegisterCache[req.body.email]) delete UserRegisterCache[req.body.email]
         UserRegisterCache[req.body.email] = {
-            code: crypto.randomBytes(10).toString('base64url'),
+            code: Math.floor(Math.random() * 1000000).toString(),
             password: req.body.password
         }
         setTimeout(() => { delete UserRegisterCache[req.body.email] }, 1000 * 60 * 10)

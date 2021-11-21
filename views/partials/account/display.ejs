@@ -12,18 +12,18 @@
 <div class="row">
     <div class="col-lg-6">
         <div class="form-group mb-3">
-            <label for="gender">Gender</label>
-            <select account class="form-control" name="gender">
-                <% if (locals.user.details.gender !=="" ) { %>
+            <label for="gender">Pronouns</label>
+            <select account class="form-control" name="pronouns">
+                <% if (locals.user.details.pronouns !=="" ) { %>
                     <option>
-                        <%= locals.user.details.gender %>
+                        <%= locals.user.details.pronouns %>
                     </option>
                     <% } %>
                         <option disabled>---------</option>
                         <option>None</option>
-                        <option>Male</option>
-                        <option>Female</option>
-                        <option>Other</option>
+                        <option>He / Him</option>
+                        <option>She / Her</option>
+                        <option>They / Them</option>
             </select>
         </div>
     </div>
