@@ -86,7 +86,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="field-1" class="control-label">New Email</label>
-                            <input type="text" class="form-control" id="new-email" value="<%= locals.user.email %>">
+                            <input type="text" class="form-control" id="new-email" value="<%= locals.user ? locals.user.email : '' %>">
                         </div>
                     </div>
                 </div>

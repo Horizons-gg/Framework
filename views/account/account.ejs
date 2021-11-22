@@ -166,6 +166,11 @@
                                                 <p class="text-muted" style="margin: 0;"><%= locals.user.connections.discord.username %>#<%= locals.user.connections.discord.discriminator %></p>
                                             </div>
                                         </div>
+
+                                        <div class="text-left mt-3">
+                                            <h4 class="font-13 text-uppercase" style="display: inline;">Email :</h4><p class="text-muted mb-2 font-13" style="display: inline"><span class="ml-2"><%= locals.user.connections.discord.email %></span></p><br>
+                                        </div>
+
                                     </div>
                                 <% } %>
 
@@ -183,6 +188,12 @@
                                                 <p class="text-muted" style="margin: 0;"><%= locals.user.connections.steam.displayName %></p>
                                             </div>
                                         </div>
+
+                                        <div class="text-left mt-3">
+                                            <h4 class="font-13 text-uppercase" style="display: inline;">Profile URL :</h4><p class="text-muted mb-2 font-13" style="display: inline"><a href="<%= locals.user.connections.steam._json.profileurl %>" target="_blank" class="ml-2"><%= locals.user.connections.steam._json.profileurl %></a></p><br>
+                                            <h4 class="font-13 text-uppercase" style="display: inline;">Steam ID :</h4><p class="text-muted mb-2 font-13" style="display: inline"><span class="ml-2"><%= locals.user.connections.steam.id %></span></p><br>
+                                        </div>
+
                                     </div>
                                 <% } %>
 
@@ -192,7 +203,7 @@
                                     }
 
                                     function UnlinkAuth(provider) {
-                                        fetch(`/auth/${provider}`, {
+                                        if (confirm(`Are you sure you want to unlink ${provider} from your account?`)) fetch(`/auth/${provider}`, {
                                             method: 'DELETE',
                                             headers: {
                                                 'Content-Type': 'application/json'

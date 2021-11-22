@@ -59,6 +59,7 @@ const express = require('express')
 const app = express()
 const httpServer = require('http').createServer(app)
 
+const cors = require('cors')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const fileUpload = require('express-fileupload')
@@ -67,6 +68,7 @@ const io = require('socket.io')(httpServer)
 httpServer.listen(process.env.port, () => console.log(`Listening on port ${process.env.port}`))
 
 app.set('view engine', 'ejs')
+
 app.use(cookieParser())
 app.use(bodyParser.json({ extended: true }))
 app.use(fileUpload())
@@ -152,6 +154,17 @@ app.route('/auth/steam')
     .get(passport.authenticate('steam'))
     .delete(require('./routes/auth').UnlinkAuth)
 app.get('/auth/steam/callback', passport.authenticate('steam', { failureRedirect: '/login' }), require('./routes/auth').Steam)
+
+
+
+//!
+//! Pages
+//!
+
+//? Landing
+app.get('/', (req, res) => {
+    res.render('landing')
+})
 
 
 

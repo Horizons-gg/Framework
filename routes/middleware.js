@@ -4,7 +4,11 @@ const fs = require('fs')
 
 
 function Data(req, res, next) {
-    res.locals.api = process.env.api
+
+    res.locals.site = {
+        api: process.env.site.api,
+        discord: process.env.site.discord
+    }
 
     next()
 }
