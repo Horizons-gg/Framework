@@ -4,9 +4,10 @@
         <meta charset="utf-8" />
         <title>Horizons</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="Horizons is an Australian gaming community hosting servers for Space Engineers, Minecraft, Eco, and more. Being one of the top Space Engineers and Eco servers within Australia, we have a large and incredibly strong community with something to offer for everyone." name="description" />
+        <meta name="description" content="Horizons is an Australian gaming community hosting servers for everyone. We've been hosting quality servers for our community since 2019, we're now prepared to rent the same high quality servers to you guys with our own unique web panel developed by us! Developing and managing your servers couldn't be easier, we've added all the features we wanted to see in web panels making the whole experience feel premium." />
         <meta name="theme-color" content="#4eccfa">
-        <meta property="og:image"  content="/images/logo-sm-light.png">
+        <meta property="og:image"  content="/assets/images/logo-sm-light.png">
+        <meta property="twitter:card"  content="/assets/images/logo-light.png">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="keywords" content="Horizons, Discord, Gaming, Australia">
 
@@ -58,7 +59,7 @@
                             <a href="#contact" class="nav-link">Contact</a>
                         </li>
                     </ul>
-                <button class="btn btn-info navbar-btn" style="background-color: #5297ff; border-color: #5297ff; font-weight: 650;" onclick="window.location.href='<%= locals.user ? `/dashboard` : `/login` %>'">Dashboard</button>
+                <button class="btn btn-info navbar-btn" style="background-color: #5297ff; border-color: #5297ff; font-weight: 650;" onclick="window.location.href='<%= locals.user ? `/dashboard` : `/login` %>'"><%= locals.user ? `Dashboard` : `Login` %></button>
                 </div>
             </div>
         </nav>
@@ -73,7 +74,7 @@
                             <div class="col-lg-6">
                                 <div class="home-title mo-mb-20">
                                     <h1 class="mb-4 text-white">Founded at home.<br>Developed with love.</h1>
-                                    <p class="text-white home-desc mb-5" style="opacity: 80%;">Horizons is an Australian gaming community hosting servers for Space Engineers, Minecraft, Eco, and more. Being one of the top Space Engineers and Eco servers within Australia, we have a large and incredibly strong community with something to offer for everyone.</p>
+                                    <p class="text-white home-desc mb-5" style="opacity: 80%;">Horizons is an Australian gaming community hosting servers for everyone.<br>We've been hosting quality servers for our community since 2019, we're now prepared to rent the same high quality servers to you guys with our own unique web panel developed by us!<br>Developing and managing your servers couldn't be easier, we've added all the features we wanted to see in web panels making the whole experience feel premium.</p>
                                     <div class="subscribe">
                                         <div class="row" style="margin-left: 0px;">
                                             <h3 class="mb-4 text-white" id="discordData">
@@ -518,7 +519,7 @@
                             </div>
                             <div class="contact-details">
                                 <h5 class="text-white">Discord</h5>
-                                <p class="text-white-50">discord.gg/ThSUBwu</p>
+                                <p class="text-white-50">discord.gg/horizons</p>
                             </div>
                         </div>
                     </div>
@@ -548,13 +549,13 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="name">Name</label>
-                                            <input name="name" id="name" type="text" class="form-control" placeholder="Enter your name..." disabled>
+                                            <input name="name" id="name" type="text" class="form-control" placeholder="Enter your name...">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="email">Email address</label>
-                                            <input name="email" id="email" type="email" class="form-control" placeholder="Enter your email..." disabled>
+                                            <input name="email" id="email" type="email" class="form-control" placeholder="Enter your email...">
                                         </div>
                                     </div>
                                 </div>
@@ -564,7 +565,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label for="subject">Subject</label>
-                                            <input name="subject" id="subject" type="text" class="form-control" placeholder="Enter Subject..." disabled>
+                                            <input name="subject" id="subject" type="text" class="form-control" placeholder="Enter Subject...">
                                         </div>
                                     </div>
                                 </div>
@@ -574,7 +575,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label for="comments">Message</label>
-                                            <textarea name="comments" id="comments" rows="4" class="form-control" placeholder="Enter your message..." disabled></textarea>
+                                            <textarea name="comments" id="comments" rows="4" class="form-control" placeholder="Enter your message..."></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -582,7 +583,7 @@
 
                                 <div class="row">
                                     <div class="col-lg-12 text-right">
-                                        <input type="submit" id="submit" name="send" class="submitBnt btn btn-danger" value="Send Message" disabled>
+                                        <input type="submit" id="submit" name="send" class="submitBnt btn btn-danger" value="Send Message">
                                         <div id="simple-msg"></div>
                                     </div>
                                 </div>
@@ -605,7 +606,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-3">
                         <div class="text-md-right">
-                            <a href="#" class="btn btn-outline-dark btn-rounded"><i class="mdi mdi-email-outline mr-1"></i> Contact Us</a>
+                            <a hidden href="#" class="btn btn-outline-dark btn-rounded"><i class="mdi mdi-email-outline mr-1"></i> Contact Us</a>
                         </div>
                     </div>
                 </div>

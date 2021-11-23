@@ -13,6 +13,15 @@ function AccountGet(req, res) {
 async function AccountUpdate(req, res) {
     if (!res.locals.user) return res.status(401).send('Unauthorized Access.')
 
+    if (req.query.theme) {
+        var Users = await process.db.collection('users')
+        var User = await Users.findOne({ _id: res.locals.user._id })
+
+        if (User.display.theme === 'dark') User.display.theme = 'light'
+        else if (User.display.theme === 'light') User.display.theme = 'dark'
+        return Users.updateOne({ _id: User._id }, { $set: User }).then(() => res.status(200).send())
+    }
+
     var data = req.body
     var Users = await process.db.collection('users')
     var User = await Users.findOne({ _id: res.locals.user._id })
@@ -24,11 +33,11 @@ async function AccountUpdate(req, res) {
     if (data.firstName.match(/[^a-zA-Z0-9 ]/) || data.lastName.match(/[^a-zA-Z0-9 ]/)) return res.status(400).send('First & Last name can only contain letters, numbers and spaces')
     if (new Date(data.dob) === 'Invalid Date') data.dob = null
     if (!['None', 'He / Him', 'She / Her', 'They / Them'].includes(data.pronouns)) return res.status(400).send('Pronouns are Invalid')
-    
+
     var personalityTypes = ['INFP', 'INTJ', 'INFJ', 'INTP', 'ENFP', 'ENTJ', 'ENTP', 'ENFJ', 'ISFJ', 'ISFP', 'ISTJ', 'ISTP', 'ESFJ', 'ESFP', 'ESTJ', 'ESTP']
     if (!personalityTypes.includes(decodeURI(data.personality).split(' - ')[0]) && decodeURI(data.personality) !== 'None') return res.status(400).send('Invalid Personality Type')
 
-    
+
 
 
     User.display.name = data.displayName

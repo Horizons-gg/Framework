@@ -25,7 +25,7 @@
 
 </style>
 
-<body class="loading" data-layout-mode="detached" data-layout='{"mode": "dark", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": true}, "topbar": {"color": "dark"}, "showRightSidebarOnPageLoad": false}'>
+<body class="loading" data-layout-mode="detached" data-layout='{"mode": "<%= locals.user ? locals.user.display.theme : "dark" %>", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": true}, "topbar": {"color": "<%= locals.user ? locals.user.display.theme : "dark" %>"}, "showRightSidebarOnPageLoad": false}'>
 
 <!-- Pre-loader -->
 <div id="preloader">
@@ -194,6 +194,7 @@
                 </div>
             </li>
 
+            <% if (locals.user) { %>
             <li class="dropdown notification-list topbar-dropdown">
                 <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     <i class="fe-bell noti-icon"></i>
@@ -234,15 +235,16 @@
 
                 </div>
             </li>
+            <% } %>
 
             <li class="dropdown notification-list topbar-dropdown">
-                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" <% if (locals.user._id) { %>data-toggle="dropdown"<% } %> href="/login" role="button" aria-haspopup="false" aria-expanded="false">
-                    <img src="<%= locals.avatar %>" alt="user-image" class="rounded-circle avatar">
+                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" <% if (locals.user) { %>data-toggle="dropdown"<% } %> href="/login" role="button" aria-haspopup="false" aria-expanded="false">
+                    <% if (locals.user) { %><img src="<%= locals.avatar %>" alt="user-image" class="rounded-circle avatar"><% } %>
                     <span class="pro-user-name ml-1">
-                    <% if (locals.user._id) { %><%= locals.user.display.name %><% } %><% if (!locals.user._id) { %>Login<% } %> <i class="mdi <% if (locals.user._id) { %>mdi-chevron-down<% } %>"></i> 
+                    <% if (locals.user) { %><%= locals.user.display.name %><% } %><% if (!locals.user) { %>Login<% } %> <i class="mdi <% if (locals.user) { %>mdi-chevron-down<% } %>"></i> 
                     </span>
                 </a>
-                <% if (locals.user._id) { %>
+                <% if (locals.user) { %>
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                     <!-- item-->
                     <div class="dropdown-header noti-title">
@@ -287,17 +289,12 @@
 
             <script type="text/javascript">
                 function changeStyle() {
-                    if(document.cookie.includes('colorScheme=dark') && !document.cookie.includes('colorScheme=light')) {
-                        document.cookie = 'colorScheme=light'
-                        document.cookie = 'themeTopbar=light'
-                    } else if(document.cookie.includes('colorScheme=light') && !document.cookie.includes('colorScheme=dark')) {
-                        document.cookie = 'colorScheme=dark'
-                        document.cookie = 'themeTopbar=dark'
-                    } else {
-                        document.cookie = 'colorScheme=light'
-                        document.cookie = 'themeTopbar=light'
-                    }
-                    window.location.reload()
+                    fetch('/account?theme=true', {method: 'PUT'})
+                        .then(async res => {
+                            if (res.status === 200) window.location.reload()
+                            else DisplayModal('error-modal', 'Error', await res.text())
+                        })
+                        .catch(err => DisplayModal('error-modal', 'Error', err))
                 }
             </script>
 
@@ -480,7 +477,7 @@
 
     <div class="h-100" data-simplebar>
 
-        <% if (locals.user._id) { %>
+        <% if (locals.user) { %>
         <!-- User box -->
         <div class="user-box text-center">
             <a href="/account"><img src="<%= locals.avatar %>" alt="user-img" class="rounded-circle avatar avatar-md"></a>
@@ -533,10 +530,10 @@
                     <div class="collapse" id="sidebarApplications">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="<% if (!locals.user._id) { %>/login<% } %>#" <% if (locals.user._id) { %>data-toggle="modal" data-target="#staff-app-modal"<% } %>>Staff Application</a>
+                                <a href="<% if (!locals.user) { %>/login<% } %>#" <% if (locals.user) { %>data-toggle="modal" data-target="#staff-app-modal"<% } %>>Staff Application</a>
                             </li>
                             <li>
-                                <a href="<% if (!locals.user._id) { %>/login<% } %>#" <% if (locals.user._id) { %>data-toggle="modal" data-target="#twitch-modal"<% } %>>Twitch Application</a>
+                                <a href="<% if (!locals.user) { %>/login<% } %>#" <% if (locals.user) { %>data-toggle="modal" data-target="#twitch-modal"<% } %>>Twitch Application</a>
                             </li>
                         </ul>
                     </div>

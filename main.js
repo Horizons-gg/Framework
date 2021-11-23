@@ -23,6 +23,9 @@ console.error = console.log
 console.log(`\n\n----- NEW PROCESS STARTED @ ${Today} -----\n`)
 
 
+require('./util/loop')()
+
+
 
 //!
 //! MongoDB
@@ -162,9 +165,41 @@ app.get('/auth/steam/callback', passport.authenticate('steam', { failureRedirect
 //!
 
 //? Landing
-app.get('/', (req, res) => {
-    res.render('landing')
+app.get('/', (req, res) => res.render('landing'))
+
+//? Space Engineers
+app.get('/space-engineers', (req, res) => {
+    res.render('pages/space-engineers', { page: req.query.page, topVoters: process.cache.topVoters, serverData: process.cache.serverData })
 })
+
+//? Squad
+app.get('/squad', (req, res) => {
+    res.render('pages/squad', { page: req.query.page })
+})
+
+
+
+//!
+//! Social HUB
+//!
+
+//? Dashboard
+app.route('/dashboard')
+    .get(require('./routes/hub').Dashboard)
+
+//? Members
+app.route('/dashboard')
+    //.get(require('./routes/hub').Members)
+
+
+
+//!
+//! Redirects
+//!
+
+app.get('/eco', (req, res) => res.redirect('http://horizons.gg:3001'))
+app.get('/discord', (req, res) => res.redirect('https://discord.gg/horizons'))
+app.get('/donate', (req, res) => res.redirect('https://www.paypal.com/donate/?business=8QMYWSGHR24UJ&no_recurring=0&item_name=Donations&currency_code=AUD'))
 
 
 

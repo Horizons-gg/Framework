@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Space Engineers | Horizons</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="We've been running our Space Engineers servers since 2019, our developers pour their hearts into building these incredible servers. We have spent over a year perfecting our servers to suit everyone. We even have high quality story based events that are written by our staff team and implemented via our website and in game."/>
+        <meta name="theme-color" content="#03bafc">
+        <meta name="keywords" content="Horizons, Space, Engineers, Australia">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="../assets/images/favicon.ico">
+
+	    <!-- App css -->
+	    <link href="../assets/css/bootstrap-modern.min.css" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
+	    <link href="../assets/css/app-modern.min.css" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+
+	    <link href="../assets/css/bootstrap-modern-dark.min.css" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
+	    <link href="../assets/css/app-modern-dark.min.css" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
+
+	    <!-- icons -->
+	    <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+    </head>
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <%- include('../header') %>
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="/">Horizons</a></li>
+                                            <li class="breadcrumb-item active">Space Engineers</li>
+                                        </ol>
+                                    </div>
+                                    <h4 class="page-title">Space Engineers</h4>
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title --> 
+
+                        <div class="row">
+                            <div class="col-xl-3 col-lg-6 order-lg-1 order-xl-1">
+
+                                <!-- start wipe -->
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 id="nextwipe" class="text-danger" style="text-align: center; font-size: 15pt;">Loading...</h3>
+                                        <h3 id="lastwipe" class="text-info" style="text-align: center; font-size: 15pt;">Loading...</h3>
+                                    </div>
+                                </div>
+                                <script>
+                                    var date = new Date('01-01-2022')
+                                    var seconds = Math.round((date.getTime() / 1000) - (new Date().getTime() / 1000))
+                                    function timer() {
+                                        var days        = Math.floor(seconds/24/60/60);
+                                        var hoursLeft   = Math.floor((seconds) - (days*86400));
+                                        var hours       = Math.floor(hoursLeft/3600);
+                                        var minutesLeft = Math.floor((hoursLeft) - (hours*3600));
+                                        var minutes     = Math.floor(minutesLeft/60);
+                                        var remainingSeconds = seconds % 60;
+                                        function pad(n) {
+                                            return (n < 10 ? "0" + n : n);
+                                        }
+                                        nextwipe.innerHTML = `Next Wipe: ${pad(days)} Days, ${pad(hours)}:${pad(minutes)}:${pad(remainingSeconds)}`
+                                        if (seconds <= 0) {
+                                            clearInterval(countdownTimer);
+                                            nextwipe.innerHTML = "Server Wipe in Progress!";
+                                        } else {
+                                            seconds--;
+                                        }
+                                        lastWipe()
+                                    }
+                                    var countdownTimer = setInterval('timer()', 1000);
+
+                                    
+                                    
+                                    async function lastWipe() {
+                                        var timeSinceWipe = [0, 0, 0, 0];
+
+                                        const firstDate = new Date('09-27-2021');
+
+                                        timeSinceWipe[0] = Math.round(Math.abs((firstDate - new Date()) / 1000));
+
+                                        while (timeSinceWipe[0] >= 60) {
+                                            timeSinceWipe[1] += 1;
+                                            timeSinceWipe[0] -= 60;
+                                        };
+
+                                        while (timeSinceWipe[1] >= 60) {
+                                            timeSinceWipe[2] += 1;
+                                            timeSinceWipe[1] -= 60;
+                                        };
+
+                                        while (timeSinceWipe[2] >= 24) {
+                                            timeSinceWipe[3] += 1;
+                                            timeSinceWipe[2] -= 24;
+                                        };
+
+                                        const zeroPad = (num, places) => String(num).padStart(places, '0')
+                                        lastwipe.innerHTML = `Last Wipe: ${timeSinceWipe[3]} Days, ${zeroPad(timeSinceWipe[2], 2)}:${zeroPad(timeSinceWipe[1], 2)}:${zeroPad(timeSinceWipe[0], 2)}`
+                                    }
+                                    lastWipe()
+
+                                </script>
+                                <!-- end wipe -->
+
+                                <!-- start pages -->
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <div class="media">
+                                            <div class="media-body pl-1">
+                                                <h5 class="mt-1 mb-0">Pages</h5>
+                                            </div>
+                                        </div>
+
+                                        <div class="list-group list-group-flush mt-2 font-15">
+                                            <a href="?" class="list-group-item list-group-item-action <% if (!page) { %>text-primary font-weight-medium<% } %> border-0"><i class='mdi mdi-image-filter-black-white font-16 mr-1'></i> Overview</a>
+                                            <a href="?page=vote" class="list-group-item list-group-item-action <% if (page === 'vote') { %>text-primary font-weight-medium<% } %> border-0"><i class="fas fa-vote-yea mr-1"></i> Vote</a>
+                                            <a href="?page=rules" class="list-group-item list-group-item-action <% if (page === 'rules') { %>text-primary font-weight-medium<% } %> border-0"><i class="fas fa-tasks font-16 mr-1"></i> Rules</a>
+                                            <a href="/mission-board" class="list-group-item list-group-item-action <% if (page === 'missions') { %>text-primary font-weight-medium<% } %> border-0"><i class='mdi mdi-map font-16 mr-1'></i> Mission Board</a>
+                                            <a href="?page=poi" class="list-group-item list-group-item-action <% if (page === 'poi') { %>text-primary font-weight-medium<% } %> border-0"><i class='mdi mdi-map-marker font-16 mr-1'></i> Points of Interest</a>
+                                            <a href="/documents/se" class="list-group-item list-group-item-action border-0"><i data-feather="code" class='font-16 mr-1' style="width: 1rem;"></i> Commands</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- end pages -->
+
+                            </div> <!-- end col -->
+
+                            <div class="col-xl-6 col-lg-12 order-lg-2 order-xl-1">
+
+                                <% if (!page) { %>
+                                <!-- Story Box -->
+                                <div class="card-box">
+                                    <h3>Overview</h3>
+                                    <h5>Welcome to Horizons Universe!</h5>
+                                    <p>Make sure to read our <a href="?page=rules">Rules!</a></p>
+                                    <p>If you would like to receive free, rare Materials then please <a href="?page=vote">Click Here!</a></p>
+                                    <br>
+                                    <h4>FAQ</h5>
+                                    <h5 style="font-style: italic;">- My grid is having issues, what should I do?</h5>
+                                    <p style="margin-top: -10px;">Look at your grid and type <b>!fixship</b> in game chat.</p>
+                                    <h5 style="font-style: italic;">- Why am does it say I am violating the Blocklimit when I'm not?</h5>
+                                    <p style="margin-top: -10px;">First you should type <b>!blocklimit update mylimit</b> into chat, then try again.</p>
+                                    <p style="margin-top: -15px;">If the issue consists then type <b>!blocklimit mylimit</b> into chat and make sure you haven't accidently placed the block elsewhere.</p>
+                                </div>
+                                <% } %>
+
+                                <% if (page === 'vote') { %>
+                                    <!-- Story Box-->
+                                    <div class="card-box">
+                                        <h3>How to Vote</h3>
+                                        <p><strong>1.</strong> Goto our server on <a href="https://space-engineers.com/server/155814/vote">Space-Engineers.com</a></p>
+                                        <p><strong>2.</strong> Press the "Sign in Through Steam" button & login to the Steam account you play our on</p>
+                                        <p><strong>3.</strong> Success! You have voted for the Server, now you can collect your rewards!</p>
+                                        <br>
+                                        <h3>How to collect your Rewards</h3>
+                                        <p><strong>1.</strong> Make sure you have voted before following these steps!</p>
+                                        <p><strong>2.</strong> Make sure you are in a Standard Sector (e.g. Sol, The Void) & not the Lobby!</p>
+                                        <p><strong>3.</strong> Type <strong>!reward</strong> in chat</p>
+                                        <p><strong>4.</strong> Congratulations! You have recieved your free materials for supporting our server!</p>
+                                        <br>
+                                        <h5>You can Vote every 24 Hours to Recieve More Rewards!</h5>
+                                        <h5>The Top 5 Voters at the End of Each Month will Recieve a Huge Supply Drop!</h5>
+                                    </div>
+                                <% } %>
+
+                                <% if (page === 'rules') { %>
+                                    <!-- Story Box-->
+                                    <div class="card-box">
+                                        <h3>General Rules</h3>
+                                        <ul>
+                                            <li>All grids should be named to properly receive support from staff.</li>
+                                            <li>Do not convert stations to ships when built into asteroids.</li>
+                                            <li>No respawn ship farming.</li>
+                                            <li>Do not intentionally cause server lag.</li>
+                                            <li>No abuse of game mechanics to give yourself an unfair advantage and no exploits of the game.</li>
+                                            <li>Do not grief.</li>
+                                            <li>Avoid using conveyor blocks where tubes can be used, staff will tell you if theres an issue.</li>
+                                        </ul>
+                                        <h3>Behavioural Rules</h3>
+                                        <ul>
+                                            <li>Respect staff decisions / no arguing with staff. (Staff Decision is final)</li>
+                                            <li>This is an English-speaking server, please use English in chat.</li>
+                                            <li>No NSFW chat relating to gore, sexually explicit content, or hate speech to other players.</li>
+                                            <li>You will be punished for toxic behavior (Warnings - Mutes - Temp/Perm Bans)</li>
+                                        </ul>
+                                        <h3>Engagement Rules</h3>
+                                        <ul>
+                                            <li>Offline Raiding is NOT allowed.</li>
+                                            <li>No combat use of Build and Repairs</li>
+                                            <li>Do NOT Foundation Wipe, If you are going in for a raid, try to avoid completely wiping them</li>
+                                            <li>Avoid hangaring grids just because you're jumping off for the night, use it to regain PCU or if you're leaving for a longer period of time</li>
+                                            <li>After raiding a factions base you cannot target that faction for the following 2 days</li>
+                                            <li>Raids should not go on for longer than 1 hour</li>
+                                            <li>Raids automatically end after you leave an enemy base (10km radius)</li>
+                                        </ul>
+                                        <h3>Clarifications</h3>
+                                        <ul>
+                                            <li>Staff members are only allowed to defend and retaliate to PvP combat.</li>
+                                            <li>Make sure your Grids Name does NOT include NPC otherwise it may be deleted!</li>
+                                        </ul>
+                                        <br>
+                                        <h3>Block Limits</h3>
+                                        <ul>
+                                            <li>4x Build and Repair Systems per Grid - 16x per Faction</li>
+                                            <li>4x Drill and Fills per Grid - 4x per Faction</li>
+                                            <li>20x Production Blocks per Grid - 80x per Faction</li>
+                                            <li>50x Hydrogen/Oxygen Tanks per Grid - 400x per Faction</li>
+                                            <li>16x Welder Blocks per Grid - 32x per Faction</li>
+                                            <li>16x Drill Blocks per Grid - 32x per Faction</li>
+                                            <li>16x Grinder Blocks per Grid - 32x per Faction</li>
+                                            <li>16x Reactors per Grid</li>
+                                            <li>100x Batteries per Grid</li>
+                                            <li>12x Cameras per Grid - 50x per Faction</li>
+                                            <li>3x Programmable Blocks per Grid - 18x per Faction</li>
+                                            <li>20x Pistons/Rotors/Hinges per Faction</li>
+                                            <li>200x Weapons per Grid - 800x per Faction</li>
+                                            <li>4x Shiva per Grid</li>
+                                            <li>10x Archer Pods per Grid</li>
+                                            <li>1x Series 8 MAC Cannons per Grid</li>
+                                            <li>8x MAC Cannons per Grid</li>
+                                        </ul>
+                                        <h3>Blacklisted Blocks</h3>
+                                        <ul>
+                                            <li>Warheads Tier 2 - Tier 5</li>
+                                            <li>Small Gatling Guns Tier 4 - Tier 5</li>
+                                        </ul>
+                                    </div>
+                                <% } %>
+
+                                <% if (page === 'poi') { %>
+                                    <!-- Story Box-->
+                                    <div class="card-box">
+                                        <h3>Stations</h3>
+                                        <h5 id="sol_trade" style="cursor: pointer;" onclick=""><b style="color: #eb7d34; font-weight: 400;">Sol Trade Station</b> <i class="far fa-clipboard"></i></h5>
+                                    </div>
+                                    <div class="card-box">
+                                        <h3>Asteroid Clusters</h3>
+                                    </div>
+                                <% } %>
+
+                                <% if (page === 'events') { %>
+                                    <!-- Story Box-->
+                                    <div class="card-box">
+                                        <h3>Events</h3>
+                                    </div>
+                                <% } %>
+
+                            </div>
+
+                            <div class="col-xl-3 col-lg-6 order-lg-1 order-xl-2">
+                                <!-- Stats -->
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="header-title mb-1" id="onlinePlayersTitle">Online Players</h4>
+
+                                        <div class="media mt-3" id="seStats">
+                                            <div class="d-flex align-items-center">
+                                                <strong style="margin-right: 1rem;">Loading...</strong>
+                                                <div style="width: 1.5rem; height: 1.5rem;" class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+                                            </div>
+                                        </div>
+
+                                    </div> <!-- end card-body-->
+                                </div> <!-- end card-->
+
+                                <!-- Ranking -->
+                                <div class="card">
+                                    <div class="card-body pb-0">
+                                        <h4 class="header-title mb-3">Server Ranking</h4>
+
+                                        <div class="media mt-3">
+                                            <i class='fas fa-medal mr-2 font-18 text-primary'></i>
+                                            <div class="media-body">
+                                                <a class="mt-1 font-14 text-reset">
+                                                    <strong class="font-weight-medium">Global Rank:</strong>
+                                                    <span class="text-muted" id="globalRank">
+                                                        <strong class="font-weight-medium">
+                                                            <div class="d-flex align-items-center">
+                                                                <strong>#<%= serverData.rank %></strong>
+                                                            </div>
+                                                        </strong>
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="media mt-3">
+                                            <i class='fas fa-poll mr-2 font-18 text-primary'></i>
+                                            <div class="media-body">
+                                                <a class="mt-1 font-14 text-reset">
+                                                    <strong class="font-weight-medium">Total Votes:</strong>
+                                                    <span class="text-muted" id="totalVotes">
+                                                        <strong class="font-weight-medium">
+                                                            <div class="d-flex align-items-center">
+                                                                <strong><%= serverData.votes %> Votes</strong>
+                                                            </div>
+                                                        </strong>
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="media mt-3">
+                                            <i class='fas fa-crown mr-2 font-18 text-primary'></i>
+                                            <div class="media-body">
+                                                <a class="mt-1 font-14 text-reset">
+                                                    <strong class="font-weight-medium">Top Voters:</strong>
+                                                    <span class="text-muted">
+                                                        <br>
+                                                        <table>
+                                                            <tr>
+                                                                <th style="border-bottom: solid;">Player</th>
+                                                                <th style="border-bottom: solid;">Votes</th>
+                                                            </tr>
+                                                            <% topVoters.voters.forEach(voter => { %>
+                                                            <tr>
+                                                                <th><%= voter.nickname %></th>
+                                                                <th style="float: right;"><%= voter.votes %></th>
+                                                            </tr>
+                                                            <% }) %>
+                                                        </table>
+                                                        <br>
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                    </div> <!-- end card-body -->
+                                </div>
+
+                                <script>
+
+                                    function parseTime(time) {
+                                        time = parseInt(time)
+                                        time = Math.round(time)
+                                        var parsedTime = [0, 0, 0]
+                                        parsedTime[2] = time
+                                        while (parsedTime[2] >= 60) {
+                                            parsedTime[1]++
+                                            parsedTime[2] -= 60
+                                        }
+                                        while (parsedTime[1] >= 60) {
+                                            parsedTime[0]++
+                                            parsedTime[1] -= 60
+                                        }
+
+                                        return parsedTime
+                                    }
+
+                                    async function refreshStats() { 
+
+                                        var data = await fetch('<%= locals.site.discord %>/game/se').then(res => res.json())
+
+                                        try {
+                                            var playerTable = ''
+                                            for (player of data.players) {
+                                                var parsedTime = await parseTime(player.raw.time)
+                                                playerTable += `
+                                                <tr>
+                                                    <th>${player.name}</th>
+                                                    <th style="float: right;">${parsedTime[0]}h ${parsedTime[1]}m ${parsedTime[2]}s</th>
+                                                </tr>
+                                                `
+                                            }
+                                            seStats.innerHTML = `
+                                            <table>
+                                                <tr>
+                                                    <th style="border-bottom: solid;">Player</th>
+                                                    <th style="border-bottom: solid;">Time Online</th>
+                                                </tr>
+                                                ${playerTable}
+                                            </table>
+                                            `
+                                            onlinePlayersTitle.innerHTML = `Online Players | ${data.players.length} / ${data.maxplayers}`
+                                        } catch (err) { seStats.innerHTML = `<strong class="font-weight-medium" style="color: red;">Modded</strong> <span class="text-muted">Offline</span>` }
+
+                                    }
+                                    setInterval(refreshStats, 10000), refreshStats()
+                                </script>
+
+                                <!-- end video -->
+                            </div> <!-- end col -->
+                        </div> <!--end row -->
+
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+                <%- include('../footer') %>
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+
+        </div>
+        <!-- END wrapper -->
+
+        <%- include('../settings') %>
+
+        <!-- Right bar overlay-->
+        <div class="rightbar-overlay"></div>
+
+        <!-- Vendor js -->
+        <script src="../assets/js/vendor.min.js"></script>
+
+        <!-- App js -->
+        <script src="../assets/js/app.min.js"></script>
+        
+    </body>
+</html>

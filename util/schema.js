@@ -18,7 +18,8 @@ async function User() {
             name: "",
             avatar: 'none',
             banner: 'none',
-            color: '#ffffff'
+            color: '#ffffff',
+            theme: 'dark'
         },
         security: {
             password: null,

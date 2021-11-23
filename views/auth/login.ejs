@@ -110,7 +110,7 @@
                                                 var token = await res.text()
                                                 window.location.href = `/login?token=${token}`
                                             } else {
-                                                alert('Invalid Credentials')
+                                                alert(await res.text())
                                             }
                                         })
                                     }

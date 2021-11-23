@@ -4,6 +4,8 @@ const Schema = require('../util/schema')
 const fetch = require('node-fetch')
 const crypto = require('crypto')
 
+const LoginCache = {}
+
 
 
 //? Login Requests
@@ -13,12 +15,18 @@ function LoginGet(req, res) {
     res.render('auth/login')
 }
 async function LoginPost(req, res) {
+    if (LoginCache[req.ip]) {
+        if (LoginCache[req.ip].attempts >= 10) return res.status(429).send('Too many login attempts, try again later.')
+        if (!LoginCache[req.ip].timer) setTimeout(() => { delete LoginCache[req.ip] }, 1000 * 60 * 15), LoginCache[req.ip].timer = true
+    }
+
     if (!req.body.email || !req.body.password) return res.status(400).send('Missing parameter(s)')
     req.body.email = req.body.email.toLowerCase()
     var Users = await process.db.collection('users')
     var user = await Users.findOne({ email: req.body.email })
     if (!user) return res.status(400).send('Invalid email or password!')
-    if (!Security.Verify(req.body.password, user.security.password)) return res.status(400).send('Invalid email or password!')
+    if (!Security.Verify(req.body.password, user.security.password)) return setTimeout(() => { res.status(400).send('Invalid email or password!') }, Math.floor(Math.random() * 500)), LoginCache[req.ip] ? LoginCache[req.ip].attempts += 1 : LoginCache[req.ip] = { attempts: 1, time: Date.now(), timer: false }
+    if (LoginCache[req.ip]) delete LoginCache[req.ip]
 
     user.security.lastLoginAddress = req.ip
     await Users.updateOne({ email: req.body.email }, { $set: { security: user.security } })
