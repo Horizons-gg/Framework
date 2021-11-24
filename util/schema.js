@@ -46,6 +46,11 @@ async function User() {
                 zip: ""
             }
         },
+        banking: {
+            paypal: {
+                
+            }
+        },
         connections: {
             discord: {},
             steam: {},

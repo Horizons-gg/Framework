@@ -1,0 +1,5 @@
+User-Agent: *
+
+Disallow: /member
+
+Sitemap: /sitemap.xml

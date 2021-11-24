@@ -23,6 +23,7 @@ console.error = console.log
 console.log(`\n\n----- NEW PROCESS STARTED @ ${Today} -----\n`)
 
 
+require('./util/paypal').GetAccessToken()
 require('./util/loop')()
 
 
@@ -108,7 +109,12 @@ require('./util/passport').Steam(passport)
 var Middleware = require('./routes/middleware')
 
 app.use(Middleware.Data)
-app.use(Middleware.FetchUser) // Fetch User Data from API
+app.use(Middleware.FetchUser)
+
+app.use('/robots.txt', (req, res) => {
+    res.type('text/plain')
+    res.sendStatus('User-Agent: *\nDisallow: /\nSitemap: /sitemap.xml')
+})
 
 
 
@@ -189,7 +195,16 @@ app.route('/dashboard')
 
 //? Members
 app.route('/dashboard')
-    //.get(require('./routes/hub').Members)
+//.get(require('./routes/hub').Members)
+
+
+
+//!
+//! PayPal
+//!
+
+app.get('/paypal/return', require('./routes/paypal').Return)
+app.get('/paypal/cancel', require('./routes/paypal').Cancel)
 
 
 
@@ -211,3 +226,11 @@ app.get('/donate', (req, res) => res.redirect('https://www.paypal.com/donate/?bu
 app.get('*', (req, res) => {
     res.status(404).render('pages/404')
 })
+
+
+
+
+
+
+
+
