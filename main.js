@@ -26,6 +26,8 @@ console.log(`\n\n----- NEW PROCESS STARTED @ ${Today} -----\n`)
 require('./util/paypal').GetAccessToken()
 require('./util/loop')()
 
+process.cache.devmode = process.env.devmode
+
 
 
 //!
@@ -226,11 +228,6 @@ app.get('/donate', (req, res) => res.redirect('https://www.paypal.com/donate/?bu
 app.get('*', (req, res) => {
     res.status(404).render('pages/404')
 })
-
-
-
-
-
 
 
 

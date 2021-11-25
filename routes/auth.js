@@ -25,7 +25,7 @@ async function LoginPost(req, res) {
     var Users = await process.db.collection('users')
     var user = await Users.findOne({ email: req.body.email })
     if (!user) return res.status(400).send('Invalid email or password!')
-    if (!Security.Verify(req.body.password, user.security.password)) return setTimeout(() => { res.status(400).send('Invalid email or password!') }, Math.floor(Math.random() * 500)), LoginCache[req.ip] ? LoginCache[req.ip].attempts += 1 : LoginCache[req.ip] = { attempts: 1, time: Date.now(), timer: false }
+    if (!Security.Verify(req.body.password, user.security.password, user.security.salt)) return setTimeout(() => { res.status(400).send('Invalid email or password!') }, Math.floor(Math.random() * 500)), LoginCache[req.ip] ? LoginCache[req.ip].attempts += 1 : LoginCache[req.ip] = { attempts: 1, time: Date.now(), timer: false }
     if (LoginCache[req.ip]) delete LoginCache[req.ip]
 
     user.security.lastLoginAddress = req.ip
@@ -72,7 +72,8 @@ async function RegisterPost(req, res) {
     var User = await Schema.User()
     User.email = req.body.email
     User.display.name = req.body.name
-    User.security.password = Security.Hash(req.body.password)
+    User.security.salt = await Security.GenerateSalt()
+    User.security.password = Security.Hash(req.body.password, User.security.salt)
     User.security.lastLoginAddress = req.ip
 
     return await Users.insertOne(User).then(() => res.status(201).send(User.security.token))
@@ -171,17 +172,17 @@ async function Steam(req, res) {
 module.exports = {
 
     //? Horizons
-    LoginGet: LoginGet,
-    LoginPost: LoginPost,
+    LoginGet,
+    LoginPost,
 
-    RegisterGet: RegisterGet,
-    RegisterPost: RegisterPost,
+    RegisterGet,
+    RegisterPost,
 
-    Logout: Logout,
+    Logout,
 
 
     //? OAuth2
-    UnlinkAuth: UnlinkAuth,
-    Discord: Discord,
-    Steam: Steam
+    UnlinkAuth,
+    Discord,
+    Steam
 }

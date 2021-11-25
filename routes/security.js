@@ -28,9 +28,10 @@ async function ChangePassword(req, res) {
     if (!PWResetCache[req.body.token]) return res.status(400).send('Token Expired')
     if (!Security.CheckPasswordRequirements(req.body.password)) return res.status(400).send('Password must be at least 8 characters long and contain at least one number, lowercase, uppercase, and special character')
     var User = await process.db.collection('users').findOne({ _id: PWResetCache[req.body.token] })
-    if (await Security.Verify(req.body.password, User.security.password)) return res.status(400).send('New password must be different from the old password')
+    if (await Security.Verify(req.body.password, User.security.password, User.security.salt)) return res.status(400).send('New password must be different from the old password')
     
-    User.security.password = await Security.Hash(req.body.password)
+    User.security.salt = await Security.GenerateSalt()
+    User.security.password = Security.Hash(req.body.password, User.security.salt)
     User.security.token = await Security.GenerateToken()
     await process.db.collection('users').updateOne({ _id: User._id }, { $set: { security: User.security } })
 
@@ -45,7 +46,7 @@ async function ChangeEmail(req, res) {
     if (!res.locals.user) return res.status(401).send()
     var User = await process.db.collection('users').findOne({ _id: res.locals.user._id })
     if (!User) return res.status(500).send('Failed to find user in the database!')
-    if (!await Security.Verify(req.body.password, User.security.password)) return res.status(400).send('Password is incorrect')
+    if (!await Security.Verify(req.body.password, User.security.password, User.security.salt)) return res.status(400).send('Password is incorrect')
 
     if (!req.body.email) return res.status(400).send('Email is required')
     if (!req.body.email.includes('@') || !req.body.email.includes('.')) return res.status(400).send('Invalid Email')

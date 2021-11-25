@@ -54,12 +54,21 @@ async function FetchUser(req, res, next) {
     res.locals.banner = output
 
 
+
+    //? Site Access
+    if (process.cache.devmode) {
+        if (['/', '/login'].includes(req.url)) return next()
+        if (!res.user) return res.render('util/maintenance')
+        if (!res.locals.user.permissions.administrator) return res.render('util/maintenance')
+    }
+
+
     next()
 }
 
 
 
 module.exports = {
-    Data: Data,
-    FetchUser: FetchUser
+    Data,
+    FetchUser
 }

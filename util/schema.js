@@ -23,6 +23,7 @@ async function User() {
         },
         security: {
             password: null,
+            salt: null,
             token: await require('../util/security').GenerateToken(),
             lastLoginAddress: null
         },

@@ -32,12 +32,16 @@ async function GenerateToken(length) {
     return token
 }
 
-function Hash(string) {
-    return crypto.createHash('sha256').update(process.env.security.seed + string).digest('hex')
+async function GenerateSalt(length) {
+    return crypto.randomBytes(length || 8).toString('base64')
 }
 
-function Verify(string, hash) {
-    var ReceivedPassword = Hash(string)
+function Hash(string, salt) {
+    return crypto.createHash('sha256').update(process.env.security.seed + string + salt).digest('hex')
+}
+
+function Verify(string, hash, salt) {
+    var ReceivedPassword = Hash(string, salt)
     if (ReceivedPassword == hash) return true
     else return false
 }
@@ -92,12 +96,16 @@ async function GenerateKeyPair() {
 
 
 module.exports = {
-    XSSFilter: XSSFilter,
-    GenerateToken: GenerateToken,
-    Hash: Hash,
-    Verify: Verify,
-    CheckPasswordRequirements: CheckPasswordRequirements,
-    Encrypt: Encrypt,
-    Decrypt: Decrypt,
-    GenerateKeyPair: GenerateKeyPair
+    XSSFilter,
+
+    GenerateToken,
+    GenerateSalt,
+    Hash,
+    Verify,
+
+    CheckPasswordRequirements,
+
+    Encrypt,
+    Decrypt,
+    GenerateKeyPair
 }
