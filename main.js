@@ -257,5 +257,5 @@ app.get('/donate', (req, res) => res.redirect('https://www.paypal.com/donate/?bu
 
 //? 404
 app.get('*', (req, res) => {
-    res.status(404).render('pages/404')
+    res.status(404).render('util/404')
 })
