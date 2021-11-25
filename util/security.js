@@ -51,7 +51,7 @@ function CheckPasswordRequirements(password) {
     if (password.search(/[a-z]/) === -1) return false
     if (password.search(/[A-Z]/) === -1) return false
     if (password.search(/[0-9]/) === -1) return false
-    if (password.search(/[^a-zA-Z0-9]/) === -1) return false
+    //if (password.search(/[^a-zA-Z0-9]/) === -1) return false
     return true
 }
 

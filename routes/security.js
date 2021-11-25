@@ -26,7 +26,7 @@ async function InitiatePasswordReset(req, res) {
 
 async function ChangePassword(req, res) {
     if (!PWResetCache[req.body.token]) return res.status(400).send('Token Expired')
-    if (!Security.CheckPasswordRequirements(req.body.password)) return res.status(400).send('Password must be at least 8 characters long and contain at least one number, lowercase, uppercase, and special character')
+    if (!Security.CheckPasswordRequirements(req.body.password)) return res.status(400).send('Password must be at least 8 characters long and contain at least one number, lowercase, and an uppercase character')
     var User = await process.db.collection('users').findOne({ _id: PWResetCache[req.body.token] })
     if (await Security.Verify(req.body.password, User.security.password, User.security.salt)) return res.status(400).send('New password must be different from the old password')
     
