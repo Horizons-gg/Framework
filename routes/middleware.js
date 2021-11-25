@@ -28,10 +28,9 @@ async function FetchUser(req, res, next) {
 
         if (avatar === 'none') output = "/assets/images/avatar.jpg"
         else if (avatar.includes('/storage/users')) {
-            if (fs.existsSync(process.env.storage.replace('/storage', '') + res.locals.user.display.avatar)) output = res.locals.user.display.avatar
+            if (fs.existsSync(process.env.storage.toLowerCase().replace('/storage', '') + res.locals.user.display.avatar)) output = res.locals.user.display.avatar
             else output = "/assets/images/avatar.jpg"
-        }
-        else if (avatar === 'discord' && res.locals.user.connections.discord.avatar) output = `https://cdn.discordapp.com/avatars/${res.locals.user.connections.discord.id}/${res.locals.user.connections.discord.avatar}.webp?size=128`
+        } else if (avatar === 'discord' && res.locals.user.connections.discord.avatar) output = `https://cdn.discordapp.com/avatars/${res.locals.user.connections.discord.id}/${res.locals.user.connections.discord.avatar}.webp?size=128`
         else if (avatar === 'steam') output = res.locals.user.connections.steam._json.avatarfull
         else output = "/assets/images/avatar.jpg"
     } else output = "/assets/images/avatar.jpg"
@@ -45,10 +44,9 @@ async function FetchUser(req, res, next) {
 
         if (banner === 'none') output = "/assets/images/banner.jpg"
         else if (banner.includes('/storage/users')) {
-            if (fs.existsSync(process.env.storage.replace('/storage', '') + res.locals.user.display.banner)) output = res.locals.user.display.banner
+            if (fs.existsSync(process.env.storage.toLowerCase().replace('/storage', '') + res.locals.user.display.banner)) output = res.locals.user.display.banner
             else output = "/assets/images/banner.jpg"
-        }
-        else if (banner === 'discord' && res.locals.user.connections.discord.banner) output = `https://cdn.discordapp.com/banners/${res.locals.user.connections.discord.id}/${res.locals.user.connections.discord.banner}.webp?size=300`
+        } else if (banner === 'discord' && res.locals.user.connections.discord.banner) output = `https://cdn.discordapp.com/banners/${res.locals.user.connections.discord.id}/${res.locals.user.connections.discord.banner}.webp?size=300`
         else output = "/assets/images/banner.jpg"
     } else output = "/assets/images/banner.jpg"
     res.locals.banner = output
