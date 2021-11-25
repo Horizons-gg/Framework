@@ -6,7 +6,8 @@ async function User() {
     var UUID = null
     while (!UUID) {
         tempUUID = crypto.randomUUID()
-        if (!await process.db.collection('users').findOne({ _id: tempUUID })) UUID = tempUUID
+        userCheck = await process.db.collection('users').findOne({ _id: tempUUID })
+        if (!userCheck) UUID = tempUUID
     }
 
     return {
@@ -66,5 +67,5 @@ async function User() {
 
 
 module.exports = {
-    User: User
+    User
 }
