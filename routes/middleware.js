@@ -3,7 +3,9 @@ const fs = require('fs')
 
 
 
-function Data(req, res, next) {
+function Checks(req, res, next) {
+
+    if (!process.db) return res.render('util/maintenance')
 
     res.locals.site = {
         api: process.env.site.api,
@@ -67,6 +69,6 @@ async function FetchUser(req, res, next) {
 
 
 module.exports = {
-    Data,
+    Checks,
     FetchUser
 }

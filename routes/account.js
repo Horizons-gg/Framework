@@ -27,6 +27,7 @@ async function AccountUpdate(req, res) {
     var User = await Users.findOne({ _id: res.locals.user._id })
 
 
+    if (data.displayName.length < 3) return res.status(400).send('Display name must be longer than 2 characters')
     if (data.displayName.match(/[^a-zA-Z0-9 _()]/)) return res.status(400).send('Display name can only contain letters, numbers, spaces, underscores, and brackets')
     if (data.color.match(/[^a-zA-Z0-9#]/) || data.color.length !== 7) return res.status(400).send('Color is invalid')
 

@@ -141,7 +141,7 @@ require('./util/passport').Steam(passport)
 
 var Middleware = require('./routes/middleware')
 
-app.use(Middleware.Data)
+app.use(Middleware.Checks)
 app.use(Middleware.FetchUser)
 
 app.use('/robots.txt', (req, res) => {
@@ -227,8 +227,8 @@ app.route('/dashboard')
     .get(require('./routes/hub').Dashboard)
 
 //? Members
-app.route('/dashboard')
-//.get(require('./routes/hub').Members)
+app.route('/members')
+    .get(require('./routes/hub').Members)
 
 
 
