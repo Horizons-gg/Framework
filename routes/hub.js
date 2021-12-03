@@ -36,7 +36,6 @@ async function Members(req, res) {
             delete member.security
             delete member.details.firstName
             delete member.details.lastName
-            delete member.details.dob
             delete member.details.location
             delete member.banking
             delete member.connections.discord.email
