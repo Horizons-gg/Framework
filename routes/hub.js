@@ -30,7 +30,7 @@ async function Members(req, res) {
     }
     if (!search) members = await Users.find({}).limit(10).toArray()
 
-    if (!res.locals.user.permissions.administrator) {
+    if (!res.locals.user || !res.locals.user.permissions.administrator) {
         await members.forEach((member, index) => {
             delete member.email
             delete member.security

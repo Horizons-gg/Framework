@@ -131,45 +131,50 @@
                                     </div>
 
                                     <div class="text-left mt-3" style="display: inline-block;">
-                                        <% if (member.personal.first_name) { %><i class="fas fa-file-signature" style="color: #fd8a48;"></i><p class="text-muted mb-2 font-13" style="display: inline;"><span class="ml-2" style="text-align: center;"><%= member.personal.first_name %> <%= member.personal.last_name %></span></p><br><% } %>
+                                        <% if (member.details.firstName) { %><i class="fas fa-file-signature" style="color: #fd8a48;"></i><p class="text-muted mb-2 font-13" style="display: inline;"><span class="ml-2" style="text-align: center;"><%= member.details.firstName %> <%= member.details.lastName %></span></p><br><% } %>
 
-                                        <% if (member.details.pronouns.includes('He') { %><i class="fas fa-mars" style="color: #489cfd; width: 1rem;"></i><% } %><% if (member.details.pronouns.includes('She')) { %><i class="fas fa-venus" style="color: #fd48df; width: 1rem;"></i><% } %><% if (!member.details.pronouns.includes('He') && !member.details.pronouns.includes('She')) { %><i class="fas fa-transgender-alt" style="color: #8751ce; width: 1rem;"></i><% } %><p class="text-muted mb-2 font-13" style="display: inline;"><span class="ml-2"><%= member.details.pronouns %></span></p><br>
+                                        <% if (member.details.pronouns.includes('He')) { %><i class="fas fa-mars" style="color: #489cfd; width: 1rem;"></i><% } %><% if (member.details.pronouns.includes('She')) { %><i class="fas fa-venus" style="color: #fd48df; width: 1rem;"></i><% } %><% if (!member.details.pronouns.includes('He') && !member.details.pronouns.includes('She')) { %><i class="fas fa-transgender-alt" style="color: #8751ce; width: 1rem;"></i><% } %><p class="text-muted mb-2 font-13" style="display: inline;"><span class="ml-2"><%= member.details.pronouns %></span></p><br>
 
-                                        <% if (member.personal.age) { %><i class="fas fa-id-badge" style="width: 1rem; color: #53d447;"></i><p class="text-muted mb-2 font-13" style="display: inline;"><span class="ml-2 "><%= member.personal.age %> Years old</span></p><br><% } %>
+                                        <% if (age) { %><i class="fas fa-id-badge" style="width: 1rem; color: #53d447;"></i><p class="text-muted mb-2 font-13" style="display: inline;"><span class="ml-2 "><%= age %> Years old</span></p><br><% } %>
 
-                                        <% if (member.personal.location) { %><i class="fas fa-map-marker-alt" style="width: 1rem; color: #f75858;"></i><p class="text-muted mb-1 font-13" style="display: inline;"><span class="ml-2"><%= member.personal.location %></span></p><br><% } %>
+                                        <i class="fas fa-map-marker-alt" style="width: 1rem; color: #f75858;"></i><p class="text-muted mb-1 font-13" style="display: inline;"><span class="ml-2">N/A</span></p><br>
                                     </div>
 
                                     <ul class="social-list list-inline mt-3 mb-0">
-                                        <% if (member.connections.youtube) { %><li class="list-inline-item">
+                                        <% if (false) { %><li class="list-inline-item">
                                             <a href="<%= member.connections.youtube %>" target="_blank" class="social-list-item" style="border-color: #FF0000; color: #FF0000;">
                                                 <i class="fab fa-youtube"></i></a>
                                         </li><% } %>
-                                        <% if (member.connections.twitch) { %><li class="list-inline-item">
+                                        <% if (false) { %><li class="list-inline-item">
                                             <a href="https://twitch.tv/<%= member.connections.twitch %>" target="_blank" class="social-list-item" style="border-color: #6441a5; color: #6441a5;">
                                                 <i class="fab fa-twitch"></i></a>
                                         </li><% } %>
-                                        <% if (member.connections.facebook) { %><li class="list-inline-item">
+                                        <% if (false) { %><li class="list-inline-item">
                                             <a href="<%= member.connections.facebook %>" target="_blank" class="social-list-item" style="border-color: #4f7cdd; color: #4f7cdd;">
                                                 <i class="fab fa-facebook"></i>
                                             </a>
                                         </li><% } %>
-                                        <% if (member.connections.twitter) { %><li class="list-inline-item">
+                                        <% if (false) { %><li class="list-inline-item">
                                             <a href="https://twitter.com/<%= member.connections.twitter %>" target="_blank" class="social-list-item" style="border-color: #43bee1; color: #43bee1;">
                                                 <i class="fab fa-twitter"></i>
                                             </a>
                                         </li><% } %>
-                                        <% if (member.connections.instagram) { %><li class="list-inline-item">
+                                        <% if (false) { %><li class="list-inline-item">
                                             <a href="https://www.instagram.com/<%= member.connections.instagram %>" target="_blank" class="social-list-item" style="border-color: #8a3ab9; color: #8a3ab9;">
                                                 <i class="fab fa-instagram"></i>
                                             </a>
                                         </li><% } %>
-                                        <% if (member.connections.github) { %><li class="list-inline-item">
+                                        <% if (false) { %><li class="list-inline-item">
                                             <a href="https://github.com/<%= member.connections.github %>" target="_blank" class="social-list-item" style="border-color: #cedeef; color: #cedeef;">
                                                 <i class="fab fa-github"></i>
                                             </a>
                                         </li><% } %>
-                                        <% if (member.steam) { %><li class="list-inline-item">
+                                        <% if (member.connections.steam.id) { %><li class="list-inline-item">
+                                            <a href="<%= member.connections.steam._json.profileurl %>" target="_blank" class="social-list-item" style="border-color: #1b2838; color: #1b2838;">
+                                                <i class="fab fa-steam"></i>
+                                            </a>
+                                        </li><% } %>
+                                        <% if (false) { %><li class="list-inline-item">
                                             <a href="<%= member.steam._json.profileurl %>" target="_blank" class="social-list-item" style="border-color: #1b2838; color: #1b2838;">
                                                 <i class="fab fa-steam"></i>
                                             </a>
