@@ -23,7 +23,7 @@ console.error = console.log
 console.log(`\n\n----- NEW PROCESS STARTED @ ${Today} -----\n`)
 
 
-require('./util/paypal').GetAccessToken()
+//require('./util/paypal').GetAccessToken()
 require('./util/loop')()
 
 process.cache.devmode = process.env.devmode
@@ -236,8 +236,8 @@ app.route('/dashboard')
 //! PayPal
 //!
 
-app.get('/paypal/return', require('./routes/paypal').Return)
-app.get('/paypal/cancel', require('./routes/paypal').Cancel)
+//app.get('/paypal/return', require('./routes/paypal').Return)
+//app.get('/paypal/cancel', require('./routes/paypal').Cancel)
 
 
 
