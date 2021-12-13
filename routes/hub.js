@@ -10,17 +10,20 @@ async function Members(req, res) {
     var search = req.query.search || null
     var category = req.query.category || 'all'
 
+    search = search.toLowerCase()
+    category = category.toLowerCase()
+
     var members = []
 
     const Users = await process.db.collection('users')
 
-    if (search && category === 'name') members = await Users.find({ 'display.name': { $regex: search } }).limit(10).toArray()
-    if (search && category === 'discord') members = await Users.find({ 'connections.discord.username': { $regex: search } }).limit(10).toArray()
-    if (search && category === 'steam') members = await Users.find({ 'connections.steam.displayName': { $regex: search } }).limit(10).toArray()
+    if (search && category === 'name') members = await Users.find({ 'display.name': { $regex: search, $options: 'i' } }).limit(10).toArray()
+    if (search && category === 'discord') members = await Users.find({ 'connections.discord.username': { $regex: search, $options: 'i' } }).limit(10).toArray()
+    if (search && category === 'steam') members = await Users.find({ 'connections.steam.displayName': { $regex: search, $options: 'i' } }).limit(10).toArray()
     if (search && category === 'all') {
-        for await (user of await Users.find({ 'display.name': { $regex: search } }).limit(10).toArray()) members.push(user)
-        for await (user of await Users.find({ 'connections.discord.username': { $regex: search } }).limit(10).toArray()) members.push(user)
-        for await (user of await Users.find({ 'connections.steam.displayName': { $regex: search } }).limit(10).toArray()) members.push(user)
+        for await (user of await Users.find({ 'display.name': { $regex: search, $options: 'i' } }).limit(10).toArray()) members.push(user)
+        for await (user of await Users.find({ 'connections.discord.username': { $regex: search, $options: 'i' } }).limit(10).toArray()) members.push(user)
+        for await (user of await Users.find({ 'connections.steam.displayName': { $regex: search, $options: 'i' } }).limit(10).toArray()) members.push(user)
 
         var ids = []
         await members.forEach((user, index) => {
