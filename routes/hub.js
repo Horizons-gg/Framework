@@ -42,6 +42,7 @@ async function Members(req, res) {
             delete member.banking
             delete member.connections.discord.email
             members[index] = member
+            console.log(member)
         })
     }
 
