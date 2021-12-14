@@ -10,7 +10,6 @@ async function Members(req, res) {
     var search = req.query.search || null
     var category = req.query.category || 'all'
 
-    search = search.toLowerCase()
     category = category.toLowerCase()
 
     var members = []
