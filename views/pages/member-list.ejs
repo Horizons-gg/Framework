@@ -113,10 +113,8 @@
                                 var avatar = member.display.avatar || 'none'
 
                                 if (avatar === 'none') output = "/assets/images/avatar.jpg"
-                                else if (avatar.includes('/storage/users')) {
-                                    if (fs.existsSync(process.env.storage.toLowerCase().replace('/storage', '') + member.display.avatar)) output = member.display.avatar
-                                    else output = "/assets/images/avatar.jpg"
-                                } else if (avatar === 'discord' && member.connections.discord.avatar) output = `https://cdn.discordapp.com/avatars/${member.connections.discord.id}/${member.connections.discord.avatar}.webp?size=128`
+                                else if (avatar.includes('/storage/users')) output = member.display.avatar
+                                else if (avatar === 'discord' && member.connections.discord.avatar) output = `https://cdn.discordapp.com/avatars/${member.connections.discord.id}/${member.connections.discord.avatar}.webp?size=128`
                                 else if (avatar === 'steam') output = member.connections.steam._json.avatarfull
                                 else output = "/assets/images/avatar.jpg"
                             %>
