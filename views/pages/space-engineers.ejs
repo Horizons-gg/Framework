@@ -67,7 +67,7 @@
                                 </div>
                             </div>
                             <script>
-                                var date = new Date('01-01-2022')
+                                var date = new Date('06-01-2022')
                                 var seconds = Math.round((date.getTime() / 1000) - (new Date().getTime() / 1000))
 
                                 function timer() {
@@ -97,7 +97,7 @@
                                 async function lastWipe() {
                                     var timeSinceWipe = [0, 0, 0, 0];
 
-                                    const firstDate = new Date('09-27-2021');
+                                    const firstDate = new Date('01-14-2022');
 
                                     timeSinceWipe[0] = Math.round(Math.abs((firstDate - new Date()) / 1000));
 
@@ -137,9 +137,9 @@
                                         <a href="?" class="list-group-item list-group-item-action <% if (!page) { %>text-primary font-weight-medium<% } %> border-0"><i class='mdi mdi-image-filter-black-white font-16 mr-1'></i> Overview</a>
                                         <a href="?page=vote" class="list-group-item list-group-item-action <% if (page === 'vote') { %>text-primary font-weight-medium<% } %> border-0"><i class="fas fa-vote-yea mr-1"></i> Vote</a>
                                         <a href="?page=rules" class="list-group-item list-group-item-action <% if (page === 'rules') { %>text-primary font-weight-medium<% } %> border-0"><i class="fas fa-tasks font-16 mr-1"></i> Rules</a>
-                                        <a href="/mission-board" class="list-group-item list-group-item-action <% if (page === 'missions') { %>text-primary font-weight-medium<% } %> border-0"><i class='mdi mdi-map font-16 mr-1'></i> Mission Board</a>
-                                        <a href="?page=poi" class="list-group-item list-group-item-action <% if (page === 'poi') { %>text-primary font-weight-medium<% } %> border-0"><i class='mdi mdi-map-marker font-16 mr-1'></i> Points of Interest</a>
-                                        <a href="/documents/se" class="list-group-item list-group-item-action border-0"><i data-feather="code" class='font-16 mr-1' style="width: 1rem;"></i> Commands</a>
+                                        <a hidden href="/mission-board" class="list-group-item list-group-item-action <% if (page === 'missions') { %>text-primary font-weight-medium<% } %> border-0"><i class='mdi mdi-map font-16 mr-1'></i> Mission Board</a>
+                                        <a href="?page=map" class="list-group-item list-group-item-action <% if (page === 'map') { %>text-primary font-weight-medium<% } %> border-0"><i class='fas fa-meteor font-16 mr-1'></i> Galaxy Map</a>
+                                        <a hidden href="/documents/se" class="list-group-item list-group-item-action border-0"><i data-feather="code" class='font-16 mr-1' style="width: 1rem;"></i> Commands</a>
                                     </div>
 
                                 </div>
@@ -165,109 +165,129 @@
                                         <h5 style="font-style: italic;">- Why am does it say I am violating the Blocklimit when I'm not?</h5>
                                         <p style="margin-top: -10px;">First you should type <b>!blocklimit update mylimit</b> into chat, then try again.</p>
                                         <p style="margin-top: -15px;">If the issue consists then type <b>!blocklimit mylimit</b> into chat and make sure you haven't accidently placed the block elsewhere.</p>
+                                        <h5 style="font-style: italic;">- How do I get back to the Lobby?</h5>
+                                        <p style="margin-top: -10px;">Type <b>!nexus lobby</b> in game chat.</p>
+                                        <h5 style="font-style: italic;">- My Grids have Vanished, how do I get them back?</h5>
+                                        <p style="margin-top: -10px;">If you have been away for over a week then your grids may have been hangared, type <b>!h list</b> to view your hangar.</p>
+                                        <p style="margin-top: -10px;">To retrieve a grid, type <b>!h load 1</b> for example, that will load the first grid in your hangar list.</p>
+                                        <p style="margin-top: -10px;">If your grid is not in your hangar, then it may have been deleted, open a ticket in our discord to get it restored.</p>
+                                </div>
+                            <% } %>
+
+                            <% if (page === 'vote') { %>
+                                <!-- Story Box-->
+                                <div class="card-box">
+                                    <h3>How to Vote</h3>
+                                    <p><strong>1.</strong> Goto our server on <a href="https://space-engineers.com/server/155814/vote">Space-Engineers.com</a></p>
+                                    <p><strong>2.</strong> Press the "Sign in Through Steam" button & login to the Steam account you play our on</p>
+                                    <p><strong>3.</strong> Success! You have voted for the Server, now you can collect your rewards!</p>
+                                    <br>
+                                    <h3>How to collect your Rewards</h3>
+                                    <p><strong>1.</strong> Make sure you have voted before following these steps!</p>
+                                    <p><strong>2.</strong> Make sure you are in a Standard Sector (e.g. Sol, The Void) & not the Lobby!</p>
+                                    <p><strong>3.</strong> Type <strong>!reward</strong> in chat</p>
+                                    <p><strong>4.</strong> Congratulations! You have recieved your free materials for supporting our server!</p>
+                                    <br>
+                                    <h5>You can Vote every 24 Hours to Recieve More Rewards!</h5>
+                                    <h5>The Top 5 Voters at the End of Each Month will Recieve a Huge Supply Drop!</h5>
+                                </div>
+                            <% } %>
+
+                            <% if (page === 'rules') { %>
+                                <!-- Story Box-->
+                                <div class="card-box">
+                                    <h3>General Rules</h3>
+                                    <ul>
+                                        <li>All grids should be named to properly receive support from staff.</li>
+                                        <li>Do not convert stations to ships when built into asteroids.</li>
+                                        <li>No respawn ship farming.</li>
+                                        <li>Do not intentionally cause server lag.</li>
+                                        <li>No abuse of game mechanics to give yourself an unfair advantage and no exploits of the game.</li>
+                                        <li>Avoid using conveyor blocks where tubes can be used, staff will tell you if theres an issue.</li>
+                                        <li>Do not voxel grief.</li>
+                                    </ul>
+                                    <h3>Behavioural Rules</h3>
+                                    <ul>
+                                        <li>Respect staff decisions / no arguing with staff.</li>
+                                        <li>This is an English-speaking server, please use English in chat.</li>
+                                        <li>No NSFW chat relating to gore, sexually explicit content, or hate speech to other players.</li>
+                                        <li>You will be punished for toxic behavior (Warnings - Mutes - Temp/Perm Bans)</li>
+                                    </ul>
+                                    <h3>Engagement Rules</h3>
+                                    <ul>
+                                        <li>No combat use of Build and Repairs</li>
+                                        <li>Do NOT Foundation Wipe, If you are going in for a raid, try to avoid completely wiping them</li>
+                                    </ul>
+                                    <h3>Clarifications</h3>
+                                    <ul>
+                                        <li>Staff members are only allowed to defend and retaliate to PvP combat.</li>
+                                        <li>Make sure your Grids Name does NOT include NPC otherwise it may be deleted!</li>
+                                    </ul>
+                                    <br>
+                                    <h3>Block Limits</h3>
+                                    <ul>
+                                        <li>1 Safezone per Faction</li>
+                                        <li>4x Build and Repair Systems per Grid - 16x per Faction</li>
+                                        <li hidden>4x Drill and Fills per Grid - 4x per Faction</li>
+                                        <li>20x Production Blocks per Grid - 80x per Faction</li>
+                                        <li>50x Hydrogen/Oxygen Tanks per Grid - 400x per Faction</li>
+                                        <li>16x Welder Blocks per Grid - 32x per Faction</li>
+                                        <li>16x Drill Blocks per Grid - 32x per Faction</li>
+                                        <li>16x Grinder Blocks per Grid - 32x per Faction</li>
+                                        <li>16x Reactors per Grid</li>
+                                        <li>100x Batteries per Grid</li>
+                                        <li>100x Solar Pannels per Grid</li>
+                                        <li>20x Hydrogen Engines per Grid</li>
+                                        <li>12x Cameras per Grid - 50x per Faction</li>
+                                        <li>3x Programmable Blocks per Grid - 18x per Faction</li>
+                                        <li>20x Pistons/Rotors/Hinges per Faction</li>
+                                        
+                                        <li>200x Weapons per Grid - 800x per Faction</li>
+                                        <li>1x Atlas Super Laser per Grid - 4x per Faction</li>
+                                        <li>2x Mark-I Atlas Superlaser per Grid - 8x per Faction</li>
+                                        <li>4x Reaper Pulse Cannon per Grid - 16x per Faction</li>
+                                        <li>4x Hunter-405 Coilgun per Grid - 16x per Faction</li>
+                                        <li>4x Ares Gauss Cannon per Grid - 16x per Faction</li>
+                                        <li>6x Trident Plasma Beam Cannon per Grid - 24x per Faction</li>
+                                        <li>6x Typhoon Heavy Cannon per Grid - 24x per Faction</li>
+                                        <li>6x Magnetar Laser Cannon per Grid - 24x per Faction</li>
+                                        <li>16x Artemis-250 Railgun per Grid - 64x per Faction</li>
+                                    </ul>
                                 </div>
                                 <% } %>
 
-                                    <% if (page === 'vote') { %>
-                                        <!-- Story Box-->
-                                        <div class="card-box">
-                                            <h3>How to Vote</h3>
-                                            <p><strong>1.</strong> Goto our server on <a href="https://space-engineers.com/server/155814/vote">Space-Engineers.com</a></p>
-                                            <p><strong>2.</strong> Press the "Sign in Through Steam" button & login to the Steam account you play our on</p>
-                                            <p><strong>3.</strong> Success! You have voted for the Server, now you can collect your rewards!</p>
-                                            <br>
-                                            <h3>How to collect your Rewards</h3>
-                                            <p><strong>1.</strong> Make sure you have voted before following these steps!</p>
-                                            <p><strong>2.</strong> Make sure you are in a Standard Sector (e.g. Sol, The Void) & not the Lobby!</p>
-                                            <p><strong>3.</strong> Type <strong>!reward</strong> in chat</p>
-                                            <p><strong>4.</strong> Congratulations! You have recieved your free materials for supporting our server!</p>
-                                            <br>
-                                            <h5>You can Vote every 24 Hours to Recieve More Rewards!</h5>
-                                            <h5>The Top 5 Voters at the End of Each Month will Recieve a Huge Supply Drop!</h5>
-                                        </div>
-                                        <% } %>
-
-                                            <% if (page === 'rules') { %>
-                                                <!-- Story Box-->
-                                                <div class="card-box">
-                                                    <h3>General Rules</h3>
-                                                    <ul>
-                                                        <li>All grids should be named to properly receive support from staff.</li>
-                                                        <li>Do not convert stations to ships when built into asteroids.</li>
-                                                        <li>No respawn ship farming.</li>
-                                                        <li>Do not intentionally cause server lag.</li>
-                                                        <li>No abuse of game mechanics to give yourself an unfair advantage and no exploits of the game.</li>
-                                                        <li>Do not grief.</li>
-                                                        <li>Avoid using conveyor blocks where tubes can be used, staff will tell you if theres an issue.</li>
-                                                    </ul>
-                                                    <h3>Behavioural Rules</h3>
-                                                    <ul>
-                                                        <li>Respect staff decisions / no arguing with staff. (Staff Decision is final)</li>
-                                                        <li>This is an English-speaking server, please use English in chat.</li>
-                                                        <li>No NSFW chat relating to gore, sexually explicit content, or hate speech to other players.</li>
-                                                        <li>You will be punished for toxic behavior (Warnings - Mutes - Temp/Perm Bans)</li>
-                                                    </ul>
-                                                    <h3>Engagement Rules</h3>
-                                                    <ul>
-                                                        <li>Offline Raiding is NOT allowed.</li>
-                                                        <li>No combat use of Build and Repairs</li>
-                                                        <li>Do NOT Foundation Wipe, If you are going in for a raid, try to avoid completely wiping them</li>
-                                                        <li>Avoid hangaring grids just because you're jumping off for the night, use it to regain PCU or if you're leaving for a longer period of time</li>
-                                                        <li>After raiding a factions base you cannot target that faction for the following 2 days</li>
-                                                        <li>Raids should not go on for longer than 1 hour</li>
-                                                        <li>Raids automatically end after you leave an enemy base (10km radius)</li>
-                                                    </ul>
-                                                    <h3>Clarifications</h3>
-                                                    <ul>
-                                                        <li>Staff members are only allowed to defend and retaliate to PvP combat.</li>
-                                                        <li>Make sure your Grids Name does NOT include NPC otherwise it may be deleted!</li>
-                                                    </ul>
-                                                    <br>
-                                                    <h3>Block Limits</h3>
-                                                    <ul>
-                                                        <li>4x Build and Repair Systems per Grid - 16x per Faction</li>
-                                                        <li>4x Drill and Fills per Grid - 4x per Faction</li>
-                                                        <li>20x Production Blocks per Grid - 80x per Faction</li>
-                                                        <li>50x Hydrogen/Oxygen Tanks per Grid - 400x per Faction</li>
-                                                        <li>16x Welder Blocks per Grid - 32x per Faction</li>
-                                                        <li>16x Drill Blocks per Grid - 32x per Faction</li>
-                                                        <li>16x Grinder Blocks per Grid - 32x per Faction</li>
-                                                        <li>16x Reactors per Grid</li>
-                                                        <li>100x Batteries per Grid</li>
-                                                        <li>12x Cameras per Grid - 50x per Faction</li>
-                                                        <li>3x Programmable Blocks per Grid - 18x per Faction</li>
-                                                        <li>20x Pistons/Rotors/Hinges per Faction</li>
-                                                        <li>200x Weapons per Grid - 800x per Faction</li>
-                                                        <li>4x Shiva per Grid</li>
-                                                        <li>10x Archer Pods per Grid</li>
-                                                        <li>1x Series 8 MAC Cannons per Grid</li>
-                                                        <li>8x MAC Cannons per Grid</li>
-                                                    </ul>
-                                                    <h3>Blacklisted Blocks</h3>
-                                                    <ul>
-                                                        <li>Warheads Tier 2 - Tier 5</li>
-                                                        <li>Small Gatling Guns Tier 4 - Tier 5</li>
-                                                    </ul>
-                                                </div>
-                                                <% } %>
-
-                                                    <% if (page === 'poi') { %>
-                                                        <!-- Story Box-->
-                                                        <div class="card-box">
-                                                            <h3>Stations</h3>
-                                                            <h5 id="sol_trade" style="cursor: pointer;" onclick=""><b style="color: #eb7d34; font-weight: 400;">Sol Trade Station</b> <i class="far fa-clipboard"></i></h5>
-                                                        </div>
-                                                        <div class="card-box">
-                                                            <h3>Asteroid Clusters</h3>
-                                                        </div>
-                                                        <% } %>
-
-                                                            <% if (page === 'events') { %>
-                                                                <!-- Story Box-->
-                                                                <div class="card-box">
-                                                                    <h3>Events</h3>
-                                                                </div>
-                                                                <% } %>
+                            <% if (page === 'map') { %>
+                                <!-- Story Box-->
+                                <div class="card-box">
+                                    <h3 style="margin-bottom: 1rem;">Earth</h3>
+                                    <h4>Planetary Bodies</h4>
+                                    <p style="color: #20b1e6; margin-bottom: 0.2rem;">Earth - GPS:Earth:0:0:0:#FF5C79E1: - [Ag, Au, Co, Fe, Mg, Ni, Si]</p>
+                                </div>
+                                <div class="card-box">
+                                    <h3 style="margin-bottom: 1rem;">Moon</h3>
+                                    <h4>Planetary Bodies</h4>
+                                    <p style="color: #818181; margin-bottom: 0.2rem;">Moon - GPS:Moon:107284.50:62584.50:574.50:#FF5C79E1: - [Ag, Au, Co, Fe, Mg, Ni, Pt, Si]</p>
+                                </div>
+                                <div class="card-box">
+                                    <h3 style="margin-bottom: 1rem;">Badlands</h3>
+                                    <h4>Planetary Bodies</h4>
+                                    <p style="color: #cebb93; margin-bottom: 0.2rem;">Pertam - GPS:Pertam:-393959:155990:-406618:#FF5C79E1: - [Ag, Au, Co, Fe, Mg, Ni, Si]</p>
+                                    <p style="color: #20e6a4; margin-bottom: 0.2rem;">Teal - GPS:Teal:-504569:79063:-392570:#FF5C79E1: - [Ag, Au, Co, Fe, Mg, Ni, Si]</p>
+                                    <p style="color: #7bafad; margin-bottom: 0.2rem;">Europa - GPS:Europa:-345471:256877:-600995:#FF5C79E1: - [Ag, Au, Co, Fe, Mg, Ni, Pt, Si]</p>
+                                </div>
+                                <div class="card-box">
+                                    <h3 style="margin-bottom: 1rem;">Outer Rim</h3>
+                                    <h4>Planetary Bodies</h4>
+                                    <p style="color: #8ec75f; margin-bottom: 0.2rem;">Trelan - GPS:Trelan:315960:751615:360486:#FF5C79E1: - [Ag, Co, Fe, Mg, Ni, Si]</p>
+                                    <p style="color: #dbb985; margin-bottom: 0.2rem;">Helios - GPS:Helios:249314:804230:276496:#FF5C79E1: - [Ag, Au, Co, Fe, Mg, Ni, Si, U]</p>
+                                    <p style="color: #9bdde9; margin-bottom: 0.2rem;">Triton - GPS:Triton:272074:850725:179811:#FF5C79E1: - [Ag, Au, Co, Fe, Mg, Ni, Si]</p>
+                                </div>
+                                <div class="card-box">
+                                    <h3 style="margin-bottom: 1rem;">Ravcor</h3>
+                                    <h4>Planetary Bodies</h4>
+                                    <p style="color: #ee6f34; margin-bottom: 0.2rem;">Ravcor - GPS:Ravcor:-253737:1145333:-201229:#FF5C79E1: - [Ag, Au, Co, Fe, Mg, Ni, Pt, Si, Ti, U]</p>
+                                </div>
+                            <% } %>
 
                         </div>
 
