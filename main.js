@@ -39,37 +39,6 @@ MongoClient.connect(`mongodb://${process.env.db.host}:${process.env.db.port}`, a
     if (err) throw err;
     console.log('Connected to the database.')
     process.db = db.db(process.env.db.database)
-
-    /*const Schema = require('./util/schema')
-    var OldUsers = await process.db.collection('old').find({}).toArray()
-    OldUsers.forEach(async (old) => {
-        var User = await Schema.User()
-        console.log(User._id)
-        User.email = old.discord.email || null
-        User.connections.discord = old.discord
-        User.connections.steam = old.steam || {}
-        User.display.name = old.discord.username
-        User.display.color = old.custom.color
-        User.display.avatar = 'discord'
-        User.display.banner = 'discord'
-
-
-        User.details.firstName = old.personal.first_name
-        User.details.lastName = old.personal.last_name
-        User.details.dob = old.personal.dob
-
-        if (old.personal.gender === 'Male') User.details.pronouns = 'He / Him'
-        else if (old.personal.gender === 'Female') User.details.pronouns = 'She / Her'
-        else if (old.personal.gender === 'Other') User.details.pronouns = 'They / Them'
-        else User.details.pronouns = 'None'
-
-        User.details.personality = old.personal.personality
-        User.details.bio = old.custom.bio
-
-        User.created = old.personal.creation
-
-        await process.db.collection('users').insertOne(User).then(() => console.log(`Successfully Migrated ${old.discord.username}`))
-    })*/
 })
 
 
