@@ -115,7 +115,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="client-images">
-                                <img src="/assets_landing/images/clients/3.png" alt="logo-img" class="mx-auto img-fluid d-block">
+                                <img src="/assets_landing/images/clients/1.png" alt="logo-img" class="mx-auto img-fluid d-block">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -130,7 +130,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="client-images">
-                                <img src="/assets_landing/images/clients/4.png" alt="logo-img" class="mx-auto img-fluid d-block">
+                                <img src="/assets_landing/images/clients/2.png" alt="logo-img" class="mx-auto img-fluid d-block">
                             </div>
                         </div>
                     </div> <!-- end row -->
@@ -179,9 +179,9 @@
                                                 <div class="features-img mb-4">
                                                     <img src="/assets_landing/images/icons/layers.png" alt="">
                                                 </div>
-                                                <h4 class="mb-2">${server}</h4>
+                                                <h4 class="mb-2">${Data.name} (${server})</h4>
                                                 <p><b>Location</b> | <b>${Data.city}</b></p>
-                                                <p><b>Latency</b> | <b>${Data.ping}</b></p>
+                                                <p><b>Latency</b> | <b>${Data.ping}ms</b></p>
                                                 <p><b>CPU Usage</b> | <b>${Data.cpu}%</b></p>
                                                 <p><b>RAM Usage</b> | <b>${Data.ramc}GB / ${Data.ramx}GB</b></p>
                                             </div>
@@ -193,9 +193,9 @@
                                             <div class="features-img mb-4">
                                                 <img src="/assets_landing/images/icons/layers.png" alt="">
                                             </div>
-                                            <h4 class="mb-2">${server}</h4>
+                                            <h4 class="mb-2">${Data.name} (${server})</h4>
                                             <p><b>Location</b> | <b>${Data.city}</b></p>
-                                            <p><b>Latency</b> | <b>${Data.ping}</b></p>
+                                            <p><b>Latency</b> | <b>${Data.ping}ms</b></p>
                                             <p><b>CPU Usage</b> | <b>${Data.cpu}%</b></p>
                                             <p><b>RAM Usage</b> | <b>${Data.ramc}GB / ${Data.ramx}GB</b></p>
                                         </div>
@@ -285,6 +285,7 @@
                         <div class="text-center mb-4">
                             <h3 class="text-white">Support us on Patreon</h3>
                             <p class="text-white-50">As we're a non-profit Community we don't have that much funding to help us expand, by supporting us, you are helping get better server hardware and software!</p>
+                            <p class="text-white-50">We've listed some of our Tiers Below!</p>
                         </div>
                     </div>
                 </div>
@@ -296,14 +297,15 @@
                             <div class="col-lg-4">
                                 <div class="pricing-plan bg-white p-4 mt-4">
                                     <div class="pricing-header text-center">
-                                        <h5 class="plan-title text-uppercase mb-4">Enhanced Supporter</h5>
-                                        <h1><sup><small>$</small></sup>5</h1>
-                                        <div class="plan-duration text-muted">American Dollars</div>
+                                        <img src="/assets/images/tiers/SVG/Bronze.svg" style="width: 5rem;">
+                                        <h5 class="plan-title text-uppercase mb-4">Bronze Tier</h5>
+                                        <h1><sup><small>$</small></sup>3.50</h1>
+                                        <div class="plan-duration text-muted">Monthly</div>
                                     </div>
                                     <ul class="list-unstyled pricing-list mt-4">
                                         <li>
                                             <i class="mdi mdi-album"></i>
-                                            <p>Exclusive Content</p>
+                                            <p>Rust SkinBox + Que Skip</p>
                                         </li>
                                         <li>
                                             <i class="mdi mdi-lifebuoy"></i>
@@ -315,35 +317,7 @@
                                         </li>
                                     </ul>
                                     <div class="text-center mt-5">
-                                        <a href="https://www.patreon.com/join/corehorizons/checkout?rid=4187695" target="_blank" class="btn btn-primary">Support Us Now!</a>
-                                    </div>
-                                </div>
-                            </div> <!-- end col -->
-
-                            <div class="col-lg-4">
-                                <div class="pricing-plan active p-4 mt-4">
-                                    <span class="lable">Popular</span>
-                                    <div class="pricing-header text-white text-center">
-                                        <h5 class="plan-title text-white text-uppercase mb-4">Elite Supporter</h5>
-                                        <h1 class=" text-white"><sup><small>$</small></sup>35</h1>
-                                        <div class="plan-duration">American Dollars</div>
-                                    </div>
-                                    <ul class="list-unstyled text-white pricing-list mt-4">
-                                        <li>
-                                            <i class="mdi mdi-album"></i>
-                                            <p>Exclusive Content</p>
-                                        </li>
-                                        <li>
-                                            <i class="mdi mdi-lifebuoy"></i>
-                                            <p>Discord Roles & Channels<p>
-                                        </li>
-                                        <li>
-                                            <i class="mdi mdi-history"></i>
-                                            <p>Early Access</p>
-                                        </li>
-                                    </ul>
-                                    <div class="text-center mt-5">
-                                        <a href="https://www.patreon.com/join/corehorizons/checkout?rid=4309491" target="_blank" class="btn shadow btn-light">Support Us Now!</a>
+                                        <a href="https://www.patreon.com/corehorizons" target="_blank" class="btn btn-primary">Support Us Now!</a>
                                     </div>
                                 </div>
                             </div> <!-- end col -->
@@ -351,14 +325,15 @@
                             <div class="col-lg-4">
                                 <div class="pricing-plan bg-white p-4 mt-4">
                                     <div class="pricing-header text-center">
-                                        <h5 class="plan-title text-uppercase mb-4">Proficient Supporter</h5>
-                                        <h1><sup><small>$</small></sup>15</h1>
-                                        <div class="plan-duration text-muted">American Dollars</div>
+                                        <img src="/assets/images/tiers/SVG/Diamond.svg" style="width: 5rem;">
+                                        <h5 class="plan-title text-uppercase mb-4">Diamond Tier</h5>
+                                        <h1><sup><small>$</small></sup>50</h1>
+                                        <div class="plan-duration">Monthly</div>
                                     </div>
                                     <ul class="list-unstyled pricing-list mt-4">
                                         <li>
                                             <i class="mdi mdi-album"></i>
-                                            <p>Exclusive Content</p>
+                                            <p>Rust SkinBox + Que Skip</p>
                                         </li>
                                         <li>
                                             <i class="mdi mdi-lifebuoy"></i>
@@ -370,7 +345,35 @@
                                         </li>
                                     </ul>
                                     <div class="text-center mt-5">
-                                        <a href="https://www.patreon.com/join/corehorizons/checkout?rid=6133110" target="_blank" class="btn btn-primary">Support Us Now!</a>
+                                        <a href="https://www.patreon.com/corehorizons" target="_blank" class="btn btn-primary">Support Us Now!</a>
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+
+                            <div class="col-lg-4">
+                                <div class="pricing-plan bg-white p-4 mt-4">
+                                    <div class="pricing-header text-center">
+                                        <img src="/assets/images/tiers/SVG/Gold.svg" style="width: 5rem;">
+                                        <h5 class="plan-title text-uppercase mb-4">Gold Tier</h5>
+                                        <h1><sup><small>$</small></sup>10</h1>
+                                        <div class="plan-duration text-muted">Monthly</div>
+                                    </div>
+                                    <ul class="list-unstyled pricing-list mt-4">
+                                        <li>
+                                            <i class="mdi mdi-album"></i>
+                                            <p>Rust SkinBox + Que Skip</p>
+                                        </li>
+                                        <li>
+                                            <i class="mdi mdi-lifebuoy"></i>
+                                            <p>Discord Roles & Channels<p>
+                                        </li>
+                                        <li>
+                                            <i class="mdi mdi-history"></i>
+                                            <p>Early Access</p>
+                                        </li>
+                                    </ul>
+                                    <div class="text-center mt-5">
+                                        <a href="https://www.patreon.com/corehorizons" target="_blank" class="btn btn-primary">Support Us Now!</a>
                                     </div>
                                 </div>
                             </div> <!-- end col -->
