@@ -146,129 +146,91 @@
                     <div class="col-lg-6">
                         <div class="text-center mb-4 pb-1">
                             <h3 class="mb-3">Live Stats</h3>
-                            <p class="text-muted">We monitor all our Services 24/7</p>
+                            <p class="text-muted">We monitor all of our Servers 24/7</p>
                         </div>
                     </div>
                 </div>
                 <!-- end row -->
 
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="features-box">
-                            <div class="features-img mb-4">
-                                <img src="/assets_landing/images/icons/layers.png" alt="">
-                            </div>
-                            <h4 class="mb-2">Dedicated Servers</h4>
-                            <p><b>Artemis</b> | <b id="artemisStats">Loading...</b></p>
-                            <p><b>Ares</b> | <b id="aresStats">Loading...</b></p>
-                            <p><b>Ceres</b> | <b id="ceresStats">Loading...</b></p>
-                        </div>
-                    </div>
-                    <!-- end col -->
-                    <div class="col-lg-4">
-                        <div class="features-box">
-                            <div class="features-img mb-4">
-                                <img src="/assets_landing/images/icons/solarsystem.png" alt="">
-                            </div>
-                            <h4 class="mb-3"><a href="/space-engineers">Space Engineers</a></h4>
-                            <p><b id="AUSEStats">Loading...</b></p>
-                        </div>
-                    </div>
-                    <!-- end col -->
-                    <div class="col-lg-4">
-                        <div class="features-box">
-                            <div class="features-img mb-4">
-                                <img src="/assets_landing/images/icons/bomb.png" alt="">
-                            </div>
-                            <h4 class="mb-2"><a href="http://horizons.gg/squad">Squad</a></h4>
-                            <p id="squadStats">Loading...</p>
-                        </div>
-                    </div>
-                    <!-- end col -->
-                </div>
-                <!-- end row -->
+                <div id="servers" class="row"></div>
 
                 <div class="row justify-content-center">
-                    <div class="col-lg-4">
-                        <div class="features-box">
-                            <div class="features-img mb-4">
-                                <img src="/assets_landing/images/icons/core.png" alt="">
-                            </div>
-                            <h4 class="mb-2"><a href="http://horizons.gg:3001">Eco</a></h4>
-                            <p id="ecoStats">Loading...</p>
-                        </div>
-                    </div>
-                    <!-- end col -->
-                    <div class="col-lg-4">
-                        <div class="features-box">
-                            <div class="features-img mb-4">
-                                <img src="/assets_landing/images/icons/browserscript.png" alt="">
-                            </div>
-                            <h4 class="mb-3"><a href="/api">API</a></h4>
-                            <p style="color: #34bb30; font-weight: 600;">Online</p>
-                        </div>
-                    </div>
-                    <!-- end col -->
-                    <div class="col-lg-4">
-                        <div class="features-box">
-                            <div class="features-img mb-4">
-                                <img src="/assets_landing/images/icons/paperdesk.png" alt="">
-                            </div>
-                            <h4 class="mb-2">TBD</h4>
-                            <p class="text-muted">TBD</p>
-                        </div>
-                    </div>
 
                     <script>
                         async function refreshStats() {
                             
-                            var data = await fetch('<%= locals.site.discord %>').then(res => res.json())
+                            var body = await fetch('<%= locals.site.discord %>').then(res => res.json())
+
+                            body.servers = Object.keys(body.servers).sort().reduce(
+                                (obj, key) => { 
+                                    obj[key] = body.servers[key] 
+                                    return obj
+                                },
+                                {}
+                            )
+
+                            for (server in body.servers) {
+
+                                var Data = body.servers[server]
+
+                                var html = `
+                                        <div class="col-lg-4" id="${server.replace(/\./g, '')}">
+                                            <div class="features-box">
+                                                <div class="features-img mb-4">
+                                                    <img src="/assets_landing/images/icons/layers.png" alt="">
+                                                </div>
+                                                <h4 class="mb-2">${server}</h4>
+                                                <p><b>Location</b> | <b>${Data.city}</b></p>
+                                                <p><b>Latency</b> | <b>${Data.ping}</b></p>
+                                                <p><b>CPU Usage</b> | <b>${Data.cpu}%</b></p>
+                                                <p><b>RAM Usage</b> | <b>${Data.ramc}GB / ${Data.ramx}GB</b></p>
+                                            </div>
+                                        </div>
+                                `
+
+                                var htmlUpdate = `
+                                        <div class="features-box">
+                                            <div class="features-img mb-4">
+                                                <img src="/assets_landing/images/icons/layers.png" alt="">
+                                            </div>
+                                            <h4 class="mb-2">${server}</h4>
+                                            <p><b>Location</b> | <b>${Data.city}</b></p>
+                                            <p><b>Latency</b> | <b>${Data.ping}</b></p>
+                                            <p><b>CPU Usage</b> | <b>${Data.cpu}%</b></p>
+                                            <p><b>RAM Usage</b> | <b>${Data.ramc}GB / ${Data.ramx}GB</b></p>
+                                        </div>
+                                `
+
+                                if ($(`#${server.replace(/\./g, '')}`).length === 0) $('#servers').append(html)
+                                else $(`#${server.replace(/\./g, '')}`).html(htmlUpdate)
+
+                            }
+
+
 
                             //
                             // Dedicated Servers
                             //
 
-                            if (data.servers['10.0.0.1'].ping) {
-                                artemisStats.innerHTML = `<b style="color: #34bb30; font-weight: 600;">Online</b> <b style="font-weight: 600;"> | ${data.servers['10.0.0.1'].ping}ms to Sydney</b>`
-                            } else {
-                                artemisStats.innerHTML = `<b style="color: #d42e2e; font-weight: 600;">Offline</b>`
-                            }
+                            // if (data.servers['10.0.0.1'].ping) {
+                            //     artemisStats.innerHTML = `<b style="color: #34bb30; font-weight: 600;">Online</b> <b style="font-weight: 600;"> | ${data.servers['10.0.0.1'].ping}ms to Sydney</b>`
+                            // } else {
+                            //     artemisStats.innerHTML = `<b style="color: #d42e2e; font-weight: 600;">Offline</b>`
+                            // }
 
-                            if (data.servers['10.0.0.2'].ping) {
-                                aresStats.innerHTML = `<b style="color: #34bb30; font-weight: 600;">Online</b> <b style="font-weight: 600;"> | ${data.servers['10.0.0.2'].ping}ms to Brisbane</b>`
-                            } else {
-                                aresStats.innerHTML = `<b style="color: #d42e2e; font-weight: 600;">Offline</b>`
-                            }
+                            // if (data.servers['10.0.0.2'].ping) {
+                            //     aresStats.innerHTML = `<b style="color: #34bb30; font-weight: 600;">Online</b> <b style="font-weight: 600;"> | ${data.servers['10.0.0.2'].ping}ms to Brisbane</b>`
+                            // } else {
+                            //     aresStats.innerHTML = `<b style="color: #d42e2e; font-weight: 600;">Offline</b>`
+                            // }
 
-                            if (data.servers['10.0.0.3'].ping) {
-                                ceresStats.innerHTML = `<b style="color: #34bb30; font-weight: 600;">Online</b> <b style="font-weight: 600;"> | ${data.servers['10.0.0.3'].ping}ms to Brisbane</b>`
-                            } else {
-                                ceresStats.innerHTML = `<b style="color: #d42e2e; font-weight: 600;">Offline</b>`
-                            }
+                            // if (data.servers['10.0.0.3'].ping) {
+                            //     ceresStats.innerHTML = `<b style="color: #34bb30; font-weight: 600;">Online</b> <b style="font-weight: 600;"> | ${data.servers['10.0.0.3'].ping}ms to Brisbane</b>`
+                            // } else {
+                            //     ceresStats.innerHTML = `<b style="color: #d42e2e; font-weight: 600;">Offline</b>`
+                            // }
 
 
-
-                            //
-                            // Game Servers
-                            //
-
-                            if (data.games.se) {
-                                AUSEStats.innerHTML = `<b style="color: #34bb30; font-weight: 600;">Online</b> <b style="font-weight: 600;"> | ${data.games.se.raw.numplayers} / ${data.games.se.maxplayers} Players</b>`
-                            } else {
-                                AUSEStats.innerHTML = `<b style="color: #d42e2e; font-weight: 600;">Offline</b>`
-                            }
-
-                            if (data.games.eco.Description) {
-                                ecoStats.innerHTML = `<b style="color: #34bb30; font-weight: 600;">Online</b> <b style="font-weight: 600;"> | ${data.games.eco.OnlinePlayers} / ${data.games.eco.TotalPlayers} Players</b>`
-                            } else {
-                                ecoStats.innerHTML = `<b style="color: #d42e2e; font-weight: 600;">Offline</b>`
-                            }
-
-                            if (data.games.squad.name) {
-                                squadStats.innerHTML = `<b style="color: #34bb30; font-weight: 600;">Online</b> <b style="font-weight: 600;"> | ${data.games.squad.raw.numplayers} / ${data.games.squad.maxplayers} Players</b>`
-                            } else {
-                                squadStats.innerHTML = `<b style="color: #d42e2e; font-weight: 600;">Offline</b>`
-                            }
                         } setInterval(refreshStats, 10000), refreshStats()
 
 
