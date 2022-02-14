@@ -252,7 +252,7 @@
                             // Game Servers
                             //
 
-                            if (data.games.se.raw) {
+                            if (data.games.se) {
                                 AUSEStats.innerHTML = `<b style="color: #34bb30; font-weight: 600;">Online</b> <b style="font-weight: 600;"> | ${data.games.se.raw.numplayers} / ${data.games.se.maxplayers} Players</b>`
                             } else {
                                 AUSEStats.innerHTML = `<b style="color: #d42e2e; font-weight: 600;">Offline</b>`
@@ -264,7 +264,7 @@
                                 ecoStats.innerHTML = `<b style="color: #d42e2e; font-weight: 600;">Offline</b>`
                             }
 
-                            if (data.games.eco.Description) {
+                            if (data.games.squad.name) {
                                 squadStats.innerHTML = `<b style="color: #34bb30; font-weight: 600;">Online</b> <b style="font-weight: 600;"> | ${data.games.squad.raw.numplayers} / ${data.games.squad.maxplayers} Players</b>`
                             } else {
                                 squadStats.innerHTML = `<b style="color: #d42e2e; font-weight: 600;">Offline</b>`
