@@ -34,7 +34,7 @@ async function AccountUpdate(req, res) {
 
     if (data.profileurl) {
         if (data.profileurl.match(/[^a-zA-Z0-9_-]/)) return res.status(400).send('Profile URL can only contain letters and numbers')
-        var URLUser = await Users.findOne({ "display.profileurl": data.profileurl })
+        var URLUser = await Users.findOne({ "display.profileurl": data.profileurl.toLowerCase() })
         if (URLUser) if (URLUser._id !== User._id) return res.status(400).send('Profile URL is already taken')
     }
 
@@ -50,7 +50,7 @@ async function AccountUpdate(req, res) {
 
     User.display.name = data.displayName
     User.display.color = data.color
-    User.display.profileurl = data.profileurl
+    User.display.profileurl = data.profileurl.toLowerCase()
 
     User.details.firstName = data.firstName
     User.details.lastName = data.lastName

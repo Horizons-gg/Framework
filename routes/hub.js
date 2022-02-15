@@ -52,7 +52,7 @@ async function Members(req, res) {
 async function Member(req, res) {
 
     var member = await process.db.collection('users').findOne({ _id: req.params['0'] })
-    if (!member) member = await process.db.collection('users').findOne({ "display.profileurl": req.params['0'] })
+    if (!member) member = await process.db.collection('users').findOne({ "display.profileurl": req.params['0'].toLowerCase() })
     if (!member) return res.render('util/404')
 
     if (member.details.dob) {
