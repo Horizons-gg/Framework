@@ -8,7 +8,7 @@ function Checks(req, res, next) {
     if (!process.db) return res.render('util/maintenance')
 
     res.locals.site = {
-        api: process.env.site.api,
+        root: process.env.site.root,
         discord: process.env.site.discord
     }
 

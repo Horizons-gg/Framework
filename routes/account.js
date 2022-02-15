@@ -6,6 +6,7 @@ function AccountGet(req, res) {
     if (!res.locals.user) return res.redirect('/login')
 
     res.locals.user.details.bio = decodeURI(res.locals.user.details.bio)
+    res.locals.site.host = req.headers.host
 
     res.render('account/account')
 }
@@ -31,6 +32,12 @@ async function AccountUpdate(req, res) {
     if (data.displayName.match(/[^a-zA-Z0-9 _()]/)) return res.status(400).send('Display name can only contain letters, numbers, spaces, underscores, and brackets')
     if (data.color.match(/[^a-zA-Z0-9#]/) || data.color.length !== 7) return res.status(400).send('Color is invalid')
 
+    if (data.profileurl) {
+        if (data.profileurl.match(/[^a-zA-Z0-9 ]/)) return res.status(400).send('Profile URL can only contain letters and numbers')
+        var URLUser = await Users.findOne({ "display.profileurl": data.profileurl })
+        if (URLUser) if (URLUser._id !== User._id) return res.status(400).send('Profile URL is already taken')
+    }
+
     if (data.firstName.match(/[^a-zA-Z0-9 ]/) || data.lastName.match(/[^a-zA-Z0-9 ]/)) return res.status(400).send('First & Last name can only contain letters, numbers and spaces')
     if (new Date(data.dob) === 'Invalid Date') data.dob = null
     if (!['None', 'He / Him', 'She / Her', 'They / Them'].includes(data.pronouns)) return res.status(400).send('Pronouns are Invalid')
@@ -43,6 +50,7 @@ async function AccountUpdate(req, res) {
 
     User.display.name = data.displayName
     User.display.color = data.color
+    User.display.profileurl = data.profileurl
 
     User.details.firstName = data.firstName
     User.details.lastName = data.lastName

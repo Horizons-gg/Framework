@@ -11,10 +11,10 @@ process.env = JSON.parse(fs.readFileSync('config.json', 'utf8'))
 var Today = new Date()
 if (!fs.existsSync('./Logs')) fs.mkdirSync('./Logs')
 var logFile = fs.createWriteStream(`./Logs/${Today.getFullYear()}-${Today.getMonth()}-${Today.getDay()}.log`, { flags: 'a' })
-    // Or 'w' to truncate the file every time the process starts.
+// Or 'w' to truncate the file every time the process starts.
 var logStdout = process.stdout
 
-console.log = function() {
+console.log = function () {
     logFile.write(`${util.format.apply(null, arguments)}\n`)
     logStdout.write(`${util.format.apply(null, arguments)}\n`)
 }
@@ -35,7 +35,7 @@ process.cache.devmode = process.env.devmode
 //!
 
 const MongoClient = require('mongodb').MongoClient
-MongoClient.connect(`mongodb://${process.env.db.host}:${process.env.db.port}`, async function(err, db) {
+MongoClient.connect(`mongodb://${process.env.db.host}:${process.env.db.port}`, async function (err, db) {
     if (err) throw err;
     console.log('Connected to the database.')
     process.db = db.db(process.env.db.database)
@@ -79,7 +79,7 @@ app.use(cookieParser())
 app.use(bodyParser.json({ extended: true }))
 app.use(fileUpload())
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     req.io = io
     next()
 })
@@ -96,7 +96,7 @@ app.use('/assets_landing', express.static('assets_landing'))
 //!
 
 const passport = require('passport')
-passport.serializeUser(function(user, done) { done(null, user) })
+passport.serializeUser(function (user, done) { done(null, user) })
 app.use(passport.initialize())
 
 require('./util/passport').Discord(passport)
@@ -105,7 +105,7 @@ require('./util/passport').Steam(passport)
 
 
 //!
-//! Horizons Middleware
+//! Middleware
 //!
 
 var Middleware = require('./routes/middleware')
@@ -204,6 +204,10 @@ app.route('/dashboard')
 //? Members
 app.route('/members')
     .get(require('./routes/hub').Members)
+
+//? Members
+app.route('/member/*')
+    .get(require('./routes/hub').Member)
 
 
 
