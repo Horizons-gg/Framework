@@ -29,11 +29,11 @@ async function AccountUpdate(req, res) {
 
 
     if (data.displayName.length < 3) return res.status(400).send('Display name must be longer than 2 characters')
-    if (data.displayName.match(/[^a-zA-Z0-9 _()]/)) return res.status(400).send('Display name can only contain letters, numbers, spaces, underscores, and brackets')
+    if (data.displayName.match(/[^a-zA-Z0-9 _()-]/)) return res.status(400).send('Display name can only contain letters, numbers, spaces, underscores, and brackets')
     if (data.color.match(/[^a-zA-Z0-9#]/) || data.color.length !== 7) return res.status(400).send('Color is invalid')
 
     if (data.profileurl) {
-        if (data.profileurl.match(/[^a-zA-Z0-9 ]/)) return res.status(400).send('Profile URL can only contain letters and numbers')
+        if (data.profileurl.match(/[^a-zA-Z0-9_-]/)) return res.status(400).send('Profile URL can only contain letters and numbers')
         var URLUser = await Users.findOne({ "display.profileurl": data.profileurl })
         if (URLUser) if (URLUser._id !== User._id) return res.status(400).send('Profile URL is already taken')
     }
