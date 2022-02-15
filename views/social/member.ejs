@@ -5,7 +5,7 @@
         <meta charset="utf-8" />
         <title><%= member.display.name %>'s Profile</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="<% if (member.details.firstName) { %><%= member.details.firstName %><% } %> <% if (member.details.lastName) { %><%= member.details.lastName %><% } %>, <% if (member.details.age) { %><%= member.details.age %> Years Old.<% } %> <% if (member.details.bio) { %><%= decodeURI(member.details.bio) %><% } %>" />
+        <meta name="description" content="<% if (member.details.firstName) { %><%= member.details.firstName %><% } %> <% if (member.details.lastName) { %><%= member.details.lastName %> <% } %><% if (member.details.age) { %><%= member.details.age %> Years Old.<% } %> <% if (member.details.bio) { %><%= decodeURI(member.details.bio) %><% } %>" />
         <meta property="og:image"  content="<%= member.display.avatar %>">
         <meta name="theme-color" content="<%= member.display.color %>">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
