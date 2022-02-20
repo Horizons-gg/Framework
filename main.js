@@ -212,6 +212,16 @@ app.route('/member/*')
 
 
 //!
+//! Social HUB
+//!
+
+//? Dashboard
+app.route('/admin/dashboard')
+    .get(require('./routes/admin').Dashboard)
+
+
+
+//!
 //! PayPal
 //!
 

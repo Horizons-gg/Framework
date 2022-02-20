@@ -10,12 +10,7 @@
         <!-- App favicon -->
         <link rel="shortcut icon" href="../assets/images/favicon.ico">
 
-        <!-- App css -->
-        <link href="../assets/css/bootstrap-modern.min.css" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
-        <link href="../assets/css/app-modern.min.css" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
-
-        <link href="../assets/css/bootstrap-modern-dark.min.css" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
-        <link href="../assets/css/app-modern-dark.min.css" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
+        <%- include('../css') %>
 
         <!-- icons -->
         <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
@@ -26,6 +21,7 @@
         <div id="wrapper">
 
             <%- include('../header') %>
+            <%- include('../sidebar') %>
 
             <!-- ============================================================== -->
             <!-- Start Page Content here -->
@@ -171,7 +167,7 @@
                                     if (age) html = html.replace('<-age->', `<i class="fas fa-id-badge" style="width: 1rem; color: #53d447;"></i><p class="text-muted mb-2 font-13" style="display: inline;"><span class="ml-2 ">${age} Years old</span></p><br>`)
                                     else html = html.replace('<-age->', '')
 
-                                    $('#members').append(html)
+                                    $('#members').html(html)
                                 }
                             </script>
 

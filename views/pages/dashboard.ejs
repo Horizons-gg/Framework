@@ -14,12 +14,7 @@
         <link href="../assets/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
         <link href="../assets/libs/selectize/css/selectize.bootstrap3.css" rel="stylesheet" type="text/css" />
         
-        <!-- App css -->
-        <link href="../assets/css/bootstrap-modern.min.css" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
-        <link href="../assets/css/app-modern.min.css" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
-
-        <link href="../assets/css/bootstrap-modern-dark.min.css" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
-        <link href="../assets/css/app-modern-dark.min.css" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
+        <%- include('../css') %>
 
         <!-- icons -->
         <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
@@ -30,6 +25,7 @@
         <div id="wrapper">
 
             <%- include('../header') %>
+            <%- include('../sidebar') %>
 
             <!-- ============================================================== -->
             <!-- Start Page Content here -->
