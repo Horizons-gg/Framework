@@ -7,21 +7,6 @@ const util = require('util')
 
 process.env = JSON.parse(fs.readFileSync('config.json', 'utf8'))
 
-//? Initialize Logger
-var Today = new Date()
-if (!fs.existsSync('./Logs')) fs.mkdirSync('./Logs')
-var logFile = fs.createWriteStream(`./Logs/${Today.getFullYear()}-${Today.getMonth()}-${Today.getDay()}.log`, { flags: 'a' })
-// Or 'w' to truncate the file every time the process starts.
-var logStdout = process.stdout
-
-console.log = function () {
-    logFile.write(`${util.format.apply(null, arguments)}\n`)
-    logStdout.write(`${util.format.apply(null, arguments)}\n`)
-}
-console.error = console.log
-
-console.log(`\n\n----- NEW PROCESS STARTED @ ${Today} -----\n`)
-
 
 //require('./util/paypal').GetAccessToken()
 require('./util/loop')()
