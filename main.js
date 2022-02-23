@@ -32,13 +32,13 @@ MongoClient.connect(`mongodb://${process.env.db.host}:${process.env.db.port}`, a
 //! Discord Config
 //!
 
-// const { Client, Intents } = require('discord.js')
-// var selectedIntents = []
-// for (intent in Intents.FLAGS) { selectedIntents.push(Intents.FLAGS[intent]) }
-// const client = new Client({ intents: selectedIntents })
-// client.login(process.env.discord.token)
-
-// process.client = client
+const { Client, Intents } = require('discord.js')
+var selectedIntents = []
+for (intent in Intents.FLAGS) { selectedIntents.push(Intents.FLAGS[intent]) }
+const client = new Client({ intents: selectedIntents })
+client.login(process.env.api.discord.token)
+client.on('ready', () => console.log(`Logged in as ${client.user.tag}!`))
+process.client = client
 
 
 
