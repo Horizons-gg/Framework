@@ -70,6 +70,7 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const fileUpload = require('express-fileupload')
 const io = require('socket.io')(httpServer)
+const RateLimit = require('express-rate-limit')
 
 httpServer.listen(process.env.port, () => console.log(`Listening on port ${process.env.port}`))
 
@@ -83,6 +84,12 @@ app.use(function (req, res, next) {
     req.io = io
     next()
 })
+
+//? Limit to 100 requests per minute
+app.use(RateLimit({
+    windowMs: 1 * 60 * 1000, // 1 minute
+    max: 100
+}))
 
 app.use('/storage', express.static(process.env.storage))
 app.use('/public', express.static('public'))
