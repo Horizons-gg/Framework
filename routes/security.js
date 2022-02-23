@@ -29,14 +29,14 @@ async function ChangePassword(req, res) {
     if (!Security.CheckPasswordRequirements(req.body.password)) return res.status(400).send('Password must be at least 8 characters long and contain at least one number, lowercase, and an uppercase character')
     var User = await process.db.collection('users').findOne({ _id: PWResetCache[req.body.token] })
     if (await Security.Verify(req.body.password, User.security.password, User.security.salt)) return res.status(400).send('New password must be different from the old password')
-    
+
     User.security.salt = await Security.GenerateSalt()
     User.security.password = Security.Hash(req.body.password, User.security.salt)
     User.security.token = await Security.GenerateToken()
     await process.db.collection('users').updateOne({ _id: User._id }, { $set: { security: User.security } })
 
     delete PWResetCache[req.body.token]
-    
+
     res.status(200).send(User.security.token)
 }
 
@@ -50,7 +50,7 @@ async function ChangeEmail(req, res) {
 
     if (!req.body.email) return res.status(400).send('Email is required')
     if (!req.body.email.includes('@') || !req.body.email.includes('.')) return res.status(400).send('Invalid Email')
-    if (await process.db.collection('users').findOne({ email: req.body.email })) return res.status(400).send('Email already in use')
+    if (await process.db.collection('users').findOne({ email: { $eq: req.body.email } })) return res.status(400).send('Email already in use')
     await process.db.collection('users').updateOne({ _id: User._id }, { $set: { email: req.body.email } })
     res.status(200).send()
 }
@@ -81,5 +81,5 @@ module.exports = {
 
     //? Token Management
     MassLogout: MassLogout
-    
+
 }
