@@ -12,7 +12,7 @@
             <div class="dropdown">
                 <a href="/account" class="text-dark font-weight-normal dropdown-toggle h5 mt-2 mb-1 d-block"><%= locals.user.display.name %></a>
             </div>
-            <p <% if (locals.roles) { %>style="color: #<%= locals.roles[0].color.toString(16) %>"<% } %>><% if (locals.roles) { %><%= locals.roles[0].name || 'Member' %><% } else { %><%= 'Member' %><% } %></p>
+            <p style="color: #<%= locals.roles[0].color.toString(16) %>"><%= locals.roles[0].name || 'Member' %></p>
         </div>
         <% } %>
 

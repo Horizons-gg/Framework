@@ -60,16 +60,16 @@ async function FetchUser(req, res, next) {
 
 
     //? Discord
-    if (res.locals.user && res.locals.user.connections.discord) {
+    if (res.locals.user && res.locals.user.connections.discord.id) {
         var Roles = await Discord.User.GetRoles(res.locals.user.connections.discord.id).then(roles => roles).catch(err => null)
-        if (!Roles) res.locals.roles === null
+        if (!Roles) res.locals.roles = [{ name: 'Member', color: 0, id: 0}]
         else {
             Roles = Roles.sort((a, b) => a.rawPosition - b.rawPosition).reverse()
             Roles = Roles.filter(role => role.color !== 0)
             res.locals.roles = Roles
         }
 
-    } else res.locals.roles === null
+    } else res.locals.roles = [{ name: 'Member', color: 0, id: 0}]
 
 
 
