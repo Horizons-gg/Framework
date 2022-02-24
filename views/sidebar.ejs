@@ -1,123 +1,144 @@
-<body class="loading" data-layout-mode="detached" data-layout='{"mode": "<%= locals.user ? locals.user.display.theme : "dark" %>", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": true}, "topbar": {"color": "<%= locals.user ? locals.user.display.theme : "dark" %>"}, "showRightSidebarOnPageLoad": false}'>
+<body class="loading" data-layout-mode="two-column" data-layout='{"mode": "<%= locals.user ? locals.user.display.theme : "dark" %>", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": false}, "topbar": {"color": "<%= locals.user ? locals.user.display.theme : "dark" %>"}, "showRightSidebarOnPageLoad": false}'></body>
+
 
 <!-- ========== Left Sidebar Start ========== -->
 <div class="left-side-menu">
 
-    <div class="h-100" data-simplebar>
+    <div class="h-100" >
 
-        <% if (locals.user) { %>
-        <!-- User box -->
-        <div class="user-box text-center">
-            <a href="/account"><img src="<%= locals.avatar %>" alt="user-img" class="rounded-circle avatar avatar-md"></a>
-            <div class="dropdown">
-                <a href="/account" class="text-dark font-weight-normal dropdown-toggle h5 mt-2 mb-1 d-block"><%= locals.user.display.name %></a>
-            </div>
-            <p style="color: #<%= locals.roles[0].color.toString(16) %>"><%= locals.roles[0].name || 'Member' %></p>
-        </div>
-        <% } %>
+        <div class="sidebar-content">
+            <div class="sidebar-icon-menu h-100" data-simplebar>
+                <!-- LOGO -->
+                <a href="/dashboard" class="logo">
+                    <span>
+                        <img src="../assets/images/logo-sm-white.png" alt="" height="30">
+                    </span>
+                </a>
+                <nav class="nav flex-column" id="two-col-sidenav-main">
 
-        <!--- Sidemenu -->
-        <div id="sidebar-menu">
-
-            <ul id="side-menu">
-
-                <li class="menu-title">Home</li>
-                <li>
-                    <a href="/dashboard">
-                        <i data-feather="airplay"></i>
-                        <span> Dashboard </span>
+                    <a class="nav-link active" href="#home" data-toggle="tooltip" data-placement="right" title="Home" data-trigger="hover">
+                        <i data-feather="home"></i>
                     </a>
-                </li>
-                <li>
-                    <a href="/members">
-                        <i data-feather="users"></i>
-                        <span> Members </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/trade">
+
+                    <a class="nav-link" href="#games" data-toggle="tooltip" data-placement="right" title="Games" data-trigger="hover">
                         <i data-feather="aperture"></i>
-                        <span> Trade Center </span>
                     </a>
-                </li>
-                <li hidden>
-                    <a href="/software">
-                        <i data-feather="codesandbox"></i>
-                        <span> Software </span>
-                    </a>
-                </li>
 
-
-                <li class="menu-title">Forms</li>
-                <li>
-                    <a href="#sidebarApplications" data-toggle="collapse">
-                        <i data-feather="check-square"></i>
-                        <span class="badge badge-success badge-pill float-right">2</span>
-                        <span> Applications </span>
+                    <% if (locals.roles.map(role => role.name).includes('Staff')) { %>
+                    <a class="nav-link" href="#staff" data-toggle="tooltip" data-placement="right" title="Staff" data-trigger="hover">
+                        <i data-feather="sliders"></i>
                     </a>
-                    <div class="collapse" id="sidebarApplications">
-                        <ul class="nav-second-level">
-                            <li>
-                                <a href="<% if (!locals.user) { %>/login<% } %>#" <% if (locals.user) { %>data-toggle="modal" data-target="#staff-app-modal"<% } %>>Staff Application</a>
-                            </li>
-                            <li>
-                                <a href="<% if (!locals.user) { %>/login<% } %>#" <% if (locals.user) { %>data-toggle="modal" data-target="#twitch-modal"<% } %>>Twitch Application</a>
-                            </li>
-                        </ul>
+                    <% } %>
+
+                    <% if (locals.roles.map(role => role.name).includes('Management')) { %>
+                    <a class="nav-link" href="#admin" data-toggle="tooltip" data-placement="right" title="Administration" data-trigger="hover">
+                        <i data-feather="server"></i>
+                    </a>
+                    <% } %>
+
+                </nav>
+            </div>
+
+            <!--- Sidemenu -->
+            <div class="sidebar-main-menu" style="padding: 15px 5px">
+
+                <% if (locals.user) { %>
+                    <div class="text-center" style="margin-bottom: 2rem;">
+                        <a href="/account"><img src="<%= locals.avatar %>" alt="user-img" class="rounded-circle avatar avatar-md"></a>
+                        <div class="dropdown">
+                            <a href="/account" class="text-dark font-weight-normal dropdown-toggle h5 mt-2 mb-1 d-block"><%= locals.user.display.name %></a>
+                        </div>
+                        <p style="color: #<%= locals.roles[0].color.toString(16) %>"><%= locals.roles[0].name || 'Member' %></p>
                     </div>
-                </li>
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#missing-info-alert-modal" hidden>
-                        <i data-feather="inbox"></i>
-                        <span> Suggestions </span>
-                    </a>
-                </li>
+                <% } %>
 
 
-                <li class="menu-title">Documentation</li>
-                <li>
-                    <a href="/documents/se">
-                        <i data-feather="file-text"></i>
-                        <span> Space Engineers </span>
-                    </a>
-                </li>
-                <li>
-                    <a hidden href="/documents/eco">
-                        <i data-feather="file-text"></i>
-                        <span> Eco </span>
-                    </a>
-                </li>
-                <% if (locals.userData) { if (locals.userData.staff.is_staff) { %>
-                <li>
-                    <a href="/network">
-                        <i data-feather="file-text"></i>
-                        <span> Network </span>
-                    </a>
-                </li>
-                <% }} %> 
-
-                <li hidden class="menu-title">Staff</li>
-                <li hidden>
-                    <a href="/api">
-                        <i data-feather="cpu"></i>
-                        <span> API </span>
-                    </a>
-                </li>
+                <div id="two-col-menu" class="h-100" data-simplebar>
                     
-                    
+                    <div class="twocolumn-menu-item d-block" id="home">
+                        <div class="title-box">
+                            <h5 class="menu-title">Home</h5>
+                            <ul class="nav flex-column">
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/dashboard">Dashboard</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/members">Members</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="twocolumn-menu-item d-block" id="games">
+                        <div class="title-box">
+                            <h5 class="menu-title">Games</h5>
+                            <ul class="nav flex-column">
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/space-engineers">Space Engineers</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/rust">Rust</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/rust">Squad</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/eco">Eco</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/minecraft">Minecraft</a>
+                                </li>
+                            
+                            </ul>
+                        </div>
+                    </div>
+
+                    <% if (locals.roles.map(role => role.name).includes('Staff')) { %>
+                        <div class="twocolumn-menu-item d-block" id="staff">
+                            <div class="title-box">
+                                <h5 class="menu-title">Staff</h5>
+                                <ul class="nav flex-column">
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/admin/dashboard">Dashboard</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/admin/tickets">Tickets</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    <% } %>
+
+                    <% if (locals.roles.map(role => role.name).includes('Management')) { %>
+                        <div class="twocolumn-menu-item d-block" id="admin">
+                            <div class="title-box">
+                                <h5 class="menu-title">Administration</h5>
+                                <ul class="nav flex-column">
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/management/systems">Systems</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    <% } %>
 
 
-            </ul>
+                </div>
 
+            </div>
+            <div class="clearfix"></div>
         </div>
         <!-- End Sidebar -->
-
-        <div class="clearfix"></div>
 
     </div>
     <!-- Sidebar -left -->
 
 </div>
 <!-- Left Sidebar End -->
-
-<%- include('modals') %>
