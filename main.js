@@ -70,12 +70,6 @@ app.use(function (req, res, next) {
     next()
 })
 
-//? Limit to 100 requests per minute
-app.use(RateLimit({
-    windowMs: 1 * 60 * 1000, // 1 minute
-    max: 100
-}))
-
 app.use('/storage', express.static(process.env.storage))
 app.use('/public', express.static('public'))
 app.use('/assets', express.static('assets'))
@@ -103,6 +97,13 @@ require('./util/passport').Steam(passport)
 var Middleware = require('./routes/middleware')
 
 app.use(Middleware.Checks)
+
+//? Limit to 100 requests per minute
+app.use(RateLimit({
+    windowMs: 1 * 60 * 1000, // 1 minute
+    max: 100
+}))
+
 app.use(Middleware.FetchUser)
 
 app.use('/robots.txt', (req, res) => {
