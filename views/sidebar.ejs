@@ -25,7 +25,7 @@
                     </a>
 
                     <% if (locals.roles.map(role => role.name).includes('Staff')) { %>
-                    <a class="nav-link" href="#staff" data-toggle="tooltip" data-placement="right" title="Staff" data-trigger="hover">
+                    <a class="nav-link" href="#moderation" data-toggle="tooltip" data-placement="right" title="Moderation" data-trigger="hover">
                         <i data-feather="sliders"></i>
                     </a>
                     <% } %>
@@ -61,11 +61,26 @@
                             <ul class="nav flex-column">
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/dashboard">Dashboard</a>
+                                    <a class="nav-link" href="/dashboard">
+                                        <i class="mdi mdi-view-dashboard"></i>
+                                        <span>Dashboard</span>
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/members">Members</a>
+                                    <a class="nav-link" href="/members">
+                                        <i class="mdi mdi-account-multiple"></i>
+                                        <span>Members</span>
+                                    </a>
                                 </li>
+
+                                <% if (locals.user) { %>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/account">
+                                        <i class="mdi mdi-card-account-details"></i>
+                                        <span>Account</span>
+                                    </a>
+                                </li>
+                                <% } %>
 
                             </ul>
                         </div>
@@ -77,19 +92,34 @@
                             <ul class="nav flex-column">
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/space-engineers">Space Engineers</a>
+                                    <a class="nav-link" href="/space-engineers">
+                                        <i class="mdi mdi-google-controller"></i>
+                                        <span>Space Engineers</span>
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/rust">Rust</a>
+                                    <a class="nav-link" href="/rust">
+                                        <i class="mdi mdi-google-controller"></i>
+                                        <span>Rust</span>
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/squad">Squad</a>
+                                    <a class="nav-link" href="/squad">
+                                        <i class="mdi mdi-google-controller"></i>
+                                        <span>Squad</span>
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/eco">Eco</a>
+                                    <a class="nav-link" href="/eco">
+                                        <i class="mdi mdi-google-controller"></i>
+                                        <span>Eco</span>
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/minecraft">Minecraft</a>
+                                    <a class="nav-link" href="/minecraft">
+                                        <i class="mdi mdi-google-controller"></i>
+                                        <span>Minecraft</span>
+                                    </a>
                                 </li>
                             
                             </ul>
@@ -97,16 +127,28 @@
                     </div>
 
                     <% if (locals.roles.map(role => role.name).includes('Staff')) { %>
-                        <div class="twocolumn-menu-item d-block" id="staff">
+                        <div class="twocolumn-menu-item d-block" id="moderation">
                             <div class="title-box">
-                                <h5 class="menu-title">Staff</h5>
+                                <h5 class="menu-title">Moderation</h5>
                                 <ul class="nav flex-column">
 
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/admin/dashboard">Dashboard</a>
+                                        <a class="nav-link" href="/admin/dashboard">
+                                            <i class="mdi mdi-view-dashboard"></i>
+                                            <span>Dashboard</span>
+                                        </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/admin/tickets">Tickets</a>
+                                        <a class="nav-link" href="/admin/tickets">
+                                            <i class="mdi mdi-format-list-checks"></i>
+                                            <span>Tickets</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/admin/warnings">
+                                            <i class="mdi mdi-badge-account-alert"></i>
+                                            <span>Warnings</span>
+                                        </a>
                                     </li>
 
                                 </ul>
@@ -121,7 +163,10 @@
                                 <ul class="nav flex-column">
 
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/management/systems">Systems</a>
+                                        <a class="nav-link" href="/management/systems">
+                                            <i class="mdi mdi-view-dashboard"></i>
+                                            <span>Systems</span>
+                                        </a>
                                     </li>
 
                                 </ul>
