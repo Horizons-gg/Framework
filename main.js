@@ -50,6 +50,12 @@ const express = require('express')
 const app = express()
 const httpServer = require('http').createServer(app)
 
+Object.defineProperty(app.request, 'ip', {
+    configurable: true,
+    enumerable: true,
+    get: function () { return this.get('X-Forwarded-For', 'CF-Connecting-IP') }
+})
+
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
