@@ -43,6 +43,10 @@ async function Members(req, res) {
         })
     }
 
+    if (req.query.charlimit) await members.forEach((member, index) => {
+        if (member.details.bio.length > req.query.charlimit) members[index].details.bio = member.details.bio.substring(0, parseInt(req.query.charlimit)) + '...'
+    })
+
 
     if (req.headers['sec-fetch-mode'] === 'navigate') return res.render('social/member-list', { members })
     else return res.status(200).send({ members })

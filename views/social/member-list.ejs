@@ -100,7 +100,7 @@
                                     var search = $('#searchbar').val()
                                     var category = $('#category').val()
 
-                                    var Query = await fetch(`/members?search=${search}&category=${category}`).then(res => res.json())
+                                    var Query = await fetch(`/members?search=${search}&category=${category}&charlimit=200`).then(res => res.json())
                                     
                                     $('#members').html('')
                                     Query.members.forEach(member => BuildMember(member))
@@ -128,13 +128,13 @@
 
                                     var html = `
                                         <div class="col-lg-3">
-                                            <div class="card-box text-center" style="height: 320px;">
+                                            <div class="card-box text-center" style="height: 320px; overflow: hidden;">
 
                                                 <div>
                                                     <a href="/member/${member.display.profileurl || member._id}"><img src="${output}" class="rounded-circle avatar avatar-lg" style="border-style: solid; border-color: ${member.display.color};" alt="profile-image" onerror="this.src='/assets/images/avatar.jpg'"></a>
 
                                                     <div class="card-box text-center" style="width: fit-content; min-width: 50%; margin: .5rem auto 0 auto; padding: .4rem .5rem 0 .5rem; border-radius: .5rem .5rem 0 0;">
-                                                        <a href="/member/${member.display.profileurl || member._id}"><h4 class="mb-0" style="margin: 0;">${member.display.name}</h4></a>
+                                                        <a href="/member/${member.display.profileurl || member._id}"><h4 class="mb-0" style="margin: 0;">${member.display.name.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</h4></a>
                                                     </div>
                                                 </div>
 
@@ -150,7 +150,7 @@
                                         </div>
                                     `
 
-                                    if (member.details.bio) html = html.replace('<-bio->', `<br>${decodeURI(member.details.bio)}<br>`)
+                                    if (member.details.bio) html = html.replace('<-bio->', `<br>${decodeURI(member.details.bio).replace(/</g, '&lt;').replace(/>/g, '&gt;')}<br>`)
                                     else html = html.replace('<-bio->', '')
 
                                     if (member.details.firstName || member.details.lastName) html = html.replace('<-name->', `<i class="fas fa-file-signature" style="color: #fd8a48;"></i><p class="text-muted mb-2 font-13" style="display: inline;"><span class="ml-2" style="text-align: center;">${member.details.firstName || ''} ${member.details.lastName || ''}</span></p><br>`)
@@ -167,7 +167,7 @@
                                     if (age) html = html.replace('<-age->', `<i class="fas fa-id-badge" style="width: 1rem; color: #53d447;"></i><p class="text-muted mb-2 font-13" style="display: inline;"><span class="ml-2 ">${age} Years old</span></p><br>`)
                                     else html = html.replace('<-age->', '')
 
-                                    $('#members').html(html)
+                                    $('#members').append(html)
                                 }
                             </script>
 
