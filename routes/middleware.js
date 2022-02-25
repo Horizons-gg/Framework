@@ -1,6 +1,10 @@
 const fetch = require('node-fetch')
 const fs = require('fs')
 
+const Discord = {
+    User: require('../discord/user')
+}
+
 
 
 function Checks(req, res, next) {
@@ -11,6 +15,8 @@ function Checks(req, res, next) {
         root: process.env.site.root,
         discord: process.env.site.discord
     }
+
+    req.ip = req.rawHeaders[req.rawHeaders.indexOf('X-Forwarded-For') + 1] || req.rawHeaders[req.rawHeaders.indexOf('CF-Connecting-IP') + 1] || req.ip
 
     next()
 }
@@ -52,6 +58,21 @@ async function FetchUser(req, res, next) {
         else output = "/assets/images/banner.jpg"
     } else output = "/assets/images/banner.jpg"
     res.locals.banner = output
+
+
+
+    //? Discord
+    if (res.locals.user && res.locals.user.connections.discord.id) {
+        var Roles = await Discord.User.GetRoles(res.locals.user.connections.discord.id).then(roles => roles).catch(err => null)
+        if (!Roles) res.locals.roles = [{ name: 'Member', color: 0, id: 0}]
+        else {
+            Roles = Roles.sort((a, b) => a.rawPosition - b.rawPosition).reverse()
+            Roles = Roles.filter(role => role.color !== 0)
+            res.locals.roles = Roles
+        }
+
+    } else res.locals.roles = [{ name: 'Member', color: 0, id: 0}]
+
 
 
 
