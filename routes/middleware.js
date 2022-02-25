@@ -16,6 +16,8 @@ function Checks(req, res, next) {
         discord: process.env.site.discord
     }
 
+    req.ip = req.rawHeaders[req.rawHeaders.indexOf('X-Forwarded-For') + 1] || req.rawHeaders[req.rawHeaders.indexOf('CF-Connecting-IP') + 1] || req.ip
+
     next()
 }
 
