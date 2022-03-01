@@ -1,1 +1,1 @@
-node handle.js
+node main.js
