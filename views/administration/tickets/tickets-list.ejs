@@ -187,7 +187,7 @@
                                                 </td>
 
                                                 <td>
-                                                    <%= ticket.closed.toGMTString() %>
+                                                    <%= if (ticket.closed) { ticket.closed.toGMTString() } else { 'Ticket in Progress...' } %>
                                                 </td>
 
                                                 <td>
