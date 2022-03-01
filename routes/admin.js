@@ -22,8 +22,12 @@ async function TicketList(req, res) {
 async function TicketDetails(req, res) {
 
     if (!res.locals.roles.map(role => role.name).includes('Staff')) return res.render('util/error', { code: 403, title: "Access Denied", message: 'You do not have permission to view this page.' })
+    if (!req.query.id) return res.render('util/404')
 
-    res.render('administration/tickets/tickets-details')
+    const Ticket = await process.db.collection('tickets').findOne({ _id: parseInt(req.query.id) })
+    if (!Ticket) return res.render('util/404')
+
+    res.render('administration/tickets/tickets-details', { ticket: Ticket })
 
 }
 

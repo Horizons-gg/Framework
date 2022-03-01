@@ -114,7 +114,7 @@ app.use(Middleware.FetchUser)
 
 app.use('/robots.txt', (req, res) => {
     res.type('text/plain')
-    res.sendStatus('User-Agent: *\nDisallow: /\nSitemap: /sitemap.xml')
+    res.send('User-Agent: *\nDisallow: /\nSitemap: /sitemap.xml')
 })
 
 

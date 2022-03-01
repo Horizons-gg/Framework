@@ -16,22 +16,22 @@
                 </a>
                 <nav class="nav flex-column" id="two-col-sidenav-main">
 
-                    <a class="nav-link active" href="#home" data-toggle="tooltip" data-placement="right" title="Home" data-trigger="hover">
+                    <a id="tab-home" class="nav-link active" href="#home" data-toggle="tooltip" data-placement="right" title="Home" data-trigger="hover">
                         <i data-feather="home"></i>
                     </a>
 
-                    <a class="nav-link" href="#games" data-toggle="tooltip" data-placement="right" title="Games" data-trigger="hover">
+                    <a id="tab-games" class="nav-link" href="#games" data-toggle="tooltip" data-placement="right" title="Games" data-trigger="hover">
                         <i data-feather="aperture"></i>
                     </a>
 
                     <% if (locals.roles.map(role => role.name).includes('Staff')) { %>
-                    <a class="nav-link" href="#moderation" data-toggle="tooltip" data-placement="right" title="Moderation" data-trigger="hover">
+                    <a id="tab-admin" class="nav-link" href="#moderation" data-toggle="tooltip" data-placement="right" title="Moderation" data-trigger="hover">
                         <i data-feather="sliders"></i>
                     </a>
                     <% } %>
 
                     <% if (locals.roles.map(role => role.name).includes('Management')) { %>
-                    <a class="nav-link" href="#admin" data-toggle="tooltip" data-placement="right" title="Administration" data-trigger="hover">
+                    <a id="tab-management" class="nav-link" href="#admin" data-toggle="tooltip" data-placement="right" title="Administration" data-trigger="hover">
                         <i data-feather="server"></i>
                     </a>
                     <% } %>
@@ -187,3 +187,23 @@
 
 </div>
 <!-- Left Sidebar End -->
+
+
+
+<script>
+
+    $(document).ready(() => {
+        if ($('.simplebar-content').toArray().length > 1) {
+
+            var path = window.location.pathname.split('/')
+            console.log(path)
+
+            if (path[1] === 'admin') $('#tab-admin').click()
+            if (path[1] === 'member') $('#tab-home').click()
+
+        }
+    })
+
+    //window.location.pathname
+
+</script>
