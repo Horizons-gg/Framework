@@ -179,7 +179,7 @@
                                                 <td><%= Object.keys(ticket.users).length %></td>
 
                                                 <td>
-                                                    <span class="badge badge-secondary"><%= ticket.status %></span>
+                                                    <span class="badge badge-<% if (ticket.status === 'open') { %>success<% } if (ticket.status === 'closed') { %>warning<% } if (ticket.status === 'archived') { %>primary<% } %>"><%= ticket.status.charAt(0).toUpperCase() + ticket.status.slice(1) %></span>
                                                 </td>
 
                                                 <td>
