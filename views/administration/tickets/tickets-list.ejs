@@ -186,9 +186,7 @@
                                                     <%= ticket.created.toGMTString() %>
                                                 </td>
 
-                                                <td>
-                                                    <%= if (ticket.closed) { ticket.closed.toGMTString() } else { 'Ticket in Progress...' } %>
-                                                </td>
+                                                <td><%= if (ticket.closed) ticket.closed.toGMTString() %></td>
 
                                                 <td>
                                                     <div class="btn-group dropdown">
