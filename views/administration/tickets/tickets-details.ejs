@@ -146,25 +146,20 @@
 
                                         <% ticket.history.forEach(msg => { %>
                                         <div class="media">
-                                            <img class="mr-2 rounded-circle" src="<%= ticket.users[msg.user].avatar || '../assets/images/avatar.jpg' %>" alt="pfp" height="32">
+                                            <img class="mr-2 rounded-circle" src="<%= ticket.users[msg.user].avatar || '../assets/images/avatar.jpg' %>" alt="pfp" height="32" onerror="this.src='/assets/images/avatar.jpg'">
                                             <div class="media-body">
-                                                <h5 class="mt-0 mb-1">Jonathan Andrews <small class="text-muted float-right">3 hours ago</small></h5>
-                                                Nice work, makes me think of The Money Pit.
-
-                                                <br/>
-                                                <a href="javascript: void(0);" class="text-muted font-13 d-inline-block mt-2"><i
-                                                    class="mdi mdi-reply"></i> Reply</a>
-
+                                                <h5 class="mt-0 mb-1"><%= ticket.users[msg.user].username %> <small class="text-muted float-right"><%= new Date(msg.timestamp).toLocaleString() %></small></h5>
+                                                <%= msg.content %><br/><br/>
                                             </div>
                                         </div>
                                         <% }) %>
 
 
-                                        <div class="text-center mt-2">
+                                        <div hidden class="text-center mt-2">
                                             <a href="javascript:void(0);" class="text-danger"><i class="mdi mdi-spin mdi-loading mr-1"></i> Load more </a>
                                         </div>
 
-                                        <div class="border rounded mt-4">
+                                        <div hidden class="border rounded mt-4">
                                             <form action="#" class="comment-area-box">
                                                 <textarea rows="3" class="form-control border-0 resize-none" placeholder="Your message..."></textarea>
                                                 <div class="p-2 bg-light d-flex justify-content-between align-items-center">
@@ -189,29 +184,24 @@
 
                                         <h5 class="card-title font-16 mb-3">Engaged Users</h5>
 
+
+                                        <% for (user in ticket.users) { %>
+                                        <% data = ticket.users[user] %>
                                         <div class="card mb-1 shadow-none border">
                                             <div class="p-2">
                                                 <div class="row align-items-center">
                                                     <div class="col-auto">
-                                                        <div class="avatar-sm">
-                                                            <span class="avatar-title badge-soft-primary text-primary rounded">
-                                                                pdf
-                                                            </span>
-                                                        </div>
+                                                        <img src="<%= ticket.users[user].avatar || '../assets/images/avatar.jpg' %>" alt="pfp" class="rounded-circle mr-2" height="38" onerror="this.src='/assets/images/avatar.jpg'" />
                                                     </div>
                                                     <div class="col pl-0">
-                                                        <a href="javascript:void(0);" class="text-muted font-weight-bold">invoice-dec-2019.pdf</a>
-                                                        <p class="mb-0 font-12">2.3 MB</p>
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <!-- Button -->
-                                                        <a href="javascript:void(0);" class="btn btn-link font-16 text-muted">
-                                                            <i class="dripicons-download"></i>
-                                                        </a>
+                                                        <a class="text-muted font-weight-bold"><%= data.username %></a>
+                                                        <p class="mb-0 font-12"><%= user %></p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <% } %>
+
 
                                     </div>
                                 </div>
