@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Ticket #<%= ticket._id %> | Administration</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="../assets/images/favicon.ico">
+
+        <!-- Plugins css -->
+        <link href="../assets/libs/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" type="text/css" />
+
+		<%- include('../../css') %>
+
+		<!-- icons -->
+		<link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+    </head>
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <%- include('../../header') %>
+            <%- include('../../sidebar') %>
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="/">Horizons</a></li>
+                                            <li class="breadcrumb-item"><a href="/admin/dashboard">Administration</a></li>
+                                            <li class="breadcrumb-item"><a href="/admin/tickets">Tickets</a></li>
+                                            <li class="breadcrumb-item active">Ticket #<%= ticket._id %></li>
+                                        </ol>
+                                    </div>
+                                    <h4 class="page-title">Ticket #<%= ticket._id %></h4>
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title --> 
+
+                        <div class="row">
+                            <div class="col-xl-9 col-lg-7">
+                                <!-- project card -->
+                                <div class="card d-block">
+                                    <div class="card-body">
+
+                                        <div class="float-right">
+                                            <div class="form-row">
+                                                <div class="col-auto">
+                                                    <a onclick="history.back()" href="#" class="btn btn-sm btn-link"><i class="mdi mdi-keyboard-backspace"></i> Back</a>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end dropdown-->
+
+                                        <h4 style="cursor: default; margin-top: 0;" class="btn btn-<% if (ticket.status === 'open') { %>success<% } if (ticket.status === 'closed') { %>warning<% } if (ticket.status === 'archived') { %>primary<% } %>"><%= ticket.status.charAt(0).toUpperCase() + ticket.status.slice(1) %></h4>
+
+                                        <div class="clerfix"></div>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <!-- Ticket type -->
+                                                <label class="mt-2 mb-1">Ticket Type :</label>
+                                                <p><%= ticket.designation.toUpperCase() %> | <%= ticket.region.toUpperCase() %></p>
+                                                <!-- end Ticket Type -->
+                                            </div>
+                                        </div> <!-- end row -->
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <!-- Reported by -->
+                                                <label class="mt-2 mb-1">Requested By :</label>
+                                                <div class="media">
+                                                    <img src="<%= ticket.users[ticket.owner].avatar || '../assets/images/avatar.jpg' %>" alt="pfp" class="rounded-circle mr-2" height="24" onerror="this.src='/assets/images/avatar.jpg'" />
+                                                    <div class="media-body">
+                                                        <p> <%= ticket.users[ticket.owner].username %> <small class="text-muted"> - <%= ticket.owner %></small> </p>
+                                                    </div>
+                                                </div>
+                                                <!-- end Reported by -->
+                                            </div> <!-- end col -->
+
+                                            <div class="col-md-6">
+                                                <!-- assignee -->
+                                                <label class="mt-2 mb-1">Assigned To :</label>
+                                                <div class="media">
+                                                    <img src="../assets/images/avatar.jpg" alt="pfp"
+                                                        class="rounded-circle mr-2" height="24" />
+                                                    <div class="media-body">
+                                                        <p> N/A </p>
+                                                    </div>
+                                                </div>
+                                                <!-- end assignee -->
+                                            </div> <!-- end col -->
+                                        </div> <!-- end row -->
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <!-- assignee -->
+                                                <label class="mt-2 mb-1">Created On :</label>
+                                                <p><%= ticket.created.toLocaleString().split(', ')[0] %> <small class="text-muted"><%= ticket.created.toLocaleString().split(', ')[1] %></small></p>
+                                                <!-- end assignee -->
+                                            </div> <!-- end col -->
+
+                                            <% if (ticket.closed) { %>
+                                            <div class="col-md-6">
+                                                <!-- assignee -->
+                                                <label class="mt-2 mb-1">Closed On :</label>
+                                                <p><%= ticket.closed.toLocaleString().split(', ')[0] %> <small class="text-muted"><%= ticket.closed.toLocaleString().split(', ')[1] %></small></p>
+                                                <!-- end assignee -->
+                                            </div> <!-- end col -->
+                                            <% } %>
+
+                                        </div> <!-- end row -->
+
+                                    </div> <!-- end card-body-->
+                                    
+                                </div> <!-- end card-->
+
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <div class="float-right">
+                                            <select class="custom-select custom-select-sm ">
+                                                <option selected="">Recent</option>
+                                                <option value="1">Old</option>
+                                            </select>
+                                        </div> <!-- end dropdown-->
+
+                                        <h4 class="mb-4 mt-0 font-16">Discussion (<%= ticket.history.length %>)</h4>
+
+                                        <div class="clerfix"></div>
+                                        
+
+                                        <% ticket.history.forEach(msg => { %>
+                                        <div class="media">
+                                            <img class="mr-2 rounded-circle" src="<%= ticket.users[msg.user].avatar || '../assets/images/avatar.jpg' %>" alt="pfp" height="32" onerror="this.src='/assets/images/avatar.jpg'">
+                                            <div class="media-body">
+                                                <h5 class="mt-0 mb-1"><%= ticket.users[msg.user].username %> <small class="text-muted float-right"><%= new Date(msg.timestamp).toLocaleString() %></small></h5>
+                                                <%= msg.content %><br/><br/>
+                                            </div>
+                                        </div>
+                                        <% }) %>
+
+
+                                        <div hidden class="text-center mt-2">
+                                            <a href="javascript:void(0);" class="text-danger"><i class="mdi mdi-spin mdi-loading mr-1"></i> Load more </a>
+                                        </div>
+
+                                        <div hidden class="border rounded mt-4">
+                                            <form action="#" class="comment-area-box">
+                                                <textarea rows="3" class="form-control border-0 resize-none" placeholder="Your message..."></textarea>
+                                                <div class="p-2 bg-light d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <a href="#" class="btn btn-sm px-1 btn-light"><i class='mdi mdi-upload'></i></a>
+                                                        <a href="#" class="btn btn-sm px-1 btn-light"><i class='mdi mdi-at'></i></a>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-sm btn-success"><i class='uil uil-message mr-1'></i>Submit</button>
+                                                </div>
+                                            </form>
+                                        </div> <!-- end .border-->
+
+                                    </div> <!-- end card-body-->
+                                </div>
+                                <!-- end card-->
+                            </div> <!-- end col -->
+
+                            <div class="col-xl-3 col-lg-5">
+
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <h5 class="card-title font-16 mb-3">Engaged Users</h5>
+
+
+                                        <% for (user in ticket.users) { %>
+                                        <% data = ticket.users[user] %>
+                                        <div class="card mb-1 shadow-none border">
+                                            <div class="p-2">
+                                                <div class="row align-items-center">
+                                                    <div class="col-auto">
+                                                        <img src="<%= ticket.users[user].avatar || '../assets/images/avatar.jpg' %>" alt="pfp" class="rounded-circle mr-2" height="38" onerror="this.src='/assets/images/avatar.jpg'" />
+                                                    </div>
+                                                    <div class="col pl-0">
+                                                        <a class="text-muted font-weight-bold"><%= data.username %></a>
+                                                        <p class="mb-0 font-12"><%= user %></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% } %>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+                        
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+                <%- include('../../footer') %>
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+
+        </div>
+        <!-- END wrapper -->
+
+        <%- include('../../settings') %>
+
+        <!-- Right bar overlay-->
+        <div class="rightbar-overlay"></div>
+
+        <!-- Vendor js -->
+        <script src="../assets/js/vendor.min.js"></script>
+
+        <!-- Plugins js -->
+        <script src="../assets/libs/bootstrap-select/js/bootstrap-select.min.js"></script>
+
+        <!-- App js -->
+        <script src="../assets/js/app.min.js"></script>
+        
+    </body>
+</html>

@@ -1,16 +1,40 @@
-const fetch = require('node-fetch')
-
-
-
 async function Dashboard(req, res) {
-    
-    if (!res.locals.roles.map(role => role.name).includes('Staff')) return res.render('util/maintenance')
+
+    if (!res.locals.roles.map(role => role.name).includes('Staff')) return res.render('util/error', { code: 403, title: "Access Denied", message: 'You do not have permission to view this page.' })
     res.render('administration/dashboard')
+
+}
+
+
+async function TicketList(req, res) {
+
+    if (!res.locals.roles.map(role => role.name).includes('Staff')) return res.render('util/error', { code: 403, title: "Access Denied", message: 'You do not have permission to view this page.' })
+
+    const Tickets = await process.db.collection('tickets').find({}, { sort: { _id: 1 }, projection: { history: 0 } }).toArray()
+    const Open = await process.db.collection('tickets').find({ status: "open" }, { projection: { history: 0 } }).toArray()
+    const Closed = await process.db.collection('tickets').find({ status: "archived" || "closed" }, { projection: { history: 0 } }).toArray()
+
+    res.render('administration/tickets/tickets-list', { tickets: Tickets, open: Open, closed: Closed })
+
+}
+
+
+async function TicketDetails(req, res) {
+
+    if (!res.locals.roles.map(role => role.name).includes('Staff')) return res.render('util/error', { code: 403, title: "Access Denied", message: 'You do not have permission to view this page.' })
+    if (!req.query.id) return res.render('util/404')
+
+    const Ticket = await process.db.collection('tickets').findOne({ _id: parseInt(req.query.id) })
+    if (!Ticket) return res.render('util/404')
+
+    res.render('administration/tickets/tickets-details', { ticket: Ticket })
 
 }
 
 
 
 module.exports = {
-    Dashboard
+    Dashboard,
+    TicketList,
+    TicketDetails
 }
