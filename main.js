@@ -210,13 +210,23 @@ app.route('/member/*')
 
 
 
+
 //!
-//! Social HUB
+//! Administration
 //!
 
 //? Dashboard
 app.route('/admin/dashboard')
     .get(require('./routes/admin').Dashboard)
+
+//? Ticket List
+app.route('/admin/tickets')
+    .get(require('./routes/admin').TicketList)
+
+//? Ticket Details
+app.route('/admin/ticket')
+    .get(require('./routes/admin').TicketDetails)
+
 
 
 
