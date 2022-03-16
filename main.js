@@ -20,7 +20,7 @@ process.cache.devmode = process.env.devmode
 //!
 
 const MongoClient = require('mongodb').MongoClient
-MongoClient.connect(`mongodb://${process.env.db.host}:${process.env.db.port}`, async function (err, db) {
+MongoClient.connect(`mongodb://${process.env.db.host}:${process.env.db.port}`, async function(err, db) {
     if (err) throw err;
     console.log('Connected to the database.')
     process.db = db.db(process.env.db.database)
@@ -53,7 +53,7 @@ const httpServer = require('http').createServer(app)
 Object.defineProperty(app.request, 'ip', {
     configurable: true,
     enumerable: true,
-    get: function () { return this.get('X-Forwarded-For', 'CF-Connecting-IP') }
+    get: function() { return this.get('X-Forwarded-For', 'CF-Connecting-IP') }
 })
 
 const cors = require('cors')
@@ -71,7 +71,7 @@ app.use(cookieParser())
 app.use(bodyParser.json({ extended: true }))
 app.use(fileUpload())
 
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
     req.io = io
     next()
 })
@@ -88,7 +88,7 @@ app.use('/assets_landing', express.static('assets_landing'))
 //!
 
 const passport = require('passport')
-passport.serializeUser(function (user, done) { done(null, user) })
+passport.serializeUser(function(user, done) { done(null, user) })
 app.use(passport.initialize())
 
 require('./util/passport').Discord(passport)
@@ -246,6 +246,7 @@ app.route('/admin/ticket')
 app.get('/eco', (req, res) => res.redirect('http://horizons.gg:3001'))
 app.get('/discord', (req, res) => res.redirect('https://discord.gg/horizons'))
 app.get('/donate', (req, res) => res.redirect('https://www.paypal.com/donate/?business=8QMYWSGHR24UJ&no_recurring=0&item_name=Donations&currency_code=AUD'))
+app.get('/donate/eu', (req, res) => res.redirect('https://www.paypal.com/donate/?hosted_button_id=JG99GWZ5DLHDJ'))
 
 
 
