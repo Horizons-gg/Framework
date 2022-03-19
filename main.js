@@ -65,6 +65,7 @@ const RateLimit = require('express-rate-limit')
 
 httpServer.listen(process.env.port, () => console.log(`Listening on port ${process.env.port}`))
 
+app.set('trust proxy', 'loopback')
 app.set('view engine', 'ejs')
 
 app.use(cookieParser())
