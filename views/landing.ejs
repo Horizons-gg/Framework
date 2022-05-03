@@ -180,11 +180,11 @@
                                                 <div class="features-img mb-4">
                                                     <img src="/assets_landing/images/icons/layers.png" alt="">
                                                 </div>
-                                                <h4 class="mb-2">${Data.name} (${server})</h4>
-                                                <p><b>Location</b> | <b>${Data.city}</b></p>
-                                                <p><b>Latency</b> | <b>${Data.ping}ms</b></p>
-                                                <p><b>CPU Usage</b> | <b>${Data.cpu}%</b></p>
-                                                <p><b>RAM Usage</b> | <b>${Data.ramc}GB / ${Data.ramx}GB</b></p>
+                                                <h4 class="mb-2">${Data.name || 'N/A'} (${server})</h4>
+                                                <p><b>Location</b> | <b>${Data.Location.city}, ${Data.Location.state}, ${Data.Location.country}</b></p>
+                                                <p><b>Latency</b> | <b>${Data.Network.latency}ms</b></p>
+                                                <p><b>CPU Usage</b> | <b>${Math.round(Data.CPU.usage)}%</b></p>
+                                                <p><b>RAM Usage</b> | <b>${Data.Memory.used}GB / ${Math.round(Data.Memory.total)}GB</b></p>
                                             </div>
                                         </div>
                                 `
@@ -194,11 +194,11 @@
                                             <div class="features-img mb-4">
                                                 <img src="/assets_landing/images/icons/layers.png" alt="">
                                             </div>
-                                            <h4 class="mb-2">${Data.name} (${server})</h4>
-                                            <p><b>Location</b> | <b>${Data.city}</b></p>
-                                            <p><b>Latency</b> | <b>${Data.ping}ms</b></p>
-                                            <p><b>CPU Usage</b> | <b>${Data.cpu}%</b></p>
-                                            <p><b>RAM Usage</b> | <b>${Data.ramc}GB / ${Data.ramx}GB</b></p>
+                                            <h4 class="mb-2">${Data.name || 'N/A'} (${server})</h4>
+                                            <p><b>Location</b> | <b>${Data.Location.city}, ${Data.Location.state}, ${Data.Location.country}</b></p>
+                                            <p><b>Latency</b> | <b>${Data.Network.latency}ms</b></p>
+                                            <p><b>CPU Usage</b> | <b>${Math.round(Data.CPU.usage)}%</b></p>
+                                            <p><b>RAM Usage</b> | <b>${Data.Memory.used}GB / ${Math.round(Data.Memory.total)}GB</b></p>
                                         </div>
                                 `
 
