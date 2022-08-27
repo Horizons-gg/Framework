@@ -17,14 +17,14 @@ interface Props {
 export const Simple = (props: Props) => {
 
     return (
-        <div className='flex h-screen'>
+        <div className='flex h-screen bg-slate-900'>
             <div className='m-auto'>
-                <div className="p-8 border border-gray-100 shadow-xl rounded-xl">
+                <div className="p-8 border border-slate-800 shadow-xl rounded-xl">
 
-                    <div className="mt-4 text-gray-500 sm:pr-8">
+                    <div className="mt-4 text-gray-400 sm:pr-8">
                         <FontAwesomeIcon icon={SolidIcons.faUser} />
 
-                        <h5 className="mt-4 text-xl font-bold text-gray-900">{props.title}</h5>
+                        <h5 className="mt-4 text-xl font-bold text-gray-300">{props.title}</h5>
 
                         <p className="hidden mt-2 text-sm sm:block">{props.subtitle}</p>
 
