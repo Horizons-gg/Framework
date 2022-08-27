@@ -14,7 +14,7 @@ const Users: NextPage = (users: any) => {
     return (
         <div>
             {Users.map((user: any) => (
-                <p>{user.name}</p>
+                <p key={user._id}>{user.name}</p>
             ))}
         </div>
     )

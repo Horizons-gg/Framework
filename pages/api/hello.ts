@@ -7,9 +7,10 @@ type Data = {
 }
 
 export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
-  
+
   const Users = await Database('users')
   Users.insertOne({ name: 'John Doe' })
 
   res.status(200).json({ name: 'John Doe' })
+
 }

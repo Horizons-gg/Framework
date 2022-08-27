@@ -20,7 +20,8 @@
             "@lib/*": ["src/lib/*"],
             "@app/*": ["src/app/*"],
             "@models/*": ["src/models/*"],
-            "@interfaces/*": ["src/components/*"]
+
+            "@components/*": ["components/*"]
         }
   },
 
