@@ -4,55 +4,32 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as RegularIcons from '@fortawesome/free-regular-svg-icons'
 import * as SolidIcons from '@fortawesome/free-solid-svg-icons'
 
+import { Simple as Layout } from '@components/layouts/panels'
+import * as Buttons from '@components/ui/buttons'
+
 const Login: NextPage = () => {
     return (
-        <div className='flex h-screen'>
-            <div className='m-auto'>
-                <div className="p-8 border border-gray-100 shadow-xl rounded-xl">
+        <Layout title="Login to Horizons" subtitle="You can manage phone, email and chat conversations all from a single mailbox.">
 
-                    <div className="mt-4 text-gray-500 sm:pr-8">
-                        <FontAwesomeIcon icon={RegularIcons.faUser} />
+            <div className='flex justify-around'>
+                <Buttons.Simple style='solid' primaryColor=''>
+                    <span className="text-sm font-medium">
+                        Login
+                    </span>
 
-                        <h5 className="mt-4 text-xl font-bold text-gray-900">
-                            Login to Horizons
-                        </h5>
+                    <FontAwesomeIcon icon={SolidIcons.faUser} className="w-5 h-5 ml-3" />
+                </Buttons.Simple>
 
-                        <p className="hidden mt-2 text-sm sm:block">
-                            You can manage phone, email and chat conversations all from a single mailbox.
-                        </p>
+                <Buttons.Simple style='regular' primaryColor=''>
+                    <span className="text-sm font-medium">
+                        Signup
+                    </span>
 
-
-                        <br />
-
-
-                        <div className='flex justify-around'>
-                            <div>
-                                <a className="inline-flex items-center px-8 py-3 text-white bg-indigo-600 border border-indigo-600 rounded hover:bg-transparent hover:text-indigo-600 active:text-indigo-500 focus:outline-none focus:ring" href="/download">
-                                    <span className="text-sm font-medium">
-                                        Login
-                                    </span>
-
-                                    <FontAwesomeIcon icon={SolidIcons.faUser} className="w-5 h-5 ml-3" />
-                                </a>
-                            </div>
-
-
-                            <div>
-                                <a className="inline-flex items-center px-8 py-3 text-indigo-600 border border-indigo-600 rounded hover:bg-indigo-600 hover:text-white active:bg-indigo-500 focus:outline-none focus:ring" href="/download">
-                                    <span className="text-sm font-medium">
-                                        Signup
-                                    </span>
-
-                                    <FontAwesomeIcon icon={SolidIcons.faArrowRightLong} className="w-5 h-5 ml-3" />
-                                </a>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
+                    <FontAwesomeIcon icon={SolidIcons.faArrowRightLong} className="w-5 h-5 ml-3" />
+                </Buttons.Simple>
             </div>
-        </div>
+
+        </Layout>
     )
 }
 
