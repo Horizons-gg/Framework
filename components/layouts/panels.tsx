@@ -26,9 +26,7 @@ export const Simple = (props: Props) => {
 
                         <h5 className="mt-4 text-xl font-bold text-gray-300">{props.title}</h5>
 
-                        <p className="hidden mt-2 text-sm sm:block">{props.subtitle}</p>
-
-                        <br />
+                        <p className="mt-2 text-sm sm:block">{props.subtitle}</p>
 
                         {props.children}
                     </div>
