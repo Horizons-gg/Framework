@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-import { NextPage, GetServerSideProps } from 'next'
+import { NextPage } from 'next'
 import Head from 'next/head'
 
 
@@ -31,9 +31,3 @@ export const Landing = (Props: Props) => {
 }
 
 export default Landing
-
-
-
-export const getServerSideProps = () => {
-    return 'testttt'
-}

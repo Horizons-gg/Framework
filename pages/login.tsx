@@ -23,7 +23,7 @@ const Login: NextPage = () => {
                         Login
                     </span>
 
-                    <FontAwesomeIcon icon={SolidIcons.faUser} className="w-5 h-5 ml-3" />
+                    <FontAwesomeIcon icon={"fa-user"} className="w-5 h-5 ml-3" />
                 </UI.Buttons.Simple>
 
                 <UI.Buttons.Simple style='regular'>
