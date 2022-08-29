@@ -1,5 +1,7 @@
 import { NextPage } from "next"
 
+import Theme from "@assets/themes/dark"
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as RegularIcons from '@fortawesome/free-regular-svg-icons'
 import * as SolidIcons from '@fortawesome/free-solid-svg-icons'
@@ -10,7 +12,7 @@ import * as BrandIcons from '@fortawesome/free-brands-svg-icons'
 export const Standard: NextPage = () => {
     return (
 
-        <footer className="bg-slate-800">
+        <footer className="bg-slate-800 border-solid border border-x-0 border-b-0" style={{borderColor: Theme.palette.primary.main}}>
             <div className="max-w-5xl px-4 pt-4 pb-16 mx-auto sm:px-6 lg:px-8">
 
                 <p className="max-w-xl mx-auto mt-6 leading-relaxed text-center text-gray-400">

@@ -18,7 +18,7 @@ interface Props {
 export const Landing = (Props: Props) => {
 
     return (
-        <>
+        <div className='h-screen bg-slate-900'>
             <Head>
                 <title>{Props.title}</title>
             </Head>
@@ -26,7 +26,7 @@ export const Landing = (Props: Props) => {
             {Props.children}
 
             <Props.Footer />
-        </>
+        </div>
     )
 }
 
