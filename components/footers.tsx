@@ -10,8 +10,8 @@ import * as BrandIcons from '@fortawesome/free-brands-svg-icons'
 export const Standard: NextPage = () => {
     return (
 
-        <footer className="bg-gray-900">
-            <div className="max-w-5xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
+        <footer className="bg-slate-800">
+            <div className="max-w-5xl px-4 pt-4 pb-16 mx-auto sm:px-6 lg:px-8">
 
                 <p className="max-w-md mx-auto mt-6 leading-relaxed text-center text-gray-400">
                     A really cool website made by really cool people
