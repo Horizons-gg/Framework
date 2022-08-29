@@ -47,28 +47,28 @@ export const Standard: NextPage = () => {
                 <ul className="flex justify-center gap-6 mt-12 md:gap-8">
 
                     <li>
-                        <a href="https://discord.gg/horizons" target="_blank" className="text-white transition hover:text-white/75">
+                        <a href="https://discord.gg/horizons" target="_blank" className="text-white transition hover:text-blue-600">
                             <span className="sr-only">Discord</span>
-                            <FontAwesomeIcon size="lg" icon={BrandIcons.faDiscord} />
+                            <FontAwesomeIcon size="lg" icon={BrandIcons.faDiscord}/>
                         </a>
                     </li>
 
                     <li>
-                        <a href="https://github.com/horizons-gg" target="_blank" className="text-white transition hover:text-white/75">
+                        <a href="https://github.com/horizons-gg" target="_blank" className="text-white transition hover:text-purple-600">
                             <span className="sr-only">Github</span>
                             <FontAwesomeIcon size="lg" icon={BrandIcons.faGithub} />
                         </a>
                     </li>
 
                     <li>
-                        <a href="https://steamcommunity.com/groups/horizons-gg" target="_blank" className="text-white transition hover:text-white/75">
+                        <a href="https://steamcommunity.com/groups/horizons-gg" target="_blank" className="text-white transition hover:text-gray-600">
                             <span className="sr-only">Steam</span>
                             <FontAwesomeIcon size="lg" icon={BrandIcons.faSteam} />
                         </a>
                     </li>
 
                     <li>
-                        <a href="https://www.patreon.com/join/corehorizons" target="_blank" className="text-white transition hover:text-white/75">
+                        <a href="https://www.patreon.com/join/corehorizons" target="_blank" className="text-white transition hover:text-orange-600">
                             <span className="sr-only">Patreon</span>
                             <FontAwesomeIcon size="lg" icon={BrandIcons.faPatreon} />
                         </a>
