@@ -21,7 +21,7 @@ const SpaceEngineers: NextPage = () => {
 
                 <div className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 text-center">
 
-                    <a className="block p-8 transition border border-gray-800 shadow-xl rounded-xl hover:shadow-pink-500/10 hover:border-pink-500/10" href="/services/digital-campaigns">
+                    <a className="block p-8 transition border border-gray-800 shadow-xl rounded-xl hover:shadow-pink-500/10 hover:border-pink-500/10" href="/space-engineers/us">
                         <FontAwesomeIcon icon={SolidIcons.faBuilding} />
 
                         <h3 className="mt-4 text-xl font-bold text-white">US Server</h3>
@@ -31,7 +31,7 @@ const SpaceEngineers: NextPage = () => {
                         </p>
                     </a>
 
-                    <a className="block p-8 transition border border-gray-800 shadow-xl rounded-xl hover:shadow-pink-500/10 hover:border-pink-500/10" href="/services/digital-campaigns">
+                    <a className="block p-8 transition border border-gray-800 shadow-xl rounded-xl hover:shadow-pink-500/10 hover:border-pink-500/10" href="/space-engineers/oce">
                         <FontAwesomeIcon icon={SolidIcons.faUmbrellaBeach} />
 
                         <h3 className="mt-4 text-xl font-bold text-white">OCE Server</h3>
@@ -41,7 +41,7 @@ const SpaceEngineers: NextPage = () => {
                         </p>
                     </a>
 
-                    <a className="block p-8 transition border border-gray-800 shadow-xl rounded-xl hover:shadow-pink-500/10 hover:border-pink-500/10" href="/services/digital-campaigns">
+                    <a className="block p-8 transition border border-gray-800 shadow-xl rounded-xl hover:shadow-pink-500/10 hover:border-pink-500/10" href="/space-engineers/eu">
                         <FontAwesomeIcon icon={SolidIcons.faEuro} />
 
                         <h3 className="mt-4 text-xl font-bold text-white">EU Server</h3>
