@@ -24,8 +24,17 @@ const Home: NextPage = () => {
                 </Head>
 
 
-                <Parallax pages={4}>
+                <div className="fixed z-50 p-5 m-auto w-screen right-10">
+                    <nav className="hidden space-x-8 text-sm font-medium md:flex justify-end">
+                        <a className="text-gray-100" href="">Statistics</a>
+                        <a className="text-gray-100" href="">Patreon</a>
+                        <a className="text-gray-100" href="">Projects</a>
+                        <a className="text-gray-100" href="">Contact</a>
+                    </nav>
+                </div>
 
+
+                <Parallax pages={4}>
                     <ParallaxLayer offset={0} speed={0.2} factor={1}
                         style={{
                             backgroundImage: `url('/images/landing/5.png')`,
@@ -50,6 +59,16 @@ const Home: NextPage = () => {
                         }}
                     />
 
+                    <ParallaxLayer offset={0} speed={0.15} factor={1}>
+                        <div className='flex justify-center h-screen' style={{ marginTop: -250 }}>
+                            <div className="m-auto">
+
+                                <Image src={Images.Logo} priority={true} height={80} width={600} className="" />
+
+                            </div>
+                        </div>
+                    </ParallaxLayer>
+
                     <ParallaxLayer offset={0} speed={0.8} factor={1}
                         style={{
                             backgroundImage: `url('/images/landing/2.png')`,
@@ -58,7 +77,7 @@ const Home: NextPage = () => {
                         }}
                     />
 
-                    <ParallaxLayer offset={0} speed={1} factor={1}
+                    <ParallaxLayer offset={0.08} speed={1} factor={2}
                         style={{
                             backgroundImage: `url('/images/landing/1.png')`,
                             backgroundSize: 'cover',
@@ -68,29 +87,19 @@ const Home: NextPage = () => {
 
 
 
-                    <ParallaxLayer offset={0} speed={1} factor={1}>
+                    <ParallaxLayer offset={1} speed={1} factor={1}>
+                        <div className="p-5 m-auto w-auto">
+                            <StatsSection />
+                        </div>
+                    </ParallaxLayer>
+
+
+
+                    {/* <ParallaxLayer offset={0} speed={1} factor={1}>
                         <div className="flex my-5 mx-10 md:block justify-center">
                             <Image src={Images.Logo} priority={true} height={40} width={300} />
                         </div>
-                    </ParallaxLayer>
-
-                    <ParallaxLayer offset={0} speed={1} factor={1} sticky={{ start: 0, end: 4 }}>
-                        <div className="p-5 m-auto w-auto">
-
-                            <nav className="hidden space-x-8 text-sm font-medium md:flex justify-center">
-                                <a className="text-gray-100" href="">Statistics</a>
-                                <a className="text-gray-100" href="">Patreon</a>
-                                <a className="text-gray-100" href="">Projects</a>
-                                <a className="text-gray-100" href="">Contact</a>
-                            </nav>
-
-                        </div>
-                    </ParallaxLayer>
-
-                    <ParallaxLayer offset={1} speed={1.5} factor={1}>
-                        <StatsSection />
-                    </ParallaxLayer>
-
+                    </ParallaxLayer> */}
                 </Parallax>
 
             </Material.ThemeProvider>
