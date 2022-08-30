@@ -6,7 +6,7 @@ import * as SolidIcons from "@fortawesome/free-solid-svg-icons"
 
 const Stats: NextPage = () => {
     return (
-        <section className="text-white bg-gray-900 shadow-lg">
+        <section className="text-white bg-gray-900 shadow-lg rounded-lg">
             <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
                 <div className="max-w-lg mx-auto text-center">
                     <h2 className="text-3xl font-bold sm:text-4xl">Server Statistics</h2>
@@ -32,7 +32,7 @@ const Stats: NextPage = () => {
                 </div>
 
                 <div className="mt-12 text-center">
-                    <a className="inline-flex items-center px-8 py-3 mt-8 text-white bg-pink-600 border border-pink-600 rounded hover:bg-transparent active:text-pink-500 focus:outline-none focus:ring" href="/get-started">
+                    <a className="inline-flex items-center px-8 py-3 mt-8 text-white bg-pink-600 border border-pink-600 rounded hover:bg-transparent active:text-pink-500 focus:outline-none focus:ring transition-all" href="/get-started">
                         <span className="text-sm font-medium"> Get Started </span>
 
 
