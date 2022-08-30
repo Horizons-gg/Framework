@@ -151,7 +151,7 @@ const Home: NextPage = () => {
 
                     <ParallaxLayer offset={0} speed={0.1} factor={1}
                         style={{
-                            backgroundImage: `url('/images/landing/Moon.png')`,
+                            backgroundImage: `url('/images/landing/moon.png')`,
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
                         }}
@@ -168,11 +168,11 @@ const Home: NextPage = () => {
 
                     <ParallaxLayer offset={0} speed={0.4} factor={1}>
                         <div className='h-screen overflow-hidden select-none'>
-                            <animated.img src='/images/landing/Ship.png' style={ShipTranslate()} />
-                            <animated.img src='/images/landing/Ship.png' style={ShipTranslate()} />
-                            <animated.img src='/images/landing/Ship.png' style={ShipTranslate()} />
-                            <animated.img src='/images/landing/Ship.png' style={ShipTranslate()} />
-                            <animated.img src='/images/landing/Ship.png' style={ShipTranslate()} />
+                            <animated.img src='/images/landing/ship.png' style={ShipTranslate()} />
+                            <animated.img src='/images/landing/ship.png' style={ShipTranslate()} />
+                            <animated.img src='/images/landing/ship.png' style={ShipTranslate()} />
+                            <animated.img src='/images/landing/ship.png' style={ShipTranslate()} />
+                            <animated.img src='/images/landing/ship.png' style={ShipTranslate()} />
                         </div>
                     </ParallaxLayer>
 
