@@ -17,6 +17,25 @@ import * as Images from '@assets/images'
 
 const Home: NextPage = () => {
 
+    const LogoSpring = useSpring({ 
+        to: {
+            opacity: 1,
+            height: 0
+        },
+
+        from: {
+            opacity: 1,
+            height: 1920
+        },
+
+        delay: 100,
+
+        config: {
+            tension: 200,
+            friction: 80
+        }
+    })
+
     return (
         <div className='h-screen bg-slate-900'>
             <Material.ThemeProvider theme={Theme}>
@@ -57,7 +76,9 @@ const Home: NextPage = () => {
                     <ParallaxLayer offset={0} speed={0.15} factor={1}>
                         <div className='flex justify-center h-screen' style={{marginTop: -250}}>
                             <div className='m-auto mx-10'>
-                                <Image src={Images.Logo} priority={true} height={80} width={600} />
+                                <animated.div style={LogoSpring}>
+                                    <Image src={Images.Logo} priority={true} height={80} width={600} />
+                                </animated.div>
                             </div>
                         </div>
                     </ParallaxLayer>
