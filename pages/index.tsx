@@ -5,9 +5,11 @@ import Image from 'next/image'
 import Theme from '@assets/themes/dark'
 import * as Material from '@mui/material'
 
+import { useSpring, animated } from 'react-spring'
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 
 import StatsSection from '@components/sections/stats'
+import SE from '@components/sections/spaceEngineers'
 import Footer from '@components/footers'
 
 import * as Images from '@assets/images'
@@ -53,7 +55,7 @@ const Home: NextPage = () => {
 
 
                     <ParallaxLayer offset={0} speed={0.15} factor={1}>
-                        <div className='flex justify-center h-screen' style={{ marginTop: -250 }}>
+                        <div className='flex justify-center h-screen' style={{marginTop: -250}}>
                             <div className='m-auto mx-10'>
                                 <Image src={Images.Logo} priority={true} height={80} width={600} />
                             </div>
