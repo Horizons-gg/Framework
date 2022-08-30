@@ -218,11 +218,9 @@ const Home: NextPage = () => {
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
                         }}
-                    />
-
-                    <ParallaxLayer offset={1} speed={1} factor={1}>
-                        <div className="p-5 m-auto w-auto">
-                            <StatsSection />
+                    >
+                        <div className="p-5 m-auto w-auto flex justify-center h-screen" style={{ marginTop: 1000 }}>
+                            <iframe src="https://discord.com/widget?id=610606066451087370&theme=dark" width="350" height="500" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
                         </div>
                     </ParallaxLayer>
 
