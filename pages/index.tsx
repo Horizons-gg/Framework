@@ -51,6 +51,18 @@ const Home: NextPage = () => {
                         }}
                     />
 
+
+                    <ParallaxLayer offset={0} speed={0.15} factor={1}>
+                        <div className='flex justify-center h-screen' style={{ marginTop: -250 }}>
+
+                            <div className='m-auto mx-10'>
+                                <Image src={Images.Logo} priority={true} height={80} width={600} />
+                            </div>
+
+                        </div>
+                    </ParallaxLayer>
+
+
                     <ParallaxLayer offset={0} speed={0.6} factor={1}
                         style={{
                             backgroundImage: `url('/images/landing/3.png')`,
@@ -58,16 +70,6 @@ const Home: NextPage = () => {
                             backgroundPosition: 'center',
                         }}
                     />
-
-                    <ParallaxLayer offset={0} speed={0.15} factor={1}>
-                        <div className='flex justify-center h-screen' style={{ marginTop: -250 }}>
-                            <div className="m-auto">
-
-                                <Image src={Images.Logo} priority={true} height={80} width={600} className="" />
-
-                            </div>
-                        </div>
-                    </ParallaxLayer>
 
                     <ParallaxLayer offset={0} speed={0.8} factor={1}
                         style={{
