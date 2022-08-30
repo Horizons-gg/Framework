@@ -54,11 +54,9 @@ const Home: NextPage = () => {
 
                     <ParallaxLayer offset={0} speed={0.15} factor={1}>
                         <div className='flex justify-center h-screen' style={{ marginTop: -250 }}>
-
                             <div className='m-auto mx-10'>
                                 <Image src={Images.Logo} priority={true} height={80} width={600} />
                             </div>
-
                         </div>
                     </ParallaxLayer>
 
@@ -85,9 +83,9 @@ const Home: NextPage = () => {
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
                         }}
-                    />
+                    >
 
-
+                    </ParallaxLayer>
 
                     <ParallaxLayer offset={1} speed={1} factor={1}>
                         <div className="p-5 m-auto w-auto">
