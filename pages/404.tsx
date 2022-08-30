@@ -6,9 +6,9 @@ const NoPageFoundPage: NextPage = () => {
 
     return (
 
-        <div className='bg-slate-900 flex h-screen justify-center'>
-            <span className='text-slate-100 text-8xl font-bold m-auto'>Nothing Here, Go Away</span>
-        </div>
+        <a className='bg-slate-900 flex h-screen justify-center' href='/'>
+                <span className='text-slate-100 text-8xl font-bold m-auto hover:text-pink-500 transition-all hover:cursor-pointer'>Nothing Here, Go Away</span>
+        </a>
 
     )
 }
