@@ -26,11 +26,47 @@ const Home: NextPage = () => {
 
                 <Parallax pages={4}>
 
-                    <ParallaxLayer offset={0} speed={1} factor={1}>
-                        <div className='h-screen blur-sm' style={{ margin: '-10px -10px', backgroundImage: `url('/images/landingImage.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                            <div className='bg-black/30 h-screen w-screen' />
-                        </div>
-                    </ParallaxLayer>
+                    <ParallaxLayer offset={0} speed={0.2} factor={1}
+                        style={{
+                            backgroundImage: `url('/images/landing/5.png')`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                        }}
+                    />
+
+                    <ParallaxLayer offset={0} speed={0.4} factor={1}
+                        style={{
+                            backgroundImage: `url('/images/landing/4.png')`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                        }}
+                    />
+
+                    <ParallaxLayer offset={0} speed={0.6} factor={1}
+                        style={{
+                            backgroundImage: `url('/images/landing/3.png')`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                        }}
+                    />
+
+                    <ParallaxLayer offset={0} speed={0.8} factor={1}
+                        style={{
+                            backgroundImage: `url('/images/landing/2.png')`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                        }}
+                    />
+
+                    <ParallaxLayer offset={0} speed={1} factor={1}
+                        style={{
+                            backgroundImage: `url('/images/landing/1.png')`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                        }}
+                    />
+
+
 
                     <ParallaxLayer offset={0} speed={1} factor={1}>
                         <div className="flex my-5 mx-10 md:block justify-center">
@@ -51,7 +87,7 @@ const Home: NextPage = () => {
                         </div>
                     </ParallaxLayer>
 
-                    <ParallaxLayer offset={0.99} speed={1.5} factor={1}>
+                    <ParallaxLayer offset={1} speed={1.5} factor={1}>
                         <StatsSection />
                     </ParallaxLayer>
 
