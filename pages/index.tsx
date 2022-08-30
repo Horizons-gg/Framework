@@ -40,7 +40,7 @@ const Home: NextPage = () => {
             opacity: 1,
             marginTop: 1000
         },
-        
+
         to: {
             opacity: 1,
             marginTop: 0
@@ -84,7 +84,7 @@ const Home: NextPage = () => {
 
                 marginLeft: Position
             },
-            
+
             to: {
                 opacity: 1,
                 marginTop: -500,
@@ -112,7 +112,7 @@ const Home: NextPage = () => {
                 </Head>
 
 
-                <div className="fixed z-50 p-5 m-auto w-screen right-10">
+                <div className="fixed z-50 p-5 m-auto w-screen right-10 select-none">
                     <nav className="hidden space-x-8 text-sm font-medium md:flex justify-end">
                         <a className="text-gray-100" href="">Statistics</a>
                         <a className="text-gray-100" href="">Patreon</a>
@@ -166,8 +166,8 @@ const Home: NextPage = () => {
                     />
 
 
-                    <ParallaxLayer offset={0} speed={0.2} factor={1}>
-                        <div className='h-screen'>
+                    <ParallaxLayer offset={0} speed={0.4} factor={1}>
+                        <div className='h-screen overflow-hidden select-none'>
                             <animated.img src='/images/landing/Ship.png' style={ShipTranslate()} />
                             <animated.img src='/images/landing/Ship.png' style={ShipTranslate()} />
                             <animated.img src='/images/landing/Ship.png' style={ShipTranslate()} />
@@ -186,7 +186,7 @@ const Home: NextPage = () => {
 
 
                     <ParallaxLayer offset={0} speed={0.15} factor={1}>
-                        <div className='flex justify-center h-screen' style={{ marginTop: -250 }}>
+                        <div className='flex justify-center h-screen select-none' style={{ marginTop: -250 }}>
                             <div className='m-auto mx-10'>
                                 <animated.div style={LogoSpring}>
                                     <Image src={Images.Logo} priority={true} height={80} width={600} />
@@ -218,8 +218,7 @@ const Home: NextPage = () => {
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
                         }}
-                    >
-                    </ParallaxLayer>
+                    />
 
                     <ParallaxLayer offset={1} speed={1} factor={1}>
                         <div className="p-5 m-auto w-auto">
