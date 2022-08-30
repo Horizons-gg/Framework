@@ -1,4 +1,5 @@
 import { NextPage } from "next"
+import Link from "next/link"
 
 import Theme from "@assets/themes/dark"
 
@@ -24,21 +25,21 @@ export const Standard: NextPage = () => {
                     <ul className="flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
 
                         <li>
-                            <a className="text-white transition hover:text-white/75" href="/">
+                            <Link className="text-white transition hover:text-white/75" href="/">
                                 Main Page
-                            </a>
+                            </Link>
                         </li>
 
                         <li>
-                            <a className="text-white transition hover:text-white/75" href="/login">
+                            <Link className="text-white transition hover:text-white/75" href="/login">
                                 Login
-                            </a>
+                            </Link>
                         </li>
 
                         <li>
-                            <a className="text-white transition hover:text-white/75" href="/space-engineers">
+                            <Link className="text-white transition hover:text-white/75" href="/space-engineers">
                                 Space Engineers
-                            </a>
+                            </Link>
                         </li>
 
                     </ul>
@@ -47,31 +48,31 @@ export const Standard: NextPage = () => {
                 <ul className="flex justify-center gap-6 mt-12 md:gap-8">
 
                     <li>
-                        <a href="https://discord.gg/horizons" target="_blank" className="text-white transition hover:text-blue-600">
+                        <Link href="https://discord.gg/horizons" target="_blank" className="text-white transition hover:text-blue-600">
                             <span className="sr-only">Discord</span>
                             <FontAwesomeIcon size="lg" icon={BrandIcons.faDiscord}/>
-                        </a>
+                        </Link>
                     </li>
 
                     <li>
-                        <a href="https://github.com/horizons-gg" target="_blank" className="text-white transition hover:text-purple-600">
+                        <Link href="https://github.com/horizons-gg" target="_blank" className="text-white transition hover:text-purple-600">
                             <span className="sr-only">Github</span>
                             <FontAwesomeIcon size="lg" icon={BrandIcons.faGithub} />
-                        </a>
+                        </Link>
                     </li>
 
                     <li>
-                        <a href="https://steamcommunity.com/groups/horizons-gg" target="_blank" className="text-white transition hover:text-gray-600">
+                        <Link href="https://steamcommunity.com/groups/horizons-gg" target="_blank" className="text-white transition hover:text-gray-600">
                             <span className="sr-only">Steam</span>
                             <FontAwesomeIcon size="lg" icon={BrandIcons.faSteam} />
-                        </a>
+                        </Link>
                     </li>
 
                     <li>
-                        <a href="https://www.patreon.com/join/corehorizons" target="_blank" className="text-white transition hover:text-orange-600">
+                        <Link href="https://www.patreon.com/join/corehorizons" target="_blank" className="text-white transition hover:text-orange-600">
                             <span className="sr-only">Patreon</span>
                             <FontAwesomeIcon size="lg" icon={BrandIcons.faPatreon} />
-                        </a>
+                        </Link>
                     </li>
 
                 </ul>
