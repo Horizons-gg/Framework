@@ -122,10 +122,11 @@ const Home: NextPage = () => {
 
                 <div className="fixed z-50 p-5 m-auto w-screen right-10 select-none">
                     <nav className="hidden space-x-8 text-sm font-medium sm:flex justify-end">
-                        <Link href={""}><a className="text-gray-100 hover:text-gray-300 transition-all">Statistics</a></Link>
-                        <Link href={""}><a className="text-gray-100 hover:text-gray-300 transition-all">Patreon</a></Link>
-                        <Link href={""}><a className="text-gray-100 hover:text-gray-300 transition-all">Projects</a></Link>
-                        <Link href={""}><a className="text-gray-100 hover:text-gray-300 transition-all">Contact</a></Link>
+                        <Link href={"/statistics"}><a className="text-gray-100 hover:text-gray-300 transition-all">Statistics</a></Link>
+                        <Link href={"https://www.patreon.com/join/corehorizons"}><a className="text-gray-100 hover:text-gray-300 transition-all">Patreon</a></Link>
+                        <Link href={"/projects"}><a className="text-gray-100 hover:text-gray-300 transition-all">Projects</a></Link>
+                        <Link href={"/contact"}><a className="text-gray-100 hover:text-gray-300 transition-all">Contact</a></Link>
+                        <Link href={"/login"}><a className="text-gray-100 hover:text-gray-300 transition-all">Login</a></Link>
                     </nav>
                 </div>
 
