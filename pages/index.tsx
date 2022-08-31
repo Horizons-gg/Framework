@@ -11,6 +11,11 @@ import * as Material from '@mui/material'
 import { useSpring, animated } from 'react-spring'
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import SolidIcons from '@fortawesome/free-solid-svg-icons'
+
+import ScrollIcon from '@components/svg/scroll'
+
 import StatsSection from '@components/sections/stats'
 import SE from '@components/sections/spaceEngineers'
 import Footer from '@components/footers'
@@ -221,8 +226,23 @@ const Home: NextPage = () => {
                             backgroundPosition: 'center',
                         }}
                     >
-                        <div className="p-5 m-auto w-auto h-screen" style={{ marginTop: 1000, marginLeft: "10rem" }}>
-                            <Material.Typography variant='h1' color={Theme.palette.text.primary} fontWeight={700} letterSpacing={15}>ABOUT THE COMMUNITY</Material.Typography>
+                        <div className="p-5 m-auto w-auto h-screen">
+
+                            {/* Desktop */}
+                            <div className="hidden md:block" style={{ marginTop: 1000, marginLeft: "10rem" }}>
+                                <Material.Typography variant='h1' color={Theme.palette.text.primary} fontWeight={700} letterSpacing={15}>ABOUT THE COMMUNITY</Material.Typography>
+                            </div>
+
+
+                            {/* Mobile */}
+                            <div className="block md:hidden text-center" style={{ marginTop: 600 }}>
+                                <div className='flex justify-center' style={{marginBottom: 200}}>
+                                    <ScrollIcon />
+                                </div>
+
+                                <Material.Typography variant='h5' color={Theme.palette.text.primary} fontWeight={700} letterSpacing={15}>ABOUT THE COMMUNITY</Material.Typography>
+                            </div>
+
                         </div>
                     </ParallaxLayer>
 
