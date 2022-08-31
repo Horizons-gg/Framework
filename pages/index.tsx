@@ -29,6 +29,7 @@ const Home: NextPage = () => {
     const [windowSize, setWindowSize] = useState(getWindowSize())
 
     useEffect(() => {
+
         function handleWindowResize() {
             setWindowSize(getWindowSize())
         }
@@ -120,7 +121,7 @@ const Home: NextPage = () => {
 
 
                 <div className="fixed z-50 p-5 m-auto w-screen right-10 select-none">
-                    <nav className="hidden space-x-8 text-sm font-medium md:flex justify-end">
+                    <nav className="hidden space-x-8 text-sm font-medium sm:flex justify-end">
                         <Link href={""}><a className="text-gray-100 hover:text-gray-300 transition-all">Statistics</a></Link>
                         <Link href={""}><a className="text-gray-100 hover:text-gray-300 transition-all">Patreon</a></Link>
                         <Link href={""}><a className="text-gray-100 hover:text-gray-300 transition-all">Projects</a></Link>
@@ -229,18 +230,23 @@ const Home: NextPage = () => {
                         <div className="p-5 m-auto w-auto h-screen">
 
                             {/* Desktop */}
-                            <div className="hidden md:block" style={{ marginTop: 1000, marginLeft: "10rem" }}>
+                            <div className="hidden lg:block" style={{ marginTop: 1000, marginLeft: "10rem" }}>
                                 <Material.Typography variant='h1' color={Theme.palette.text.primary} fontWeight={700} letterSpacing={15}>ABOUT THE COMMUNITY</Material.Typography>
                             </div>
 
 
                             {/* Mobile */}
-                            <div className="block md:hidden text-center" style={{ marginTop: 600 }}>
-                                <div className='flex justify-center' style={{marginBottom: 200}}>
+                            <div className="relative lg:hidden h-screen flex justify-center text-center">
+
+                                <div className='absolute bottom-60'>
                                     <ScrollIcon />
                                 </div>
 
-                                <Material.Typography variant='h5' color={Theme.palette.text.primary} fontWeight={700} letterSpacing={15}>ABOUT THE COMMUNITY</Material.Typography>
+                                <div className='absolute -bottom-5'>
+                                    <Material.Typography variant='h5' color={Theme.palette.text.primary} fontWeight={700} letterSpacing={15}>WHAT IS HORIZONS</Material.Typography>
+                                    <Material.Divider variant='fullWidth' color={Theme.palette.text.primary} />
+                                </div>
+
                             </div>
 
                         </div>
