@@ -5,16 +5,14 @@ import Link from 'next/link'
 const NoPageFoundPage: NextPage = () => {
 
     return (
-        <div style={{
-            backgroundImage: `url('/images/landingImage.jpg')`, 
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-        }}>
-            <Link href='/'>
-                <a className='bg-slate-900 flex h-screen justify-center'>
-                    <span className='text-slate-100 text-8xl font-bold m-auto hover:text-pink-500 transition-all hover:cursor-pointer'>404, Page Not Found</span>
-                </a>
-            </Link>
+        <div className='h-screen overflow-hidden'>
+            <div className='h-screen w-screen fixed flex justify-center select-none z-10'>
+                <Link href='/'>
+                    <a className='text-slate-100 text-8xl font-bold m-auto hover:text-pink-500 transition-all'>404, Page Not Found</a>
+                </Link>
+            </div>
+
+            <div className='h-screen' style={{ backgroundImage: `url('/images/landingImage.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
         </div>
     )
 }
