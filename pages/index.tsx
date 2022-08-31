@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { useState, useEffect } from 'react'
 
@@ -114,10 +115,10 @@ const Home: NextPage = () => {
 
                 <div className="fixed z-50 p-5 m-auto w-screen right-10 select-none">
                     <nav className="hidden space-x-8 text-sm font-medium md:flex justify-end">
-                        <a className="text-gray-100" href="">Statistics</a>
-                        <a className="text-gray-100" href="">Patreon</a>
-                        <a className="text-gray-100" href="">Projects</a>
-                        <a className="text-gray-100" href="">Contact</a>
+                        <Link href={""}><a className="text-gray-100 hover:text-gray-300 transition-all">Statistics</a></Link>
+                        <Link href={""}><a className="text-gray-100 hover:text-gray-300 transition-all">Patreon</a></Link>
+                        <Link href={""}><a className="text-gray-100 hover:text-gray-300 transition-all">Projects</a></Link>
+                        <Link href={""}><a className="text-gray-100 hover:text-gray-300 transition-all">Contact</a></Link>
                     </nav>
                 </div>
 
