@@ -14,14 +14,16 @@ export default createTheme({
             dark: '#ba000d',
             contrastText: '#000'
         },
-        neutral: {
-            main: '#64748b'
+
+        text: {
+            primary: 'white',
+            secondary: 'black',
         }
     },
 
     typography: {
         fontFamily: [
-            'Montserrat', 
+            'Montserrat',
             'sans-serif'
         ].join(','),
 

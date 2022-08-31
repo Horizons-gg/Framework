@@ -1,13 +1,15 @@
-// declare module '@mui/material/styles' {
-//     interface Theme {
-//         status: {
-//             danger: string
-//         }
-//     }
+// import { PaletteOptions } from "@mui/material/styles/createPalette"
 
-//     interface ThemeOptions {
-//         status?: {
-//             danger?: string
+// declare module "@mui/material/styles/createPalette" {
+//     export interface PaletteOptions {
+
+//         lightText: {
+//             main: string
 //         }
+
+//         darkText: {
+//             main: string
+//         }
+
 //     }
 // }

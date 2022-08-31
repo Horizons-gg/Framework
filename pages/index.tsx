@@ -222,7 +222,7 @@ const Home: NextPage = () => {
                         }}
                     >
                         <div className="p-5 m-auto w-auto h-screen" style={{ marginTop: 1000, marginLeft: "10rem" }}>
-                            <Material.Typography variant='h1' fontWeight={700} letterSpacing={15}>ABOUT THE COMMUNITY</Material.Typography>
+                            <Material.Typography variant='h1' color={Theme.palette.text.primary} fontWeight={700} letterSpacing={15}>ABOUT THE COMMUNITY</Material.Typography>
                         </div>
                     </ParallaxLayer>
 
