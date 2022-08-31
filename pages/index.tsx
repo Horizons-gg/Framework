@@ -12,7 +12,8 @@ import { useSpring, animated } from 'react-spring'
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import SolidIcons from '@fortawesome/free-solid-svg-icons'
+import * as SolidIcons from '@fortawesome/free-solid-svg-icons'
+import * as BrandIcons from '@fortawesome/free-brands-svg-icons'
 
 import ScrollIcon from '@components/svg/scroll'
 
@@ -112,7 +113,7 @@ const Home: NextPage = () => {
 
 
     return (
-        <div className='h-screen bg-slate-900'>
+        <div className='h-screen bg-slate-900 select-none'>
             <Material.ThemeProvider theme={Theme}>
 
                 <Head>
@@ -120,7 +121,7 @@ const Home: NextPage = () => {
                 </Head>
 
 
-                <div className="fixed z-50 p-5 m-auto w-screen right-10 select-none">
+                <div className="fixed z-50 p-5 m-auto w-screen right-10">
                     <nav className="hidden space-x-8 text-sm font-medium sm:flex justify-end">
                         <Link href={"/statistics"}><a className="text-gray-100 hover:text-gray-300 transition-all">Statistics</a></Link>
                         <Link href={"https://www.patreon.com/join/corehorizons"}><a className="text-gray-100 hover:text-gray-300 transition-all">Patreon</a></Link>
@@ -131,7 +132,7 @@ const Home: NextPage = () => {
                 </div>
 
 
-                <Parallax pages={4}>
+                <Parallax pages={1.5}>
                     <ParallaxLayer offset={0} speed={1} factor={1}
                         style={{
                             backgroundImage: `url('/images/landing/sky.png')`,
@@ -176,7 +177,7 @@ const Home: NextPage = () => {
 
 
                     <ParallaxLayer offset={0} speed={0.4} factor={1}>
-                        <div className='h-screen overflow-hidden select-none'>
+                        <div className='h-screen overflow-hidden'>
                             <animated.img src='/images/landing/ship.png' style={ShipTranslate()} />
                             <animated.img src='/images/landing/ship.png' style={ShipTranslate()} />
                             <animated.img src='/images/landing/ship.png' style={ShipTranslate()} />
@@ -195,7 +196,7 @@ const Home: NextPage = () => {
 
 
                     <ParallaxLayer offset={0} speed={0.15} factor={1}>
-                        <div className='flex justify-center h-screen select-none' style={{ marginTop: -250 }}>
+                        <div className='flex justify-center h-screen' style={{ marginTop: -250 }}>
                             <div className='m-auto mx-10'>
                                 <animated.div style={LogoSpring}>
                                     <Image src={Images.Logo} priority={true} height={80} width={600} />
@@ -228,24 +229,65 @@ const Home: NextPage = () => {
                             backgroundPosition: 'center',
                         }}
                     >
-                        <div className="p-5 m-auto w-auto h-screen">
-
-                            {/* Desktop */}
-                            <div className="hidden lg:block" style={{ marginTop: 1000, marginLeft: "10rem" }}>
-                                <Material.Typography variant='h1' color={Theme.palette.text.primary} fontWeight={700} letterSpacing={15}>ABOUT THE COMMUNITY</Material.Typography>
+                        <div className="relative h-screen flex justify-center">
+                            <div className='absolute bottom-60'>
+                                <ScrollIcon />
                             </div>
+                        </div>
+                    </ParallaxLayer>
 
 
-                            {/* Mobile */}
-                            <div className="relative lg:hidden h-screen flex justify-center text-center">
 
-                                <div className='absolute bottom-60'>
-                                    <ScrollIcon />
+                    <ParallaxLayer offset={0.9} speed={1.2}>
+                        <div className="m-5 relative h-screen flex justify-center text-center">
+
+                            <div className='absolute top-52'>
+
+                                {/* Desktop */}
+                                <div className='hidden lg:block'>
+                                    <Material.Typography variant='h3' color={Theme.palette.text.primary} fontWeight={700} letterSpacing={15} style={{ textIndent: 15 }}>JOIN THE COMMUNITY</Material.Typography>
+
+                                    <Material.Divider variant='fullWidth' color={Theme.palette.text.primary} style={{ marginTop: 15, marginBottom: 15 }} />
+
+                                    <Material.Typography variant='body1'>We host Servers in Australia, North America, and Europe.<br /><br />We have a strong, friendly community that loves to play games and hangout with one another.<br /><br />We develop and host games and other online entertainment services and use Discord as our primary platform.</Material.Typography>
+
+                                    <br />
+
+                                    <Link href="https://discord.gg/horizons" target="_blank">
+                                        <a className='animate-pulse'>
+                                            <Material.Link underline='none'>
+                                                <span className="sr-only">Discord</span>
+                                                <Material.Typography variant='caption' fontWeight={600} fontSize={17} color={'#fff'}>JOIN DISCORD</Material.Typography> <FontAwesomeIcon size="lg" color={'#fff'} icon={BrandIcons.faDiscord} />
+                                            </Material.Link>
+                                        </a>
+                                    </Link>
+
+                                    <Material.Divider variant='middle' color={Theme.palette.text.primary} style={{ marginTop: 15, marginBottom: 15 }} />
+
                                 </div>
 
-                                <div className='absolute -bottom-5'>
-                                    <Material.Typography variant='h5' color={Theme.palette.text.primary} fontWeight={700} letterSpacing={15}>WHAT IS HORIZONS</Material.Typography>
-                                    <Material.Divider variant='fullWidth' color={Theme.palette.text.primary} />
+
+                                {/* Mobile */}
+                                <div className='block lg:hidden'>
+                                    <Material.Typography variant='h5' color={Theme.palette.text.primary} fontWeight={700} letterSpacing={15} style={{ textIndent: 15 }}>JOIN THE COMMUNITY</Material.Typography>
+
+                                    <Material.Divider variant='middle' color={Theme.palette.text.primary} style={{ marginTop: 15, marginBottom: 15 }} />
+
+                                    <Material.Typography variant='body1'>We host Servers in Australia, North America, and Europe.<br /><br />We have a strong, friendly community that loves to play games and hangout with one another.<br /><br />We develop and host games and other online entertainment services and use Discord as our primary platform.</Material.Typography>
+
+                                    <br />
+
+                                    <Link href="https://discord.gg/horizons" target="_blank">
+                                        <a className='animate-pulse'>
+                                            <Material.Link underline='none'>
+                                                <span className="sr-only">Discord</span>
+                                                <Material.Typography variant='caption' fontWeight={600} fontSize={17} color={'#fff'}>JOIN DISCORD</Material.Typography> <FontAwesomeIcon size="lg" color={'#fff'} icon={BrandIcons.faDiscord} />
+                                            </Material.Link>
+                                        </a>
+                                    </Link>
+
+                                    <Material.Divider variant='middle' color={Theme.palette.text.primary} style={{ marginTop: 15, marginBottom: 15 }} />
+
                                 </div>
 
                             </div>
