@@ -18,6 +18,7 @@ import Footer from '@components/footers'
 import * as Images from '@assets/images'
 
 
+
 const Home: NextPage = () => {
 
     const [windowSize, setWindowSize] = useState(getWindowSize())
@@ -220,8 +221,8 @@ const Home: NextPage = () => {
                             backgroundPosition: 'center',
                         }}
                     >
-                        <div className="p-5 m-auto w-auto flex justify-center h-screen" style={{ marginTop: 1000 }}>
-                            <iframe src="https://discord.com/widget?id=610606066451087370&theme=dark" width="350" height="500" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+                        <div className="p-5 m-auto w-auto h-screen" style={{ marginTop: 1000, marginLeft: "10rem" }}>
+                            <Material.Typography variant='h1' fontWeight={700} letterSpacing={15}>ABOUT THE COMMUNITY</Material.Typography>
                         </div>
                     </ParallaxLayer>
 

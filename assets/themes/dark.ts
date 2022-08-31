@@ -13,6 +13,20 @@ export default createTheme({
             main: '#f44336',
             dark: '#ba000d',
             contrastText: '#000'
+        },
+        neutral: {
+            main: '#64748b'
         }
-    }
+    },
+
+    typography: {
+        fontFamily: [
+            'Montserrat', 
+            'sans-serif'
+        ].join(','),
+
+        allVariants: {
+            color: 'white'
+        },
+    },
 })
