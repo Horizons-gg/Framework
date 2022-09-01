@@ -16,8 +16,8 @@ export default createTheme({
         },
 
         text: {
-            primary: 'white',
-            secondary: 'black',
+            primary: '#fff',
+            secondary: '#000',
         }
     },
 
@@ -28,7 +28,15 @@ export default createTheme({
         ].join(','),
 
         allVariants: {
-            color: 'white'
+            color: '#fff'
         },
     },
+
+    components: {
+        MuiTextField: {
+            defaultProps: {
+                className: 'm-2 w-full bg-slate-800 rounded-lg shadow-sm'
+            }
+        }
+    }
 })

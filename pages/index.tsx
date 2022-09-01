@@ -264,6 +264,8 @@ const Home: NextPage = () => {
 
                                     <Material.Divider variant='middle' color={Theme.palette.text.primary} style={{ marginTop: 15, marginBottom: 15 }} />
 
+                                    <StatsSection />
+
                                 </div>
 
 
@@ -295,13 +297,6 @@ const Home: NextPage = () => {
                         </div>
                     </ParallaxLayer>
 
-
-
-                    {/* <ParallaxLayer offset={0} speed={1} factor={1}>
-                        <div className="flex my-5 mx-10 md:block justify-center">
-                            <Image src={Images.Logo} priority={true} height={40} width={300} />
-                        </div>
-                    </ParallaxLayer> */}
                 </Parallax>
 
             </Material.ThemeProvider>

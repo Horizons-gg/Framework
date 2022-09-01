@@ -16,9 +16,9 @@ import * as UI from '@components/ui'
 
 
 
-const Login: NextPage = () => {
+const Register: NextPage = () => {
 
-    async function SubmitLogin() {
+    async function RegisterAccount() {
         const username = $('#username').val()?.toString().trim()
         const password = $('#password').val()?.toString().trim()
 
@@ -36,35 +36,36 @@ const Login: NextPage = () => {
 
     return (
         <Material.ThemeProvider theme={Theme}>
+            <Layout title="Account Registration" subtitle="You can manage phone, email and chat conversations all from a single mailbox.">
 
-            <Layout title="Login to Horizons" subtitle="You can manage phone, email and chat conversations all from a single mailbox.">
-                <Material.TextField id='username' variant='filled' placeholder='Email or Username' />
+                <Material.TextField id='email' variant='filled' placeholder='Email' />
+                <Material.TextField id='username' variant='filled' placeholder='Username' />
                 <Material.TextField id='password' variant='filled' type='password' placeholder='Password' />
 
                 <div className='mt-5 flex justify-around'>
-                    <Material.Button variant='outlined' onClick={SubmitLogin} className="px-10">
-                        <span className="text-sm font-medium">
-                            Login
-                        </span>
-                        <FontAwesomeIcon icon={SolidIcons.faUser} className="w-5 h-5 ml-3" />
-                    </Material.Button>
 
-                    <Link href="/register">
+                    <Link href="/login">
                         <a>
-                            <Material.Button variant='outlined' className="px-10">
+                            <Material.Button variant='outlined' className="px-5">
+                                <FontAwesomeIcon icon={SolidIcons.faArrowLeftLong} className="w-5 h-5 mr-3" />
                                 <span className="text-sm font-medium">
-                                    Register
+                                    Back to Login
                                 </span>
-                                <FontAwesomeIcon icon={SolidIcons.faArrowRightLong} className="w-5 h-5 ml-3" />
                             </Material.Button>
                         </a>
                     </Link>
 
+                    <Material.Button variant='outlined' onClick={RegisterAccount} className="px-5">
+                        <span className="text-sm font-medium">
+                            Register Account
+                        </span>
+                        <FontAwesomeIcon icon={SolidIcons.faUser} className="w-5 h-5 ml-3" />
+                    </Material.Button>
                 </div>
-            </Layout>
 
+            </Layout>
         </Material.ThemeProvider>
     )
 }
 
-export default Login
+export default Register
