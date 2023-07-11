@@ -14,25 +14,11 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-
     "baseUrl": ".",
-        "paths": {
-            "@lib/*": ["src/lib/*"],
-            "@app/*": ["src/app/*"],
-            "@models/*": ["src/models/*"],
-
-            "@components/*": ["components/*"],
-            "@assets/*": ["assets/*"]
-        }
-  },
-
-  "ts-node": {
-    "transpileOnly": true,
-    "compilerOptions": {
-      "module": "commonjs"
+    "paths": {
+      "@/*": ["./*"]
     }
   },
-
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "app.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/landing/desktop.tsx.ignore"],
   "exclude": ["node_modules"]
 }

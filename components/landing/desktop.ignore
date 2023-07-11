@@ -1,0 +1,35 @@
+// Dependencies
+
+import * as Material from '@mui/material'
+
+
+
+export default function TextPanel() {
+
+    return (
+        <div className='hidden lg:block'>
+            <Material.Typography variant='h3' color={Theme.palette.text.primary} fontWeight={700} letterSpacing={15} style={{ textIndent: 15 }}>JOIN THE COMMUNITY</Material.Typography>
+
+            <Material.Divider variant='fullWidth' color={Theme.palette.text.primary} style={{ marginTop: 15, marginBottom: 15 }} />
+
+            <Material.Typography variant='body1'>We host Servers in Australia, North America, and Europe.<br /><br />We have a strong, friendly community that loves to play games and hangout with one another.<br /><br />We develop and host games and other online entertainment services and use Discord as our primary platform.</Material.Typography>
+
+            <br />
+            
+            <p className='animate-pulse'>
+                <Link href="https://discord.gg/horizons" target="_blank">
+
+                    <Material.Link underline='none'>
+                        <span className="sr-only">Discord</span>
+                        <Material.Typography variant='caption' fontWeight={600} fontSize={17} color={'#fff'}>JOIN DISCORD</Material.Typography> <FontAwesomeIcon size="lg" color={'#fff'} icon={BrandIcons.faDiscord} />
+                    </Material.Link>
+                </Link>
+            </p>
+
+            <Material.Divider variant='middle' color={Theme.palette.text.primary} style={{ marginTop: 15, marginBottom: 15 }} />
+
+            <StatsSection />
+
+        </div>
+    )
+}
