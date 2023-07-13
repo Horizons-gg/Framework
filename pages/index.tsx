@@ -82,7 +82,7 @@ export default function Home() {
                     </ParallaxLayer>
 
 
-                    <ParallaxLayer offset={0} speed={0.3} factor={2}
+                    <ParallaxLayer offset={0} speed={0.5} factor={2}
                         style={{
                             backgroundImage: 'url(/parallax/mountainsFar2.png)',
                             backgroundSize: 'cover',
@@ -91,9 +91,18 @@ export default function Home() {
                     />
 
 
-                    <ParallaxLayer offset={0} speed={0.4} factor={2}
+                    <ParallaxLayer offset={0} speed={0.6} factor={2}
                         style={{
-                            backgroundImage: 'url(/parallax/close.png)',
+                            backgroundImage: 'url(/parallax/lake.png)',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                        }}
+                    />
+
+
+                    <ParallaxLayer offset={0} speed={1} factor={2}
+                        style={{
+                            backgroundImage: 'url(/parallax/trees.png)',
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
                         }}
