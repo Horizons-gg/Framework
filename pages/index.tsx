@@ -110,24 +110,21 @@ export default function Home() {
 
 
 
+                    <ParallaxLayer offset={0} speed={0.6} factor={2}>
+                        <div className="relative h-screen flex justify-center">
+                            <div className='absolute bottom-72'>
+                                <ScrollIcon />
+                            </div>
+                        </div>
+                    </ParallaxLayer>
 
 
 
 
-                    {/* <ParallaxLayer offset={1} speed={0.5} factor={1}>
-                        <svg viewBox="0 0 100 100">
-                            <polygon
-                                points='50 15, 100 100, 0 100'
 
-                                style={{
-                                    fill: 'transparent',
-                                    stroke: 'white',
-                                    strokeWidth: 1
-                                }}
-                            />
+                    <ParallaxLayer offset={1} speed={1} factor={1} style={{ "backgroundColor": "#0f1727" }}>
 
-                        </svg>
-                    </ParallaxLayer> */}
+                    </ParallaxLayer>
 
                 </Parallax>
 
