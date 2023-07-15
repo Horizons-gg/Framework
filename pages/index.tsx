@@ -30,9 +30,12 @@ const Montserrat_Standard = Montserrat({ weight: '400', subsets: ['latin'] })
 import AnimatedLogo from '@/components/logo'
 import ScrollIcon from '@/components/svg/scroll'
 
+import DesktopText from '@/components/landing/desktop'
+import MobileText from '@/components/landing/mobile'
 
 
 
+// Page
 
 export default function Home() {
     return (
@@ -55,7 +58,7 @@ export default function Home() {
                 </div>
 
 
-                <Parallax pages={2}>
+                <Parallax pages={1.5}>
 
                     <ParallaxLayer offset={0} speed={0.1} factor={2}
                         style={{
@@ -122,7 +125,16 @@ export default function Home() {
 
 
 
-                    <ParallaxLayer offset={1} speed={1} factor={1} style={{ "backgroundColor": "#0f1727" }}>
+                    <ParallaxLayer offset={0.9} speed={1} factor={1}>
+
+                        <div className="m-5 relative h-screen flex justify-center text-center">
+                            <div className='absolute top-52'>
+
+                                <DesktopText />
+                                <MobileText />
+                                
+                            </div>
+                        </div>
 
                     </ParallaxLayer>
 
